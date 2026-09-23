@@ -1,11 +1,31 @@
+@php
+    $languages = \App\Support\Locales::languages();
+    $activeLanguages = \App\Support\Locales::active();
+    $contactEmail = \App\Models\Setting::get('contact_email');
+    $socials = [
+        ['url' => \App\Models\Setting::get('linkedin_url'), 'icon' => 'fab fa-linkedin-in'],
+        ['url' => \App\Models\Setting::get('instagram_url'), 'icon' => 'fab fa-instagram'],
+        ['url' => \App\Models\Setting::get('facebook_url'), 'icon' => 'fab fa-facebook-f'],
+    ];
+    $socials = array_values(array_filter($socials, fn (array $social) => filled($social['url'])));
+@endphp
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="{{ app()->getLocale() }}">
 
 <head>
     <meta charset="utf-8">
-    @yield('title')
+    <title>{{ $page->t('meta_title') }}</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    @yield('meta')
+    @if ($page->t('meta_keywords'))
+    <meta name="keywords" content="{{ $page->t('meta_keywords') }}">
+    @endif
+    <meta name="description" content="{{ $page->t('meta_description') }}">
+    @if ($page->noindex)
+    <meta name="robots" content="noindex">
+    @endif
+    @foreach ($activeLanguages as $language)
+    <link rel="alternate" hreflang="{{ $language->code }}" href="{{ locale_url($language->code) }}">
+    @endforeach
 
     <!-- Favicon -->
     <link href="{{ asset('img/favicon.ico') }}" rel="icon">
@@ -14,6 +34,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    @if (app()->getLocale() === 'zh')
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    @endif
 
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -49,19 +72,28 @@
     <div class="container-fluid topbar-sabonea text-white p-0">
         <div class="row gx-0 d-none d-lg-flex">
             <div class="col-lg-7 px-5 text-start">
+                @if ($contactEmail)
                 <div class="h-100 d-inline-flex align-items-center me-4">
                     <small class="fa fa-envelope text-sabonea-orange me-2"></small>
-                    <small><a href="mailto:contact@sabonea.com">contact@sabonea.com</a></small>
+                    <small><a href="mailto:{{ $contactEmail }}">{{ $contactEmail }}</a></small>
                 </div>
+                @endif
             </div>
             <div class="col-lg-5 px-5 text-end">
+                @if ($activeLanguages->count() > 1)
+                <div class="h-100 d-inline-flex align-items-center me-4 topbar-langs">
+                    @foreach ($activeLanguages as $language)
+                    <a href="{{ locale_url($language->code) }}" hreflang="{{ $language->code }}" @class(['active' => $language->code === app()->getLocale()])>{{ strtoupper($language->code) === 'ZH' ? '中文' : strtoupper($language->code) }}</a>
+                    @endforeach
+                </div>
+                @endif
                 <div class="h-100 d-inline-flex align-items-center me-4">
-                    <small>Suivez-nous</small>
+                    <small>{{ ui('layout.follow_us') }}</small>
                 </div>
                 <div class="h-100 d-inline-flex align-items-center mx-n2">
-                    <a class="btn btn-square btn-link border-0 border-end border-secondary" target="_blank" rel="noopener" href="https://www.linkedin.com/company/sabonea"><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-square btn-link border-0 border-end border-secondary" target="_blank" rel="noopener" href="https://www.instagram.com/sabonea_group"><i class="fab fa-instagram"></i></a>
-                    <a class="btn btn-square btn-link" target="_blank" rel="noopener" href="https://www.facebook.com/profile.php?id=61594208143644"><i class="fab fa-facebook-f"></i></a>
+                    @foreach ($socials as $social)
+                    <a @class(['btn btn-square btn-link', 'border-0 border-end border-secondary' => ! $loop->last]) target="_blank" rel="noopener" href="{{ $social['url'] }}"><i class="{{ $social['icon'] }}"></i></a>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -72,23 +104,23 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-xl bg-white navbar-light p-0">
         <a href="{{ route('accueil') }}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-            <img src="{{ asset('img/sabonea/logo-sabonea.png') }}" alt="Sabonea - Direct access to the best suppliers">
+            <img src="{{ asset('img/sabonea/logo-sabonea.png') }}" alt="{{ ui('layout.logo_alt') }}">
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav mx-auto p-4 p-xl-0">
-                <a href="{{ route('accueil') }}" class="nav-item nav-link{{ request()->routeIs('accueil') ? ' active' : '' }}">Accueil</a>
-                <a href="{{ route('a-propos') }}" class="nav-item nav-link{{ request()->routeIs('a-propos') ? ' active' : '' }}">À propos</a>
-                <a href="{{ route('comment-ca-fonctionne') }}" class="nav-item nav-link{{ request()->routeIs('comment-ca-fonctionne', 'fournisseur-exemple') ? ' active' : '' }}">Fonctionnement</a>
-                <a href="{{ route('secteurs') }}" class="nav-item nav-link{{ request()->routeIs('secteurs') ? ' active' : '' }}">Secteurs</a>
-                <a href="{{ route('pourquoi-sabonea') }}" class="nav-item nav-link{{ request()->routeIs('pourquoi-sabonea') ? ' active' : '' }}">Pourquoi nous</a>
-                <a href="{{ route('contact') }}" class="nav-item nav-link{{ request()->routeIs('contact') ? ' active' : '' }}">Contact</a>
+                <a href="{{ route('accueil') }}" class="nav-item nav-link{{ request()->routeIs('accueil') ? ' active' : '' }}">{{ ui('nav.home') }}</a>
+                <a href="{{ route('a-propos') }}" class="nav-item nav-link{{ request()->routeIs('a-propos') ? ' active' : '' }}">{{ ui('nav.about') }}</a>
+                <a href="{{ route('comment-ca-fonctionne') }}" class="nav-item nav-link{{ request()->routeIs('comment-ca-fonctionne', 'fournisseur-exemple') ? ' active' : '' }}">{{ ui('nav.how') }}</a>
+                <a href="{{ route('secteurs') }}" class="nav-item nav-link{{ request()->routeIs('secteurs') ? ' active' : '' }}">{{ ui('nav.sectors') }}</a>
+                <a href="{{ route('pourquoi-sabonea') }}" class="nav-item nav-link{{ request()->routeIs('pourquoi-sabonea') ? ' active' : '' }}">{{ ui('nav.why') }}</a>
+                <a href="{{ route('contact') }}" class="nav-item nav-link{{ request()->routeIs('contact') ? ' active' : '' }}">{{ ui('nav.contact') }}</a>
             </div>
             <div class="navbar-phone px-xl-3 d-flex align-items-center">
-                <a href="{{ route('contact') }}" class="navbar-secondary-link">Devenir fournisseur</a>
-                <a href="{{ route('expression-de-besoin') }}" class="btn navbar-cta py-2 px-3">Exprimer un besoin</a>
+                <a href="{{ route('contact') }}" class="navbar-secondary-link">{{ ui('nav.become_supplier') }}</a>
+                <a href="{{ route('expression-de-besoin') }}" class="btn navbar-cta py-2 px-3">{{ ui('nav.express_need') }}</a>
             </div>
         </div>
     </nav>
@@ -104,31 +136,38 @@
             <div class="row g-5">
                 <div class="col-lg-4 col-md-6">
                     <img src="{{ asset('img/sabonea/logo-sabonea-white.png') }}" alt="Sabonea" style="height:50px;" class="mb-3">
-                    <p class="mb-3">Marketplace B2B internationale pour les équipements professionnels de nettoyage, d'entretien et de maintenance.</p>
-                    <p class="mb-2"><i class="fa fa-envelope me-3"></i><a href="mailto:contact@sabonea.com" class="text-white-50">contact@sabonea.com</a></p>
+                    <p class="mb-3">{{ ui('footer.tagline') }}</p>
+                    @if ($contactEmail)
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i><a href="mailto:{{ $contactEmail }}" class="text-white-50">{{ $contactEmail }}</a></p>
+                    @endif
                     <div class="d-flex pt-2">
-                        <a class="btn btn-square btn-primary me-2" target="_blank" rel="noopener" href="https://www.linkedin.com/company/sabonea"><i class="fab fa-linkedin-in"></i></a>
-                        <a class="btn btn-square btn-primary me-2" target="_blank" rel="noopener" href="https://www.instagram.com/sabonea_group"><i class="fab fa-instagram"></i></a>
-                        <a class="btn btn-square btn-primary me-2" target="_blank" rel="noopener" href="https://www.facebook.com/profile.php?id=61594208143644"><i class="fab fa-facebook-f"></i></a>
+                        @foreach ($socials as $social)
+                        <a class="btn btn-square btn-primary me-2" target="_blank" rel="noopener" href="{{ $social['url'] }}"><i class="{{ $social['icon'] }}"></i></a>
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
-                    <h3 class="text-white text-uppercase mb-4">Navigation</h3>
-                    <a class="btn btn-link" href="{{ route('a-propos') }}">À propos</a>
-                    <a class="btn btn-link" href="{{ route('comment-ca-fonctionne') }}">Comment ça marche</a>
-                    <a class="btn btn-link" href="{{ route('secteurs') }}">Secteurs &amp; équipements</a>
-                    <a class="btn btn-link" href="{{ route('pourquoi-sabonea') }}">Pourquoi Sabonea</a>
-                    <a class="btn btn-link" href="{{ route('expression-de-besoin') }}">Exprimer un besoin</a>
-                    <a class="btn btn-link" href="{{ route('contact') }}">Contact</a>
+                    <h3 class="text-white text-uppercase mb-4">{{ ui('footer.navigation') }}</h3>
+                    <a class="btn btn-link" href="{{ route('a-propos') }}">{{ ui('nav.about') }}</a>
+                    <a class="btn btn-link" href="{{ route('comment-ca-fonctionne') }}">{{ ui('footer.how') }}</a>
+                    <a class="btn btn-link" href="{{ route('secteurs') }}">{{ ui('footer.sectors') }}</a>
+                    <a class="btn btn-link" href="{{ route('pourquoi-sabonea') }}">{{ ui('footer.why') }}</a>
+                    <a class="btn btn-link" href="{{ route('expression-de-besoin') }}">{{ ui('nav.express_need') }}</a>
+                    <a class="btn btn-link" href="{{ route('contact') }}">{{ ui('nav.contact') }}</a>
                 </div>
                 <div class="col-lg-4 col-md-6">
-                    <h3 class="text-white text-uppercase mb-4">Langues</h3>
-                    <p class="mb-3">Le site est disponible en français. D'autres langues sont prévues prochainement :</p>
+                    <h3 class="text-white text-uppercase mb-4">{{ ui('footer.languages') }}</h3>
+                    <p class="mb-3">{{ ui('footer.languages_text') }}</p>
                     <div>
-                        <span class="lang-pill active">Français</span>
-                        <span class="lang-pill">English</span>
-                        <span class="lang-pill">中文</span>
-                        <span class="lang-pill">Deutsch</span>
+                        @foreach ($languages as $language)
+                        @if ($language->code === app()->getLocale())
+                        <span class="lang-pill active">{{ $language->name }}</span>
+                        @elseif ($language->is_active)
+                        <a class="lang-pill" href="{{ locale_url($language->code) }}" hreflang="{{ $language->code }}">{{ $language->name }}</a>
+                        @else
+                        <span class="lang-pill upcoming">{{ $language->name }}</span>
+                        @endif
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -137,10 +176,10 @@
             <div class="copyright py-4" style="border-top: 1px solid rgba(255,255,255,.1);">
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a href="{{ route('accueil') }}" class="text-white">Sabonea</a>, tous droits réservés.
+                        &copy; <a href="{{ route('accueil') }}" class="text-white">Sabonea</a>, {{ ui('footer.rights') }}
                     </div>
                     <div class="col-md-6 text-center text-md-end">
-                        Designed by <a href="https://htmlcodex.com">HTML Codex</a>, adapté pour Sabonea
+                        {{ ui('footer.credit_before') }} <a href="https://htmlcodex.com">HTML Codex</a>{{ ui('footer.credit_after') }}
                     </div>
                 </div>
             </div>

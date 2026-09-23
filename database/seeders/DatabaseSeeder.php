@@ -2,9 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Setting;
+use App\Support\Locales;
+use App\Support\Ui;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Cache;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,11 +18,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $this->call([
+            LanguageSeeder::class,
+            SettingSeeder::class,
+            UiTranslationSeeder::class,
+            CatalogSeeder::class,
+            PageSeeder::class,
+            AdminUserSeeder::class,
         ]);
+
+        Locales::flush();
+        Ui::flush();
+        Cache::forget(Setting::CACHE_KEY);
     }
 }
