@@ -11,6 +11,7 @@ use Filament\Actions\EditAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
@@ -28,20 +29,33 @@ class EquipmentTypeResource extends Resource
 
     protected static ?int $navigationSort = 4;
 
-    protected static ?string $modelLabel = 'type d\'équipement';
+    protected static ?string $modelLabel = 'catégorie d\'équipement';
 
-    protected static ?string $pluralModelLabel = 'types d\'équipements';
+    protected static ?string $pluralModelLabel = 'catégories d\'équipements';
 
     public static function form(Schema $schema): Schema
     {
         return $schema
             ->components([
+                TextInput::make('key')
+                    ->label('Clé technique')
+                    ->helperText('Code fixe enregistré dans les réponses et les exports (ex. EQ_ROAD_SWEEPER). Non modifiable après création.')
+                    ->required()
+                    ->regex('/^[A-Z0-9_]+$/')
+                    ->unique(ignoreRecord: true)
+                    ->disabledOn('edit'),
                 Translatable::tabs(fn (string $locale, bool $isReference): array => [
                     TextInput::make("name.{$locale}")->label('Nom')->required($isReference),
+                    TextInput::make("form_label.{$locale}")->label('Libellé dans les formulaires')
+                        ->helperText('Facultatif : remplace le nom dans les formulaires.'),
                 ]),
-                TextInput::make('icon')->label('Icône')->placeholder('fa fa-broom')
-                    ->helperText('Classe Font Awesome 5, par exemple « fa fa-broom ».')->required(),
-                Toggle::make('is_active')->label('Actif (visible sur le site et dans le formulaire)')->default(true),
+                Grid::make(2)->columnSpanFull()->schema([
+                    TextInput::make('icon')->label('Icône')->placeholder('fa fa-broom')
+                        ->helperText('Classe Font Awesome 5, par exemple « fa fa-broom ».')->required(),
+                    Toggle::make('is_active')->label('Actif (proposé dans les formulaires)')->default(true),
+                    Toggle::make('show_on_site')->label('Affiché sur la page Secteurs')->default(true),
+                    Toggle::make('is_other')->label('Option « Autre » (demande une précision)'),
+                ]),
             ]);
     }
 
@@ -53,12 +67,14 @@ class EquipmentTypeResource extends Resource
             ->columns([
                 TextColumn::make('icon')->label('Icône')->color('gray'),
                 Translatable::column('name', 'Nom'),
+                TextColumn::make('key')->label('Clé')->color('gray')->fontFamily('mono')->size('xs'),
                 ToggleColumn::make('is_active')->label('Actif'),
+                ToggleColumn::make('show_on_site')->label('Page Secteurs'),
                 Translatable::statusColumn(),
             ])
             ->recordActions([
                 EditAction::make(),
-                DeleteAction::make(),
+                DeleteAction::make()->visible(fn (EquipmentType $record): bool => blank($record->key)),
             ]);
     }
 

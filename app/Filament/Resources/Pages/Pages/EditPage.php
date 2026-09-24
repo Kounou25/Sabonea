@@ -4,7 +4,6 @@ namespace App\Filament\Resources\Pages\Pages;
 
 use App\Filament\Resources\Pages\PageResource;
 use App\Models\Page;
-use App\Support\Locales;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Support\Icons\Heroicon;
@@ -20,7 +19,8 @@ class EditPage extends EditRecord
                 ->label('Voir sur le site')
                 ->icon(Heroicon::OutlinedArrowTopRightOnSquare)
                 ->color('gray')
-                ->url(fn (Page $record): string => route($record->key, ['locale' => Locales::reference()]))
+                ->visible(fn (Page $record): bool => $record->previewUrl() !== null)
+                ->url(fn (Page $record): ?string => $record->previewUrl())
                 ->openUrlInNewTab(),
         ];
     }

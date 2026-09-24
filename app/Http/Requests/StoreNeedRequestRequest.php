@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Models\EquipmentType;
 use App\Models\FormOption;
 use App\Models\Sector;
+use App\Support\Countries;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -33,24 +34,13 @@ class StoreNeedRequestRequest extends FormRequest
             'phone' => ['nullable', 'string', 'max:50'],
             'sector_id' => ['nullable', Rule::exists(Sector::class, 'id')],
             'equipment_type_id' => ['nullable', Rule::exists(EquipmentType::class, 'id')],
-            'country' => ['nullable', 'string', 'max:255'],
+            'country' => ['nullable', Rule::in(Countries::CODES)],
             'deadline_option_id' => [
                 'nullable',
                 Rule::exists(FormOption::class, 'id')->where('field', FormOption::NEED_DEADLINE),
             ],
             'message' => ['nullable', 'string', 'max:5000'],
         ];
-    }
-
-    /**
-     * "Other" choices of the select lists are stored as no value.
-     */
-    protected function prepareForValidation(): void
-    {
-        $this->merge([
-            'sector_id' => $this->input('sector_id') === 'other' ? null : $this->input('sector_id'),
-            'equipment_type_id' => $this->input('equipment_type_id') === 'other' ? null : $this->input('equipment_type_id'),
-        ]);
     }
 
     /**
@@ -63,6 +53,7 @@ class StoreNeedRequestRequest extends FormRequest
             '*.email' => ui('form.error_email'),
             '*.max' => ui('form.error_max'),
             '*.exists' => ui('form.error_invalid'),
+            '*.in' => ui('form.error_invalid'),
         ];
     }
 }

@@ -39,6 +39,10 @@ class SiteLink
             'contact' => 'Contact',
             'expression-de-besoin' => 'Exprimer un besoin',
             'fournisseur-exemple' => 'Exemple de vitrine fournisseur',
+            'devenir-fournisseur' => 'Devenir fournisseur (formulaire)',
+            'politique-de-confidentialite' => 'Politique de confidentialité',
+            'conditions-fournisseurs' => 'Conditions de partenariat fournisseur',
+            'mentions-legales' => 'Mentions légales',
         ];
     }
 }

@@ -16,10 +16,16 @@ class UiTranslationSeeder extends Seeder
      */
     public function run(): void
     {
-        foreach (require __DIR__.'/data/ui.php' as $key => $texts) {
+        $texts = [
+            ...require __DIR__.'/data/ui.php',
+            ...require __DIR__.'/data/ui_supplier.php',
+            ...require __DIR__.'/data/ui_pdf.php',
+        ];
+
+        foreach ($texts as $key => $text) {
             UiTranslation::query()->firstOrCreate(['key' => $key], [
                 'group' => Str::before($key, '.'),
-                'text' => $this->tr($texts),
+                'text' => $this->tr($text),
             ]);
         }
     }

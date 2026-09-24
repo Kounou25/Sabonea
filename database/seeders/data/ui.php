@@ -7,6 +7,7 @@
 return [
     // Layout
     'layout.follow_us' => ['Suivez-nous', 'Follow us', 'Folgen Sie uns', '关注我们'],
+    'layout.choose_language' => ['Choisir la langue', 'Choose your language', 'Sprache wählen', '选择语言'],
     'layout.logo_alt' => ['Sabonea - Direct access to the best suppliers', 'Sabonea - Direct access to the best suppliers', 'Sabonea - Direct access to the best suppliers', 'Sabonea - Direct access to the best suppliers'],
 
     // Navigation
@@ -91,4 +92,16 @@ return [
         'Vielen Dank, Ihre Anfrage wurde übermittelt. Unser Team prüft sie und meldet sich in Kürze bei Ihnen.',
         '感谢您，您的需求已提交。我们的团队将进行分析并尽快与您联系。',
     ],
+
+    // E-mails sent to visitors
+    'mail.greeting' => ['Bonjour :name,', 'Hello :name,', 'Guten Tag :name,', ':name，您好：'],
+    'mail.signature' => ["L'équipe Sabonea", 'The Sabonea team', 'Ihr Sabonea-Team', 'Sabonea 团队'],
+    'mail.contact_received.subject' => ['Nous avons bien reçu votre message', 'We have received your message', 'Wir haben Ihre Nachricht erhalten', '我们已收到您的留言'],
+    'mail.contact_received.intro' => [
+        "Merci d'avoir contacté Sabonea. Notre équipe a bien reçu votre message et vous répondra rapidement.",
+        'Thank you for contacting Sabonea. Our team has received your message and will get back to you shortly.',
+        'Vielen Dank für Ihre Nachricht an Sabonea. Unser Team hat sie erhalten und meldet sich in Kürze bei Ihnen.',
+        '感谢您联系 Sabonea。我们的团队已收到您的留言，并将尽快回复您。',
+    ],
+    'mail.contact_received.copy' => ['Pour rappel, voici votre message :', 'For your records, here is your message:', 'Zur Erinnerung, hier ist Ihre Nachricht:', '以下是您的留言内容：'],
 ];

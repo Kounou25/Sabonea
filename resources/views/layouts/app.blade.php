@@ -54,7 +54,8 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
     <!-- Sabonea Brand Stylesheet -->
-    <link href="{{ asset('css/sabonea.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/sabonea.css') }}?v={{ filemtime(public_path('css/sabonea.css')) }}" rel="stylesheet">
+    @stack('styles')
 </head>
 
 <body>
@@ -80,13 +81,6 @@
                 @endif
             </div>
             <div class="col-lg-5 px-5 text-end">
-                @if ($activeLanguages->count() > 1)
-                <div class="h-100 d-inline-flex align-items-center me-4 topbar-langs">
-                    @foreach ($activeLanguages as $language)
-                    <a href="{{ locale_url($language->code) }}" hreflang="{{ $language->code }}" @class(['active' => $language->code === app()->getLocale()])>{{ strtoupper($language->code) === 'ZH' ? '中文' : strtoupper($language->code) }}</a>
-                    @endforeach
-                </div>
-                @endif
                 <div class="h-100 d-inline-flex align-items-center me-4">
                     <small>{{ ui('layout.follow_us') }}</small>
                 </div>
@@ -106,6 +100,7 @@
         <a href="{{ route('accueil') }}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
             <img src="{{ asset('img/sabonea/logo-sabonea.png') }}" alt="{{ ui('layout.logo_alt') }}">
         </a>
+        @include('partials.language-switcher')
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -119,7 +114,7 @@
                 <a href="{{ route('contact') }}" class="nav-item nav-link{{ request()->routeIs('contact') ? ' active' : '' }}">{{ ui('nav.contact') }}</a>
             </div>
             <div class="navbar-phone px-xl-3 d-flex align-items-center">
-                <a href="{{ route('contact') }}" class="navbar-secondary-link">{{ ui('nav.become_supplier') }}</a>
+                <a href="{{ route('devenir-fournisseur') }}" class="navbar-secondary-link">{{ ui('nav.become_supplier') }}</a>
                 <a href="{{ route('expression-de-besoin') }}" class="btn navbar-cta py-2 px-3">{{ ui('nav.express_need') }}</a>
             </div>
         </div>
@@ -161,11 +156,11 @@
                     <div>
                         @foreach ($languages as $language)
                         @if ($language->code === app()->getLocale())
-                        <span class="lang-pill active">{{ $language->name }}</span>
+                        <span class="lang-pill active" lang="{{ $language->code }}"><img class="lang-flag" src="{{ $language->flagUrl() }}" alt="" width="20" height="15">{{ $language->name }}</span>
                         @elseif ($language->is_active)
-                        <a class="lang-pill" href="{{ locale_url($language->code) }}" hreflang="{{ $language->code }}">{{ $language->name }}</a>
+                        <a class="lang-pill" href="{{ locale_url($language->code) }}" hreflang="{{ $language->code }}" lang="{{ $language->code }}"><img class="lang-flag" src="{{ $language->flagUrl() }}" alt="" width="20" height="15">{{ $language->name }}</a>
                         @else
-                        <span class="lang-pill upcoming">{{ $language->name }}</span>
+                        <span class="lang-pill upcoming" lang="{{ $language->code }}"><img class="lang-flag" src="{{ $language->flagUrl() }}" alt="" width="20" height="15">{{ $language->name }}</span>
                         @endif
                         @endforeach
                     </div>
@@ -177,6 +172,7 @@
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                         &copy; <a href="{{ route('accueil') }}" class="text-white">Sabonea</a>, {{ ui('footer.rights') }}
+                        <span class="footer-legal-links"><a href="{{ route('mentions-legales') }}">{{ ui('footer.legal_notice') }}</a> · <a href="{{ route('politique-de-confidentialite') }}">{{ ui('footer.privacy') }}</a></span>
                     </div>
                     <div class="col-md-6 text-center text-md-end">
                         {{ ui('footer.credit_before') }} <a href="https://htmlcodex.com">HTML Codex</a>{{ ui('footer.credit_after') }}
@@ -202,6 +198,7 @@
 
     <!-- Template Javascript -->
     <script src="{{ asset('js/main.js') }}"></script>
+    @stack('scripts')
 </body>
 
 </html>

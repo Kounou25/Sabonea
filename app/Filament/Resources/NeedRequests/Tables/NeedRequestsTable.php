@@ -4,6 +4,7 @@ namespace App\Filament\Resources\NeedRequests\Tables;
 
 use App\Enums\NeedRequestStatus;
 use App\Models\NeedRequest;
+use App\Support\Countries;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -29,7 +30,7 @@ class NeedRequestsTable
                     ->state(fn (NeedRequest $record): string => $record->sector?->t('name', 'fr') ?? 'Autre'),
                 TextColumn::make('equipment_label')->label('Équipement')->wrap()
                     ->state(fn (NeedRequest $record): string => $record->equipmentType?->t('name', 'fr') ?? 'Autre'),
-                TextColumn::make('country')->label('Pays')->searchable()->toggleable(),
+                TextColumn::make('country')->label('Pays')->formatStateUsing(fn (?string $state): ?string => Countries::name($state, 'fr'))->toggleable(),
                 TextColumn::make('locale')->label('Langue')->formatStateUsing(fn (string $state): string => strtoupper($state))->toggleable(),
                 TextColumn::make('assignee.name')->label('Suivie par')->placeholder('—')->toggleable(),
             ])

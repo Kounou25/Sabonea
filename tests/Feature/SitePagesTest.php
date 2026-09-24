@@ -115,6 +115,32 @@ class SitePagesTest extends TestCase
         Cache::flush();
     }
 
+    public function test_the_language_switcher_shows_every_online_language_with_its_flag(): void
+    {
+        $response = $this->get('/de/secteurs');
+
+        $response->assertSee('aria-label="Sprache wählen : Deutsch"', false)
+            ->assertSee('img/flags/de.svg', false)
+            ->assertSee('img/flags/gb.svg', false)
+            ->assertSee('img/flags/cn.svg', false)
+            ->assertSee('href="'.url('/zh/secteurs').'"', false)
+            ->assertSee('aria-current="true"', false);
+
+        Language::query()->where('code', 'zh')->update(['is_active' => false]);
+        Locales::flush();
+
+        $this->get('/de/secteurs')->assertDontSee('href="'.url('/zh/secteurs').'"', false);
+    }
+
+    public function test_the_home_page_remembers_the_language_chosen_by_the_visitor(): void
+    {
+        $this->get('/zh/secteurs')->assertCookie('sabonea_locale', 'zh');
+
+        $this->withCookie('sabonea_locale', 'zh')
+            ->get('/', ['Accept-Language' => 'fr-FR'])
+            ->assertRedirect('/zh');
+    }
+
     public function test_language_switcher_links_to_the_same_page(): void
     {
         $this->get('/fr/secteurs')

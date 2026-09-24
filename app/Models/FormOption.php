@@ -3,12 +3,16 @@
 namespace App\Models;
 
 use App\Models\Concerns\HasTranslations;
+use App\SupplierForms\OptionLists;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
-#[Fillable(['field', 'label', 'is_active', 'sort'])]
+/**
+ * Option of a choice list. The technical key is what the answers store; the label is translated.
+ */
+#[Fillable(['field', 'key', 'label', 'is_other', 'is_exclusive', 'is_active', 'sort'])]
 class FormOption extends Model
 {
     use HasTranslations;
@@ -22,15 +26,18 @@ class FormOption extends Model
      */
     protected array $translatable = ['label'];
 
+    protected static function booted(): void
+    {
+        static::saved(fn () => OptionLists::flush());
+        static::deleted(fn () => OptionLists::flush());
+    }
+
     /**
      * @return array<string, string>
      */
     public static function fields(): array
     {
-        return [
-            self::CONTACT_SUBJECT => 'Contact : objet du message',
-            self::NEED_DEADLINE => 'Expression de besoin : délai souhaité',
-        ];
+        return OptionLists::FORM_OPTION_LISTS;
     }
 
     /**
@@ -48,6 +55,8 @@ class FormOption extends Model
     protected function casts(): array
     {
         return [
+            'is_other' => 'boolean',
+            'is_exclusive' => 'boolean',
             'is_active' => 'boolean',
         ];
     }

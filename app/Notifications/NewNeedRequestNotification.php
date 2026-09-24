@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use App\Models\NeedRequest;
+use App\Support\Countries;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
@@ -41,7 +42,7 @@ class NewNeedRequestNotification extends Notification
             ->line("**E-mail :** {$needRequest->email}")
             ->line('**Secteur :** '.($needRequest->sector?->t('name', 'fr') ?? 'Autre / non précisé'))
             ->line('**Équipement :** '.($needRequest->equipmentType?->t('name', 'fr') ?? 'Autre / non précisé'))
-            ->line('**Pays :** '.($needRequest->country ?: '—'))
+            ->line('**Pays :** '.(Countries::name($needRequest->country, 'fr') ?? '—'))
             ->line('**Délai :** '.($needRequest->deadline?->t('label', 'fr') ?? '—'))
             ->line('**Langue du site :** '.strtoupper($needRequest->locale))
             ->action('Voir la demande', url("/admin/need-requests/{$needRequest->id}"));

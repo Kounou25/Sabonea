@@ -18,6 +18,8 @@ class SettingSeeder extends Seeder
             'instagram_label' => '@sabonea_group',
             'facebook_url' => 'https://www.facebook.com/profile.php?id=61594208143644',
             'facebook_label' => 'Sabonea',
+            // Supplier form 1 stays in test mode until the privacy policy is published.
+            'supplier_form_public' => '0',
         ];
 
         foreach ($settings as $key => $value) {

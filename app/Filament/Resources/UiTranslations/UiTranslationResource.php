@@ -42,6 +42,12 @@ class UiTranslationResource extends Resource
         'form' => 'Formulaires (commun)',
         'contact' => 'Formulaire de contact',
         'need' => 'Formulaire « Exprimer un besoin »',
+        'supplier_form' => 'Formulaires fournisseurs : boutons et messages',
+        'supplier_contact' => 'Formulaire fournisseur 1 : prise de contact',
+        'supplier_onboarding' => 'Formulaire fournisseur 2 : dossier d\'intégration',
+        'mail' => 'E-mails envoyés aux visiteurs',
+        'pdf' => 'Fiche fournisseur PDF : textes',
+        'supplier_pdf' => 'Fiche fournisseur PDF : libellés des réponses',
     ];
 
     /**

@@ -9,6 +9,7 @@ use Filament\Actions\Action;
 use Filament\Forms\Components\Field;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -44,6 +45,8 @@ class PageSectionForm
                 $uses('title') ? TextInput::make("title.{$locale}")->label('Titre')->required($isReference) : null,
                 $uses('subtitle') ? Textarea::make("subtitle.{$locale}")->label('Sous-titre / chapeau')->rows(2)->helperText(self::MARKDOWN_HINT)->required($isReference) : null,
                 $uses('body') ? Textarea::make("body.{$locale}")->label('Texte')->rows(4)->helperText(self::MARKDOWN_HINT)->required($isReference) : null,
+                $uses('content') ? RichEditor::make("body.{$locale}")->label('Texte de la page')->required($isReference)
+                    ->toolbarButtons([['bold', 'italic', 'link'], ['h2', 'h3'], ['bulletList', 'orderedList', 'blockquote'], ['undo', 'redo']]) : null,
                 $uses('note') ? Textarea::make("note.{$locale}")->label('Texte complémentaire')->rows(3)->helperText(self::MARKDOWN_HINT) : null,
                 $uses('image') ? TextInput::make("image_alt.{$locale}")->label('Texte alternatif de l\'image') : null,
                 $uses('cta') ? TextInput::make("cta_label.{$locale}")->label('Bouton : libellé')->required($isReference) : null,

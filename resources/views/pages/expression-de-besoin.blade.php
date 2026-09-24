@@ -85,9 +85,8 @@
                                         <select @class(['form-select', 'is-invalid' => $errors->has('sector_id')]) id="secteur" name="sector_id">
                                             <option value="" @selected(blank(old('sector_id')))>{{ ui('form.select') }}</option>
                                             @foreach ($sectors as $sector)
-                                            <option value="{{ $sector->id }}" @selected(old('sector_id') == $sector->id)>{{ $sector->t('name') }}</option>
+                                            <option value="{{ $sector->id }}" @selected(old('sector_id') == $sector->id)>{{ $sector->formLabel() }}</option>
                                             @endforeach
-                                            <option value="other" @selected(old('sector_id') === 'other')>{{ ui('form.other') }}</option>
                                         </select>
                                         <label for="secteur">{{ ui('need.form.sector') }}</label>
                                         @error('sector_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
@@ -98,9 +97,8 @@
                                         <select @class(['form-select', 'is-invalid' => $errors->has('equipment_type_id')]) id="equipement" name="equipment_type_id">
                                             <option value="" @selected(blank(old('equipment_type_id')))>{{ ui('form.select') }}</option>
                                             @foreach ($equipmentTypes as $equipmentType)
-                                            <option value="{{ $equipmentType->id }}" @selected(old('equipment_type_id') == $equipmentType->id)>{{ $equipmentType->t('name') }}</option>
+                                            <option value="{{ $equipmentType->id }}" @selected(old('equipment_type_id') == $equipmentType->id)>{{ $equipmentType->formLabel() }}</option>
                                             @endforeach
-                                            <option value="other" @selected(old('equipment_type_id') === 'other')>{{ ui('form.other') }}</option>
                                         </select>
                                         <label for="equipement">{{ ui('need.form.equipment') }}</label>
                                         @error('equipment_type_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
@@ -108,7 +106,12 @@
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-floating">
-                                        <input type="text" @class(['form-control', 'is-invalid' => $errors->has('country')]) id="pays" name="country" value="{{ old('country') }}" placeholder="{{ ui('need.form.country') }}">
+                                        <select @class(['form-select', 'is-invalid' => $errors->has('country')]) id="pays" name="country">
+                                            <option value="" @selected(blank(old('country')))>{{ ui('form.select') }}</option>
+                                            @foreach (\App\Support\Countries::options() as $code => $countryName)
+                                            <option value="{{ $code }}" @selected(old('country') === $code)>{{ $countryName }}</option>
+                                            @endforeach
+                                        </select>
                                         <label for="pays">{{ ui('need.form.country') }}</label>
                                         @error('country')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                     </div>

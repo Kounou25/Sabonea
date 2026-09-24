@@ -33,7 +33,8 @@ class PagesTable
                     ->label('Voir')
                     ->icon(Heroicon::OutlinedArrowTopRightOnSquare)
                     ->color('gray')
-                    ->url(fn (Page $record): string => route($record->key, ['locale' => Locales::reference()]))
+                    ->visible(fn (Page $record): bool => $record->previewUrl() !== null)
+                    ->url(fn (Page $record): ?string => $record->previewUrl())
                     ->openUrlInNewTab(),
             ]);
     }

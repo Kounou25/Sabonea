@@ -24,7 +24,9 @@ class PageController extends Controller
             ->with(['sections.items'])
             ->firstOrFail();
 
-        return view("pages.{$key}", ['page' => $page, ...$this->extraData($key)]);
+        $view = view()->exists("pages.{$key}") ? "pages.{$key}" : 'pages.legal';
+
+        return view($view, ['page' => $page, ...$this->extraData($key)]);
     }
 
     /**
@@ -37,11 +39,11 @@ class PageController extends Controller
         return match ($key) {
             'accueil' => [
                 'slides' => HeroSlide::query()->published()->get(),
-                'homeSectors' => Sector::query()->published()->where('show_on_home', true)->get(),
+                'homeSectors' => Sector::query()->onSite()->where('show_on_home', true)->get(),
             ],
             'secteurs' => [
-                'sectors' => Sector::query()->published()->get(),
-                'equipmentTypes' => EquipmentType::query()->published()->get(),
+                'sectors' => Sector::query()->onSite()->get(),
+                'equipmentTypes' => EquipmentType::query()->onSite()->get(),
             ],
             'contact' => [
                 'subjects' => FormOption::query()->published(FormOption::CONTACT_SUBJECT)->get(),

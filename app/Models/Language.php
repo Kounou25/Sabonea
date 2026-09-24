@@ -21,6 +21,13 @@ class Language extends Model
         static::deleted(fn () => Locales::flush());
     }
 
+    public function flagUrl(): string
+    {
+        $flag = config("sabonea.flags.{$this->code}", $this->code);
+
+        return asset("img/flags/{$flag}.svg");
+    }
+
     /**
      * @return array<string, string>
      */

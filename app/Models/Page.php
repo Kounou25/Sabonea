@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Concerns\HasTranslations;
+use App\Support\Locales;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -36,6 +37,18 @@ class Page extends Model
     public function section(string $key): ?PageSection
     {
         return $this->sections->first(fn (PageSection $section) => $section->key === $key && $section->is_visible);
+    }
+
+    /**
+     * Public address of the page in the reference language (none for the private onboarding form).
+     */
+    public function previewUrl(): ?string
+    {
+        if ($this->key === 'integration-fournisseur') {
+            return null;
+        }
+
+        return route($this->key, ['locale' => Locales::reference()]);
     }
 
     /**

@@ -6,6 +6,8 @@ use App\Http\Requests\StoreNeedRequestRequest;
 use App\Models\NeedRequest;
 use App\Models\Setting;
 use App\Notifications\NewNeedRequestNotification;
+use App\Support\Locales;
+use App\Support\Mailing;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Notification;
 
@@ -24,8 +26,8 @@ class NeedRequestController extends Controller
             'ip_address' => $request->ip(),
         ]);
 
-        Notification::route('mail', Setting::get('notification_email', Setting::get('contact_email')))
-            ->notify(new NewNeedRequestNotification($needRequest));
+        Mailing::safely(fn () => Notification::route('mail', Setting::get('notification_email', Setting::get('contact_email')))
+            ->notify((new NewNeedRequestNotification($needRequest))->locale(Locales::reference())));
 
         return to_route('expression-de-besoin')->with('need_sent', true);
     }

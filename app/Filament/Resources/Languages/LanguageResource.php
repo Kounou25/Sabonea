@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
@@ -73,6 +74,7 @@ class LanguageResource extends Resource
             ->defaultSort('sort')
             ->paginated(false)
             ->columns([
+                ImageColumn::make('flag')->label('')->state(fn (Language $record): string => $record->flagUrl())->imageWidth(28)->imageHeight(21),
                 TextColumn::make('code')->label('Code')->formatStateUsing(fn (string $state): string => strtoupper($state))->badge(),
                 TextColumn::make('name')->label('Nom'),
                 ToggleColumn::make('is_active')->label('En ligne')

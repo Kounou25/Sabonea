@@ -39,17 +39,29 @@ class SectorResource extends Resource
     {
         return $schema
             ->components([
+                TextInput::make('key')
+                    ->label('Clé technique')
+                    ->helperText('Code fixe enregistré dans les réponses et les exports (ex. SEC_AIRPORT). Non modifiable après création.')
+                    ->required()
+                    ->regex('/^[A-Z0-9_]+$/')
+                    ->unique(ignoreRecord: true)
+                    ->disabledOn('edit'),
                 Translatable::tabs(fn (string $locale, bool $isReference): array => [
-                    TextInput::make("name.{$locale}")->label('Nom')->required($isReference),
+                    TextInput::make("name.{$locale}")->label('Nom sur le site')->required($isReference),
                     TextInput::make("short_name.{$locale}")->label('Nom court (cartes de l\'accueil)')
                         ->helperText('Facultatif : remplace le nom sur la page d\'accueil.'),
+                    TextInput::make("form_label.{$locale}")->label('Libellé dans les formulaires')
+                        ->helperText('Facultatif : remplace le nom dans les formulaires acheteur et fournisseurs.'),
                 ]),
                 Grid::make(2)->columnSpanFull()->schema([
-                    FileUpload::make('image')->label('Image')->image()->disk('public')->directory('uploads')->maxSize(4096)->required()->columnSpanFull(),
+                    FileUpload::make('image')->label('Image (page Secteurs)')->image()->disk('public')->directory('uploads')->maxSize(4096)->columnSpanFull(),
                     TextInput::make('icon')->label('Icône')->placeholder('fa fa-plane')
                         ->helperText('Classe Font Awesome 5, par exemple « fa fa-plane ».')->required(),
-                    Toggle::make('show_on_home')->label('Afficher sur la page d\'accueil'),
-                    Toggle::make('is_active')->label('Actif (visible sur le site et dans le formulaire)')->default(true),
+                    Toggle::make('is_active')->label('Actif (proposé dans les formulaires)')->default(true),
+                    Toggle::make('show_on_site')->label('Affiché sur la page Secteurs')->default(true)
+                        ->helperText('Nécessite une image.'),
+                    Toggle::make('show_on_home')->label('Affiché sur la page d\'accueil'),
+                    Toggle::make('is_other')->label('Option « Autre » (demande une précision)'),
                 ]),
             ]);
     }
@@ -62,14 +74,15 @@ class SectorResource extends Resource
             ->columns([
                 ImageColumn::make('image')->label('Image')->disk('public')->imageHeight(40),
                 Translatable::column('name', 'Nom'),
-                TextColumn::make('icon')->label('Icône')->color('gray')->toggleable(isToggledHiddenByDefault: true),
-                ToggleColumn::make('show_on_home')->label('Accueil'),
+                TextColumn::make('key')->label('Clé')->color('gray')->fontFamily('mono')->size('xs'),
                 ToggleColumn::make('is_active')->label('Actif'),
+                ToggleColumn::make('show_on_site')->label('Page Secteurs'),
+                ToggleColumn::make('show_on_home')->label('Accueil'),
                 Translatable::statusColumn(),
             ])
             ->recordActions([
                 EditAction::make(),
-                DeleteAction::make(),
+                DeleteAction::make()->visible(fn (Sector $record): bool => blank($record->key)),
             ]);
     }
 

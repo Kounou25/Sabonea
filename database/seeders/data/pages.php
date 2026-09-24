@@ -333,7 +333,7 @@ return [
                 'key' => 'suppliers', 'name' => 'Parcours fournisseurs', 'fields' => ['eyebrow', 'title', 'cta'], 'item_fields' => ['title', 'text'],
                 'eyebrow' => ['Pour les fournisseurs', 'For suppliers', 'Für Lieferanten', '致供应商'],
                 'title' => ['De l\'inscription à la demande de devis', 'From registration to quote request', 'Von der Anmeldung zur Angebotsanfrage', '从注册到收到询价'],
-                'cta_label' => $becomeSupplier, 'cta_url' => 'contact',
+                'cta_label' => $becomeSupplier, 'cta_url' => 'devenir-fournisseur',
                 'items' => [
                     ['title' => ['Inscription', 'Registration', 'Anmeldung', '注册'], 'text' => [
                         'Le fournisseur soumet son profil et ses gammes de produits via notre formulaire dédié.',
@@ -452,7 +452,7 @@ return [
                 'image_alt' => ['Avantages Sabonea pour les fournisseurs', 'Sabonea benefits for suppliers', 'Vorteile von Sabonea für Lieferanten', 'Sabonea 为供应商带来的优势'],
                 'eyebrow' => ['Pour les fournisseurs', 'For suppliers', 'Für Lieferanten', '致供应商'],
                 'title' => ['Une vitrine à l\'international, des contacts qualifiés', 'An international showcase, qualified contacts', 'Ein internationales Schaufenster, qualifizierte Kontakte', '国际展示窗口，优质客户资源'],
-                'cta_label' => $becomeSupplier, 'cta_url' => 'contact',
+                'cta_label' => $becomeSupplier, 'cta_url' => 'devenir-fournisseur',
                 'items' => [
                     ['title' => ['Une visibilité internationale ciblée, sans dispersion sur des canaux génériques', 'Targeted international visibility, without spreading yourself thin across generic channels', 'Gezielte internationale Sichtbarkeit – ohne Streuverluste über generische Kanäle', '精准的国际曝光，无需在泛化渠道上分散精力']],
                     ['title' => ['Des demandes de devis qualifiées, provenant d\'acheteurs professionnels identifiés', 'Qualified quote requests from identified professional buyers', 'Qualifizierte Angebotsanfragen von identifizierten professionellen Einkäufern', '来自专业买家的优质询价']],
