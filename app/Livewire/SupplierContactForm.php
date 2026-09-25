@@ -9,6 +9,7 @@ use App\Models\SupplierApplication;
 use App\SupplierForms\SupplierContactForm as ContactFormDefinition;
 use App\SupplierForms\SupplierForm;
 use App\Support\SupplierForms;
+use App\Support\SupplierMailer;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\RateLimiter;
 use Livewire\Component;
@@ -63,7 +64,7 @@ class SupplierContactForm extends Component
 
         $answers = $definition->normalize($this->answers);
 
-        SupplierApplication::create([
+        $application = SupplierApplication::create([
             'status' => SupplierApplicationStatus::New,
             'is_test' => SupplierForms::isTestSubmission(),
             'company_name' => $answers['company_name'],
@@ -76,6 +77,8 @@ class SupplierContactForm extends Component
             'contact_submitted_at' => now(),
             'ip_address' => request()->ip(),
         ]);
+
+        SupplierMailer::formSubmitted($application, SupplierMailer::CONTACT_FORM);
 
         $this->submitted = true;
         $this->dispatch('supplier-form-done');

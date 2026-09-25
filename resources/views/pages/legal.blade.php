@@ -7,15 +7,13 @@
 @section('content')
     @include('partials.page-header')
 
-    <!-- Legal Content Start -->
-    <div class="container-fluid py-5">
+    <section class="section">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-9 legal-content">
+            <div class="row">
+                <div class="col-lg-8 legal-content">
                     {!! $content?->t('body') !!}
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Legal Content End -->
+    </section>
 @endsection

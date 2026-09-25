@@ -27,10 +27,10 @@ class ContactMessageController extends Controller
             'ip_address' => $request->ip(),
         ]);
 
-        Mailing::safely(fn () => Notification::route('mail', Setting::get('notification_email', Setting::get('contact_email')))
+        Mailing::later(fn () => Notification::route('mail', Setting::get('notification_email', Setting::get('contact_email')))
             ->notify((new NewContactMessageNotification($message))->locale(Locales::reference())));
 
-        Mailing::safely(fn () => Notification::route('mail', $message->email)
+        Mailing::later(fn () => Notification::route('mail', $message->email)
             ->notify((new ContactMessageReceivedNotification($message))->locale($message->locale)));
 
         return to_route('contact')->withFragment('contact-form')->with('contact_sent', true);

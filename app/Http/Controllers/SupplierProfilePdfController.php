@@ -12,6 +12,7 @@ class SupplierProfilePdfController extends Controller
 {
     /**
      * Supplier profile PDF, shown inline (back-office preview) or downloaded. Back-office users only.
+     * "documents": comma-separated ids of the supplier documents to show inside (absent: default of the version).
      */
     public function __invoke(Request $request, SupplierApplication $supplierApplication): Response
     {
@@ -21,10 +22,14 @@ class SupplierProfilePdfController extends Controller
             $supplierApplication,
             (string) $request->query('audience', SupplierProfileDocument::INTERNAL),
             (string) $request->query('locale', 'fr'),
+            $request->has('documents') ? array_filter(explode(',', (string) $request->query('documents'))) : null,
         );
 
-        $pdf = $document->pdf();
+        $disposition = $request->boolean('download') ? 'attachment' : 'inline';
 
-        return $request->boolean('download') ? $pdf->download($document->filename()) : $pdf->stream($document->filename());
+        return response($document->output(), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => $disposition.'; filename="'.$document->filename().'"',
+        ]);
     }
 }

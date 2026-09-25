@@ -15,7 +15,7 @@
     >
         <img class="lang-flag" src="{{ $currentLanguage->flagUrl() }}" alt="" width="22" height="16">
         <span class="lang-switcher-code">{{ strtoupper($currentLanguage->code) }}</span>
-        <i class="bi bi-chevron-down lang-switcher-chevron" aria-hidden="true"></i>
+        <i class="fa fa-chevron-down lang-switcher-chevron" aria-hidden="true"></i>
     </button>
 
     <ul class="dropdown-menu dropdown-menu-end lang-switcher-menu" aria-labelledby="languageSwitcher">
@@ -33,7 +33,7 @@
                 <span class="lang-switcher-name">{{ $language->name }}</span>
                 <span class="lang-switcher-item-code">{{ strtoupper($language->code) }}</span>
                 @if ($language->code === $currentLanguage->code)
-                <i class="bi bi-check2 lang-switcher-check" aria-hidden="true"></i>
+                <i class="fa fa-check lang-switcher-check" aria-hidden="true"></i>
                 @endif
             </a>
         </li>

@@ -8,56 +8,58 @@
 @section('content')
     @include('partials.page-header')
 
-    @if ($suppliers)
-    <!-- For Suppliers Start -->
-    <div class="container-fluid py-5">
-        <div class="container about px-lg-0">
-            <div class="row g-0 mx-lg-0">
-                <div class="col-lg-6 ps-lg-0 wow fadeIn" data-wow-delay="0.1s" style="min-height: 420px;">
-                    <div class="position-relative h-100">
-                        <img class="position-absolute img-fluid w-100 h-100" src="{{ \App\Support\Media::url($suppliers->image) }}" style="object-fit: cover; border-radius:6px;" alt="{{ $suppliers->t('image_alt') }}">
-                    </div>
+    @if ($buyers)
+    <section class="section">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-5">
+                    @if ($buyers->t('eyebrow'))
+                    <p class="label">{{ $buyers->t('eyebrow') }}</p>
+                    @endif
+                    <h2 class="t-h2">{{ $buyers->t('title') }}</h2>
+                    <a href="{{ \App\Support\SiteLink::url($buyers->cta_url) }}" class="btn btn-accent mt-2">{{ $buyers->t('cta_label') }}</a>
                 </div>
-                <div class="col-lg-6 about-text py-5 wow fadeIn" data-wow-delay="0.3s">
-                    <div class="p-lg-5 position-relative">
-                        <h6 class="text-sabonea-orange text-uppercase mb-2"><i class="fa fa-store me-2"></i>{{ $suppliers->t('eyebrow') }}</h6>
-                        <h2 class="mb-4">{{ $suppliers->t('title') }}</h2>
-                        @foreach ($suppliers->items as $item)
-                        <h6 class="text-uppercase"><i class="fa fa-check text-sabonea-green me-3"></i>{{ $item->t('title') }}</h6>
+                <div class="col-lg-6 offset-lg-1">
+                    <ul class="rule-list rule-list-lg mt-0">
+                        @foreach ($buyers->items as $item)
+                        <li>{{ $item->t('title') }}</li>
                         @endforeach
-                        <a href="{{ \App\Support\SiteLink::url($suppliers->cta_url) }}" class="btn btn-primary py-3 px-5 mt-3">{{ $suppliers->t('cta_label') }}</a>
-                    </div>
+                    </ul>
                 </div>
             </div>
+            @if ($buyers->image)
+            <figure class="figure-wide mt-5">
+                <img src="{{ \App\Support\Media::url($buyers->image) }}" alt="{{ $buyers->t('image_alt') }}">
+            </figure>
+            @endif
         </div>
-    </div>
-    <!-- For Suppliers End -->
+    </section>
     @endif
 
-    @if ($buyers)
-    <!-- For Buyers Start -->
-    <div class="container-fluid bg-light py-5">
-        <div class="container about px-lg-0">
-            <div class="row g-0 mx-lg-0 flex-lg-row-reverse">
-                <div class="col-lg-6 pe-lg-0 wow fadeIn" data-wow-delay="0.1s" style="min-height: 420px;">
-                    <div class="position-relative h-100">
-                        <img class="position-absolute img-fluid w-100 h-100" src="{{ \App\Support\Media::url($buyers->image) }}" style="object-fit: cover; border-radius:6px;" alt="{{ $buyers->t('image_alt') }}">
-                    </div>
+    @if ($suppliers)
+    <section class="section section-paper">
+        <div class="container">
+            <div class="row gy-5 align-items-center">
+                <div class="col-lg-4">
+                    <figure class="figure-portrait">
+                        <img src="{{ \App\Support\Media::url($suppliers->image) }}" alt="{{ $suppliers->t('image_alt') }}">
+                    </figure>
                 </div>
-                <div class="col-lg-6 about-text py-5 wow fadeIn" data-wow-delay="0.3s">
-                    <div class="p-lg-5 position-relative">
-                        <h6 class="text-sabonea-green text-uppercase mb-2"><i class="fa fa-search-dollar me-2"></i>{{ $buyers->t('eyebrow') }}</h6>
-                        <h2 class="mb-4">{{ $buyers->t('title') }}</h2>
-                        @foreach ($buyers->items as $item)
-                        <h6 class="text-uppercase"><i class="fa fa-check text-sabonea-orange me-3"></i>{{ $item->t('title') }}</h6>
+                <div class="col-lg-7 offset-lg-1">
+                    @if ($suppliers->t('eyebrow'))
+                    <p class="label">{{ $suppliers->t('eyebrow') }}</p>
+                    @endif
+                    <h2 class="t-h2">{{ $suppliers->t('title') }}</h2>
+                    <ul class="rule-list">
+                        @foreach ($suppliers->items as $item)
+                        <li>{{ $item->t('title') }}</li>
                         @endforeach
-                        <a href="{{ \App\Support\SiteLink::url($buyers->cta_url) }}" class="btn btn-sabonea-green py-3 px-5 mt-3">{{ $buyers->t('cta_label') }}</a>
-                    </div>
+                    </ul>
+                    <a href="{{ \App\Support\SiteLink::url($suppliers->cta_url) }}" class="btn btn-outline-primary">{{ $suppliers->t('cta_label') }}</a>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- For Buyers End -->
+    </section>
     @endif
 
     @include('partials.cta-banner', ['section' => $page->section('cta')])

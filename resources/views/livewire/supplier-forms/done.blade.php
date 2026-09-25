@@ -21,5 +21,5 @@
     </div>
     @endif
 
-    <a href="{{ route('accueil') }}" class="btn btn-outline-primary py-3 px-5 mt-2"><i class="fa fa-arrow-left me-2"></i>{{ ui('supplier_form.back_home') }}</a>
+    <a href="{{ route('accueil') }}" class="btn btn-outline-primary">{{ ui('supplier_form.back_home') }}</a>
 </div>

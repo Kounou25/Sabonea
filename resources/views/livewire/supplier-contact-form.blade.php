@@ -15,7 +15,7 @@
                 </div>
 
                 @if ($isTest)
-                <div class="sf-alert sf-alert-test" role="status"><i class="fa fa-flask"></i><span>{{ ui('supplier_form.test_mode') }}</span></div>
+                <div class="sf-alert sf-alert-test" role="status"><span>{{ ui('supplier_form.test_mode') }}</span></div>
                 @endif
 
                 @if ($errors->any())
@@ -35,7 +35,6 @@
                 @php $state = $progress[$section->key]; @endphp
                 <section class="sf-card" id="section-{{ $section->key }}" wire:key="section-{{ $section->key }}">
                     <header class="sf-card-header">
-                        <span class="sf-card-icon"><i class="{{ $section->icon }}" aria-hidden="true"></i></span>
                         <div class="sf-card-heading">
                             <span class="sf-card-eyebrow">{{ ui('supplier_form.section_count', ['current' => $loop->iteration, 'total' => $total]) }}</span>
                             <h3 class="sf-card-title">{{ $definition->sectionTitle($section) }}</h3>
@@ -58,7 +57,7 @@
                 <div class="sf-submit-bar">
                     <p class="mb-0 small">{{ ui('supplier_form.required_hint') }}</p>
                     <button class="btn btn-primary sf-submit" type="submit" wire:loading.attr="disabled" wire:target="submit">
-                        <span wire:loading.remove wire:target="submit">{{ ui('supplier_form.submit_contact') }}<i class="fa fa-paper-plane ms-2"></i></span>
+                        <span wire:loading.remove wire:target="submit">{{ ui('supplier_form.submit_contact') }}</span>
                         <span wire:loading wire:target="submit"><span class="spinner-border spinner-border-sm me-2" role="status"></span>{{ ui('supplier_form.sending') }}</span>
                     </button>
                 </div>
@@ -77,7 +76,7 @@
                         <li>
                             <a href="#section-{{ $section->key }}" @class(['sf-side-step', 'is-complete' => $state['complete']])>
                                 <span class="sf-side-step-icon">
-                                    @if ($state['complete'])<i class="fa fa-check"></i>@else<i class="{{ $section->icon }}"></i>@endif
+                                    @if ($state['complete'])<i class="fa fa-check"></i>@else{{ $loop->iteration }}@endif
                                 </span>
                                 <span class="sf-side-step-title">{{ $definition->sectionTitle($section) }}</span>
                                 @if ($state['total'] > 0)<span class="sf-side-step-count">{{ $state['answered'] }}/{{ $state['total'] }}</span>@endif

@@ -10,12 +10,12 @@ return [
             'image' => 'hero-aeroport.jpg',
             'image_alt' => ['Équipements professionnels sur tarmac d\'aéroport', 'Professional equipment on an airport apron', 'Professionelle Ausrüstung auf dem Flughafenvorfeld', '机场停机坪上的专业设备'],
             'eyebrow' => ['Marketplace B2B internationale', 'International B2B marketplace', 'Internationaler B2B-Marktplatz', '国际 B2B 交易平台'],
-            'title' => ['Direct access to the best suppliers', 'Direct access to the best suppliers', 'Direct access to the best suppliers', 'Direct access to the best suppliers'],
+            'title' => ['Un accès direct aux bons fournisseurs', 'Direct access to the right suppliers', 'Direkter Zugang zu den richtigen Lieferanten', '直达合适的供应商'],
             'text' => [
-                'Sabonea met en relation les fournisseurs d\'équipements professionnels de nettoyage, d\'entretien et de maintenance avec les organisations qui en ont besoin, partout dans le monde.',
-                'Sabonea connects suppliers of professional cleaning, upkeep and maintenance equipment with the organisations that need it, anywhere in the world.',
-                'Sabonea bringt Lieferanten professioneller Reinigungs-, Pflege- und Wartungsausrüstung mit den Organisationen zusammen, die sie benötigen – weltweit.',
-                'Sabonea 将专业清洁、保养与维护设备供应商与有需求的机构对接，覆盖全球。',
+                'Sabonea met en relation les fabricants et distributeurs d\'équipements de nettoyage, d\'entretien et de maintenance avec les organisations qui les utilisent.',
+                'Sabonea connects manufacturers and distributors of cleaning, upkeep and maintenance equipment with the organisations that use it.',
+                'Sabonea verbindet Hersteller und Händler von Reinigungs-, Pflege- und Wartungstechnik mit den Organisationen, die sie einsetzen.',
+                'Sabonea 将清洁、保养与维护设备的制造商和经销商，与使用这些设备的机构对接。',
             ],
             'cta_label' => ['Exprimer un besoin', 'Submit a request', 'Bedarf melden', '提交需求'],
             'cta_url' => 'expression-de-besoin',
@@ -25,8 +25,8 @@ return [
         [
             'image' => 'hero-voirie-nuit.jpg',
             'image_alt' => ['Nettoyage municipal et entretien de la voirie', 'Municipal cleaning and road maintenance', 'Kommunale Reinigung und Straßenunterhaltung', '市政清洁与道路养护'],
-            'eyebrow' => ['Marketplace B2B internationale', 'International B2B marketplace', 'Internationaler B2B-Marktplatz', '国际 B2B 交易平台'],
-            'title' => ['Un accès direct aux meilleurs fournisseurs', 'The right supplier, without the search', 'Direkter Zugang zu den besten Lieferanten', '直达优质供应商'],
+            'eyebrow' => ['Pour les acheteurs', 'For buyers', 'Für Einkäufer', '致买家'],
+            'title' => ['Le bon fournisseur, sans le chercher vous-même', 'The right supplier, without the search', 'Der passende Lieferant, ohne selbst zu suchen', '无需亲自寻找，也能找到合适的供应商'],
             'text' => [
                 'Aéroports, hôpitaux, municipalités, sites industriels : nous analysons votre besoin et vous orientons vers le fournisseur le plus adapté.',
                 'Airports, hospitals, municipalities, industrial sites: we analyse your requirement and point you to the most suitable supplier.',
@@ -41,13 +41,13 @@ return [
         [
             'image' => 'hero-logistique.jpg',
             'image_alt' => ['Logistique et équipements industriels', 'Logistics and industrial equipment', 'Logistik und Industrieausrüstung', '物流与工业设备'],
-            'eyebrow' => ['Marketplace B2B internationale', 'International B2B marketplace', 'Internationaler B2B-Marktplatz', '国际 B2B 交易平台'],
+            'eyebrow' => ['Pour les fournisseurs', 'For suppliers', 'Für Lieferanten', '致供应商'],
             'title' => ['Une vitrine internationale pour nos fournisseurs', 'An international showcase for our suppliers', 'Ein internationales Schaufenster für unsere Lieferanten', '为供应商打造的国际展示窗口'],
             'text' => [
-                'Nous accompagnons les fournisseurs dans leur développement à l\'export, avec des demandes qualifiées provenant d\'acheteurs professionnels identifiés.',
-                'We support suppliers in growing their export business, with qualified requests from identified professional buyers.',
-                'Wir begleiten Lieferanten bei ihrer Exportentwicklung – mit qualifizierten Anfragen von identifizierten professionellen Einkäufern.',
-                '我们助力供应商拓展出口业务，为其带来来自专业买家的有效询盘。',
+                'Nous accompagnons les fournisseurs à l\'export, avec des demandes triées par notre équipe et venant d\'acheteurs professionnels identifiés.',
+                'We support suppliers in their export business, with requests sorted by our team and coming from identified professional buyers.',
+                'Wir begleiten Lieferanten beim Export, mit Anfragen, die unser Team vorsortiert und die von identifizierten professionellen Einkäufern stammen.',
+                '我们助力供应商拓展出口业务，所转交的询盘均经团队筛选，来自身份明确的专业买家。',
             ],
             'cta_label' => ['Devenir fournisseur', 'Become a supplier', 'Lieferant werden', '成为供应商'],
             'cta_url' => 'devenir-fournisseur',
@@ -99,8 +99,8 @@ return [
      */
     'form_options' => [
         'contact_subject' => [
-            ['SUBJECT_BUYER', ['Je suis acheteur   j\'ai un besoin en équipement', 'I am a buyer – I need equipment', 'Ich bin Einkäufer – ich habe einen Ausrüstungsbedarf', '我是买家——我有设备需求']],
-            ['SUBJECT_SUPPLIER', ['Je suis fournisseur   je souhaite rejoindre Sabonea', 'I am a supplier – I would like to join Sabonea', 'Ich bin Lieferant – ich möchte Sabonea beitreten', '我是供应商——我想加入 Sabonea']],
+            ['SUBJECT_BUYER', ['Je suis acheteur : j\'ai un besoin en équipement', 'I am a buyer: I need equipment', 'Ich bin Einkäufer: Ich habe einen Ausrüstungsbedarf', '我是买家：我有设备需求']],
+            ['SUBJECT_SUPPLIER', ['Je suis fournisseur : je souhaite rejoindre Sabonea', 'I am a supplier: I would like to join Sabonea', 'Ich bin Lieferant: Ich möchte Sabonea beitreten', '我是供应商：我想加入 Sabonea']],
             ['SUBJECT_PARTNERSHIP', ['Demande de partenariat', 'Partnership request', 'Partnerschaftsanfrage', '合作咨询']],
             ['SUBJECT_OTHER', ['Autre question', 'Other question', 'Sonstige Frage', '其他问题']],
         ],

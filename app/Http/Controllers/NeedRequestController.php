@@ -26,7 +26,7 @@ class NeedRequestController extends Controller
             'ip_address' => $request->ip(),
         ]);
 
-        Mailing::safely(fn () => Notification::route('mail', Setting::get('notification_email', Setting::get('contact_email')))
+        Mailing::later(fn () => Notification::route('mail', Setting::get('notification_email', Setting::get('contact_email')))
             ->notify((new NewNeedRequestNotification($needRequest))->locale(Locales::reference())));
 
         return to_route('expression-de-besoin')->with('need_sent', true);

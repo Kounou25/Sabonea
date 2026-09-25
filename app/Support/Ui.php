@@ -56,7 +56,8 @@ class Ui
      */
     public static function all(): array
     {
-        return Cache::rememberForever(static::CACHE_KEY, fn () => UiTranslation::query()
+        // Memoized: read once per request, however many strings the page uses.
+        return Cache::memo()->rememberForever(static::CACHE_KEY, fn () => UiTranslation::query()
             ->get(['key', 'text'])
             ->mapWithKeys(fn (UiTranslation $translation) => [$translation->key => $translation->text ?? []])
             ->all());
@@ -64,6 +65,6 @@ class Ui
 
     public static function flush(): void
     {
-        Cache::forget(static::CACHE_KEY);
+        Cache::memo()->forget(static::CACHE_KEY);
     }
 }

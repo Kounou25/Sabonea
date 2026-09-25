@@ -9,6 +9,7 @@ use App\Models\SupplierApplication;
 use App\SupplierForms\FormSection;
 use App\SupplierForms\SupplierForm;
 use App\SupplierForms\SupplierOnboardingForm as OnboardingFormDefinition;
+use App\Support\SupplierMailer;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
@@ -137,6 +138,8 @@ class SupplierOnboardingForm extends Component
             'onboarding_saved_at' => now(),
             'onboarding_submitted_at' => now(),
         ]);
+
+        SupplierMailer::formSubmitted($this->application(), SupplierMailer::ONBOARDING_FORM);
 
         $this->submitted = true;
         $this->dispatch('supplier-form-done');

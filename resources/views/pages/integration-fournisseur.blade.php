@@ -5,11 +5,9 @@
 @section('content')
     @include('partials.page-header')
 
-    <!-- Onboarding Form Start -->
-    <div class="container-fluid py-5 sf-page">
+    <section class="section">
         <div class="container">
             <livewire:supplier-onboarding-form :token="request()->route('token')" />
         </div>
-    </div>
-    <!-- Onboarding Form End -->
+    </section>
 @endsection

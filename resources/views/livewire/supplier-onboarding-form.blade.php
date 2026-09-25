@@ -9,12 +9,12 @@
     @endphp
 
     @if (! $isValid)
-    <div class="sf-done">
+    <div class="sf-done is-locked">
         <div class="sf-done-icon is-locked"><i class="fa fa-lock" aria-hidden="true"></i></div>
         <h2 class="sf-done-title">{{ $invalid?->t('title') }}</h2>
         <p class="sf-done-text">{{ $invalid?->md('body') }}</p>
         @if ($invalid?->t('cta_label'))
-        <a href="{{ \App\Support\SiteLink::url($invalid->cta_url) }}" class="btn btn-primary py-3 px-5">{{ $invalid->t('cta_label') }}</a>
+        <a href="{{ \App\Support\SiteLink::url($invalid->cta_url) }}" class="btn btn-primary">{{ $invalid->t('cta_label') }}</a>
         @endif
     </div>
     @elseif ($submitted)
@@ -22,9 +22,11 @@
     @else
     @if ($intro && $step === 0)
     <div class="sf-intro">
-        <h6 class="text-sabonea-orange text-uppercase mb-2">{{ $intro->t('eyebrow') }}</h6>
-        <h2 class="mb-3">{{ $intro->t('title') }}</h2>
-        <p class="mb-0">{{ $intro->md('body') }}</p>
+        @if ($intro->t('eyebrow'))
+        <p class="label">{{ $intro->t('eyebrow') }}</p>
+        @endif
+        <h2 class="t-h2">{{ $intro->t('title') }}</h2>
+        <p class="t-lead mb-0">{{ $intro->md('body') }}</p>
     </div>
     @endif
 
@@ -92,7 +94,6 @@
             <form wire:submit="{{ $isLastStep ? 'submit' : 'next' }}" novalidate>
                 <section class="sf-card" wire:key="section-{{ $current->key }}">
                     <header class="sf-card-header">
-                        <span class="sf-card-icon"><i class="{{ $current->icon }}" aria-hidden="true"></i></span>
                         <div class="sf-card-heading">
                             <span class="sf-card-eyebrow">{{ ui('supplier_form.step', ['current' => $step + 1, 'total' => $total]) }}</span>
                             <h3 class="sf-card-title">{{ $definition->sectionTitle($current) }}</h3>
@@ -106,9 +107,9 @@
                     </header>
 
                     @if ($step === 0)
-                    <div class="sf-note"><i class="fa fa-magic"></i><span>{{ ui('supplier_form.prefilled') }}</span></div>
+                    <p class="sf-note">{{ ui('supplier_form.prefilled') }}</p>
                     @elseif ($current->key === 'documents')
-                    <div class="sf-note"><i class="fa fa-paperclip"></i><span>{{ ui('supplier_form.files_intro') }}</span></div>
+                    <p class="sf-note">{{ ui('supplier_form.files_intro') }}</p>
                     @endif
 
                     <div class="row g-4">
@@ -123,10 +124,10 @@
                             <button type="button" class="btn sf-btn-ghost" wire:click="previous"><i class="fa fa-arrow-left me-2"></i>{{ ui('supplier_form.previous') }}</button>
                             @endif
                         </div>
-                        <button class="btn {{ $isLastStep ? 'btn-sabonea-green' : 'btn-primary' }} sf-submit" type="submit" wire:loading.attr="disabled" wire:target="next,submit">
+                        <button class="btn {{ $isLastStep ? 'btn-accent' : 'btn-primary' }} sf-submit" type="submit" wire:loading.attr="disabled" wire:target="next,submit">
                             <span wire:loading.remove wire:target="next,submit">
                                 @if ($isLastStep)
-                                {{ ui('supplier_form.submit_onboarding') }}<i class="fa fa-paper-plane ms-2"></i>
+                                {{ ui('supplier_form.submit_onboarding') }}
                                 @else
                                 {{ ui('supplier_form.next') }}<i class="fa fa-arrow-right ms-2"></i>
                                 @endif

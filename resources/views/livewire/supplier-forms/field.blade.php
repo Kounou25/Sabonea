@@ -30,20 +30,15 @@
         @case(FieldType::Text)
         @case(FieldType::Url)
         @case(FieldType::Email)
-            <div class="sf-input-icon">
-                @if ($question->type !== FieldType::Text)
-                <i class="fa {{ $question->type === FieldType::Url ? 'fa-globe' : 'fa-envelope' }}" aria-hidden="true"></i>
-                @endif
-                <input
-                    type="{{ $question->type === FieldType::Email ? 'email' : 'text' }}"
-                    id="{{ $id }}"
-                    @class(['form-control', 'is-invalid' => $hasError])
-                    wire:model.blur="answers.{{ $key }}"
-                    maxlength="255"
-                    @if ($question->type === FieldType::Url) inputmode="url" placeholder="https://" @endif
-                    @if ($question->type === FieldType::Email) autocomplete="email" @endif
-                >
-            </div>
+            <input
+                type="{{ $question->type === FieldType::Email ? 'email' : 'text' }}"
+                id="{{ $id }}"
+                @class(['form-control', 'is-invalid' => $hasError])
+                wire:model.blur="answers.{{ $key }}"
+                maxlength="255"
+                @if ($question->type === FieldType::Url) inputmode="url" placeholder="https://" @endif
+                @if ($question->type === FieldType::Email) autocomplete="email" @endif
+            >
             @break
 
         @case(FieldType::Number)
@@ -67,15 +62,12 @@
             @break
 
         @case(FieldType::Country)
-            <div class="sf-input-icon">
-                <i class="fa fa-map-marker-alt" aria-hidden="true"></i>
-                <select id="{{ $id }}" @class(['form-select', 'is-invalid' => $hasError]) wire:model.live="answers.{{ $key }}">
-                    <option value="">{{ ui('form.select') }}</option>
-                    @foreach (Countries::options() as $code => $name)
-                    <option value="{{ $code }}">{{ $name }}</option>
-                    @endforeach
-                </select>
-            </div>
+            <select id="{{ $id }}" @class(['form-select', 'is-invalid' => $hasError]) wire:model.live="answers.{{ $key }}">
+                <option value="">{{ ui('form.select') }}</option>
+                @foreach (Countries::options() as $code => $name)
+                <option value="{{ $code }}">{{ $name }}</option>
+                @endforeach
+            </select>
             @break
 
         @case(FieldType::Countries)
@@ -89,17 +81,14 @@
                 @endforeach
             </div>
             @endif
-            <div class="sf-input-icon">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                <select id="{{ $id }}" @class(['form-select', 'sf-add-country', 'is-invalid' => $hasError]) wire:change="addCountry('{{ $key }}', $event.target.value)" wire:key="add-country-{{ $key }}-{{ count((array) $value) }}">
-                    <option value="">{{ ui('supplier_form.add_country') }}</option>
-                    @foreach (Countries::options() as $code => $name)
-                    @unless (in_array($code, (array) $value, true))
-                    <option value="{{ $code }}">{{ $name }}</option>
-                    @endunless
-                    @endforeach
-                </select>
-            </div>
+            <select id="{{ $id }}" @class(['form-select', 'sf-add-country', 'is-invalid' => $hasError]) wire:change="addCountry('{{ $key }}', $event.target.value)" wire:key="add-country-{{ $key }}-{{ count((array) $value) }}">
+                <option value="">{{ ui('supplier_form.add_country') }}</option>
+                @foreach (Countries::options() as $code => $name)
+                @unless (in_array($code, (array) $value, true))
+                <option value="{{ $code }}">{{ $name }}</option>
+                @endunless
+                @endforeach
+            </select>
             @break
 
         @case(FieldType::Choice)

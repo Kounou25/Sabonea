@@ -3,8 +3,12 @@
 namespace App\Support;
 
 use App\Models\Language;
+use Illuminate\Cookie\CookieValuePrefix;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Crypt;
+use Throwable;
 
 class Locales
 {
@@ -80,6 +84,51 @@ class Locales
         }
 
         return static::default();
+    }
+
+    /**
+     * Language of a page that may be shown outside the localised routes (error pages): the one already applied
+     * (App\Http\Middleware\SetLocale), then the /{locale}/ prefix of the address, the language chosen on a previous
+     * visit, the browser preferences. The back-office is in French.
+     */
+    public static function detect(Request $request): string
+    {
+        if ($request->is('admin', 'admin/*')) {
+            return static::reference();
+        }
+
+        $applied = $request->attributes->get('locale');
+
+        if (is_string($applied) && static::isActive($applied)) {
+            return $applied;
+        }
+
+        $prefix = strtolower((string) $request->segment(1));
+
+        if (static::isActive($prefix)) {
+            return $prefix;
+        }
+
+        return static::negotiate([static::rememberedLocale($request), ...$request->getLanguages()]);
+    }
+
+    /**
+     * The language cookie, decrypted by hand when the request did not go through the web middleware (unknown address).
+     */
+    private static function rememberedLocale(Request $request): string
+    {
+        $name = (string) config('sabonea.locale_cookie');
+        $value = (string) $request->cookies->get($name);
+
+        if ($value === '' || static::isActive($value)) {
+            return $value;
+        }
+
+        try {
+            return (string) CookieValuePrefix::validate($name, Crypt::decryptString($value), Crypt::getAllKeys());
+        } catch (Throwable) {
+            return '';
+        }
     }
 
     public static function flush(): void

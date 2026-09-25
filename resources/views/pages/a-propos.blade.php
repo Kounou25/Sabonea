@@ -10,70 +10,67 @@
     @include('partials.page-header')
 
     @if ($intro)
-    <!-- Intro Start -->
-    <div class="container-fluid py-5">
+    <section class="section">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-9 text-center wow fadeIn" data-wow-delay="0.1s">
-                    <h6 class="text-sabonea-orange text-uppercase mb-2">{{ $intro->t('eyebrow') }}</h6>
-                    <p class="fs-4">{{ $intro->md('subtitle') }}</p>
-                    <p class="text-muted">{{ $intro->md('body') }}</p>
+            <div class="row gy-3">
+                <div class="col-lg-3">
+                    <p class="label">{{ $intro->t('eyebrow') }}</p>
+                </div>
+                <div class="col-lg-9">
+                    <p class="t-lead-xl">{{ $intro->md('subtitle') }}</p>
+                    <p class="muted measure mb-0">{{ $intro->md('body') }}</p>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Intro End -->
+    </section>
     @endif
 
     @if ($story)
-    <!-- Notre histoire Start -->
-    <div class="container-fluid bg-light overflow-hidden my-5 px-lg-0">
-        <div class="container about px-lg-0">
-            <div class="row g-0 mx-lg-0">
-                <div class="col-lg-5 ps-lg-0 wow fadeIn" data-wow-delay="0.1s" style="min-height: 420px;">
-                    <div class="position-relative h-100">
-                        <img class="position-absolute img-fluid w-100 h-100" src="{{ \App\Support\Media::url($story->image) }}" style="object-fit: cover;" alt="{{ $story->t('image_alt') }}">
-                    </div>
+    <section class="section section-paper">
+        <div class="container">
+            <div class="row gy-5 align-items-center">
+                <div class="col-lg-5">
+                    <figure class="figure-portrait">
+                        <img src="{{ \App\Support\Media::url($story->image) }}" alt="{{ $story->t('image_alt') }}">
+                    </figure>
                 </div>
-                <div class="col-lg-7 about-text py-5 wow fadeIn" data-wow-delay="0.5s">
-                    <div class="p-lg-5 pe-lg-0 position-relative">
-                        <h6 class="text-sabonea-orange text-uppercase mb-2">{{ $story->t('eyebrow') }}</h6>
-                        <h2 class="mb-4">{{ $story->t('title') }}</h2>
-                        <p class="fs-5 fst-italic" style="color:#5c4f78;">{{ $story->md('subtitle') }}</p>
-                        <p>{{ $story->md('body') }}</p>
-                    </div>
+                <div class="col-lg-6 offset-lg-1">
+                    @if ($story->t('eyebrow'))
+                    <p class="label">{{ $story->t('eyebrow') }}</p>
+                    @endif
+                    <h2 class="t-h2">{{ $story->t('title') }}</h2>
+                    <blockquote class="t-quote">{{ $story->md('subtitle') }}</blockquote>
+                    <p class="mb-0">{{ $story->md('body') }}</p>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Notre histoire End -->
+    </section>
     @endif
 
     @if ($mission)
-    <!-- Notre mission Start -->
-    <div class="container-fluid py-5">
+    <section class="section">
         <div class="container">
-            <div class="row mb-5">
-                <div class="col-lg-8 mx-auto text-center wow fadeIn" data-wow-delay="0.1s">
-                    <h6 class="text-sabonea-orange text-uppercase mb-2">{{ $mission->t('eyebrow') }}</h6>
-                    <h1 class="display-5 mb-4">{{ $mission->t('title') }}</h1>
-                    <p class="fs-5">{{ $mission->md('subtitle') }}</p>
+            <div class="row gy-5">
+                <div class="col-lg-5">
+                    @if ($mission->t('eyebrow'))
+                    <p class="label">{{ $mission->t('eyebrow') }}</p>
+                    @endif
+                    <h2 class="t-h2">{{ $mission->t('title') }}</h2>
+                    <p class="t-lead mb-0">{{ $mission->md('subtitle') }}</p>
                 </div>
-            </div>
-            <div class="row g-4">
-                @foreach ($mission->items as $item)
-                <div class="col-md-6 col-lg-3 wow fadeInUp" data-wow-delay="{{ wow_delay(0.1, 0.1, $loop->index) }}">
-                    <div class="key-fact{{ $item->variant ? ' '.$item->variant : '' }} text-center">
-                        <div class="btn-lg-square mx-auto mb-3"><i class="{{ $item->icon }} text-white"></i></div>
-                        <h6 class="text-uppercase">{{ $item->t('title') }}</h6>
-                        <span class="small">{{ $item->md('text') }}</span>
-                    </div>
+                <div class="col-lg-6 offset-lg-1">
+                    <ul class="entry-list">
+                        @foreach ($mission->items as $item)
+                        <li>
+                            <span class="entry-list-title">{{ $item->t('title') }}</span>
+                            <span class="entry-list-text">{{ $item->md('text') }}</span>
+                        </li>
+                        @endforeach
+                    </ul>
                 </div>
-                @endforeach
             </div>
         </div>
-    </div>
-    <!-- Notre mission End -->
+    </section>
     @endif
 
     @include('partials.cta-banner', ['section' => $page->section('cta')])

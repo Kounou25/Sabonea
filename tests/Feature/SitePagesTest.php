@@ -100,7 +100,7 @@ class SitePagesTest extends TestCase
         $page = Page::query()->where('key', 'a-propos')->first();
         $page->sections()->where('key', 'story')->update(['is_visible' => false]);
 
-        $this->get('/fr/a-propos')->assertDontSee('Une idée simple, portée par une vision plus grande');
+        $this->get('/fr/a-propos')->assertDontSee('Pourquoi j&#039;ai créé Sabonea', false);
     }
 
     public function test_pages_render_with_a_persistent_cache_store(): void

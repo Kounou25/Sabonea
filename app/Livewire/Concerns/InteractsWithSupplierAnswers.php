@@ -52,18 +52,48 @@ trait InteractsWithSupplierAnswers
         }
     }
 
-    public function updatingAnswers(mixed $value, string $key): void
+    /**
+     * $key is null when the browser sends all the answers at once (it does so when an answer that did not exist yet appears).
+     */
+    public function updatingAnswers(mixed $value, ?string $key = null): void
     {
+        if ($key === null) {
+            $this->answersBeforeUpdate = $this->answers;
+
+            return;
+        }
+
         $field = Str::before($key, '.');
         $this->answersBeforeUpdate[$field] = $this->answers[$field] ?? null;
+    }
+
+    public function updatedAnswers(mixed $value, ?string $key = null): void
+    {
+        if ($key !== null) {
+            $this->answerChanged(Str::before($key, '.'));
+
+            return;
+        }
+
+        $changed = array_filter(
+            array_keys($this->answers),
+            fn (string $field): bool => ($this->answers[$field] ?? null) !== ($this->answersBeforeUpdate[$field] ?? null),
+        );
+
+        foreach ($changed as $field) {
+            $this->answerChanged($field, notify: false);
+        }
+
+        if ($changed !== []) {
+            $this->answerUpdated((string) end($changed));
+        }
     }
 
     /**
      * "None" is exclusive: selecting it unselects the other options, and the other way round.
      */
-    public function updatedAnswers(mixed $value, string $key): void
+    private function answerChanged(string $field, bool $notify = true): void
     {
-        $field = Str::before($key, '.');
         $question = $this->definition()->question($field);
 
         if ($question?->type === FieldType::Choices && is_array($this->answers[$field] ?? null)) {
@@ -78,7 +108,9 @@ trait InteractsWithSupplierAnswers
             }
         }
 
-        $this->answerUpdated($field);
+        if ($notify) {
+            $this->answerUpdated($field);
+        }
     }
 
     public function addCountry(string $key, string $code): void

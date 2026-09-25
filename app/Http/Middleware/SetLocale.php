@@ -25,6 +25,7 @@ class SetLocale
         app()->setLocale($locale);
         URL::defaults(['locale' => $locale]);
         $request->route()->forgetParameter('locale');
+        $request->attributes->set('locale', $locale);
 
         // Remembered for the home page redirect, so a returning visitor gets the language they chose.
         if ($request->cookie(config('sabonea.locale_cookie')) !== $locale) {

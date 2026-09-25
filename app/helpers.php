@@ -15,16 +15,6 @@ if (! function_exists('ui')) {
     }
 }
 
-if (! function_exists('wow_delay')) {
-    /**
-     * Staggered "data-wow-delay" value for the n-th card of a list (e.g. 0.1s, 0.3s, 0.5s).
-     */
-    function wow_delay(float $start, float $step, int $index): string
-    {
-        return rtrim(rtrim(number_format($start + $step * $index, 2, '.', ''), '0'), '.').'s';
-    }
-}
-
 if (! function_exists('locale_url')) {
     /**
      * URL of the current page in another language.

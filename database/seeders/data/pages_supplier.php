@@ -17,7 +17,7 @@ return [
     /* ------------------------------------------------------------------ */
     'devenir-fournisseur' => [
         'name' => 'Devenir fournisseur (formulaire 1)',
-        'meta_title' => ['Devenir fournisseur   Sabonea', 'Become a supplier – Sabonea', 'Lieferant werden – Sabonea', '成为供应商 – Sabonea'],
+        'meta_title' => ['Devenir fournisseur | Sabonea', 'Become a supplier | Sabonea', 'Lieferant werden | Sabonea', '成为供应商 | Sabonea'],
         'meta_description' => [
             'Fabricant ou distributeur d\'équipements professionnels de nettoyage, d\'entretien et de maintenance ? Présentez votre entreprise à Sabonea et accédez à des acheteurs professionnels du monde entier.',
             'Manufacturer or distributor of professional cleaning, upkeep and maintenance equipment? Introduce your company to Sabonea and reach professional buyers worldwide.',
@@ -32,10 +32,10 @@ return [
                 'eyebrow' => ['Rejoindre Sabonea', 'Join Sabonea', 'Sabonea beitreten', '加入 Sabonea'],
                 'title' => ['Présentez votre entreprise en quelques minutes', 'Introduce your company in a few minutes', 'Stellen Sie Ihr Unternehmen in wenigen Minuten vor', '几分钟内介绍您的企业'],
                 'body' => [
-                    'Ce premier formulaire nous permet de mieux vous connaître. Notre équipe l\'étudie et revient vers vous sous 48 h. Si votre profil correspond, vous recevrez un lien privé pour compléter votre dossier d\'intégration : vos réponses y seront déjà reprises.',
-                    'This first form helps us get to know you. Our team reviews it and gets back to you within 48 hours. If your profile is a good fit, you will receive a private link to complete your onboarding file, with your answers already filled in.',
-                    'Mit diesem ersten Formular lernen wir Sie besser kennen. Unser Team prüft es und meldet sich innerhalb von 48 Stunden bei Ihnen. Passt Ihr Profil, erhalten Sie einen privaten Link zu Ihren Aufnahmeunterlagen – Ihre Antworten sind dort bereits übernommen.',
-                    '通过这份初步表单，我们可以更好地了解您。我们的团队会在 48 小时内审核并与您联系。如果您的情况符合要求，您将收到一个专属链接，用于完善入驻资料，您已填写的回答会自动带入。',
+                    'Ce premier formulaire nous permet de mieux vous connaître. Notre équipe l\'étudie puis revient vers vous. Si votre profil correspond, vous recevrez un lien privé pour compléter votre dossier d\'intégration : vos réponses y seront déjà reprises.',
+                    'This first form helps us get to know you. Our team reviews it and then gets back to you. If your profile is a good fit, you will receive a private link to complete your onboarding file, with your answers already filled in.',
+                    'Mit diesem ersten Formular lernen wir Sie besser kennen. Unser Team prüft es und meldet sich dann bei Ihnen. Passt Ihr Profil, erhalten Sie einen privaten Link zu Ihren Aufnahmeunterlagen; Ihre Antworten sind dort bereits übernommen.',
+                    '通过这份初步表单，我们可以更好地了解您。我们的团队审核后会与您联系。如果您的情况符合要求，您将收到一个专属链接，用于完善入驻资料，您已填写的回答会自动带入。',
                 ],
             ],
             [
@@ -47,17 +47,17 @@ return [
                         'Präsentieren Sie Ihre Ausrüstung professionellen Einkäufern weltweit.',
                         '向全球专业买家展示您的设备。',
                     ]],
-                    ['icon' => 'fa fa-bullseye', 'title' => ['Des demandes qualifiées', 'Qualified requests', 'Qualifizierte Anfragen', '优质询盘'], 'text' => [
+                    ['icon' => 'fa fa-bullseye', 'title' => ['Des demandes déjà triées', 'Pre-screened requests', 'Vorab geprüfte Anfragen', '预先筛选的询盘'], 'text' => [
                         'Chaque demande est analysée par notre équipe avant de vous être transmise.',
                         'Every request is analysed by our team before being passed on to you.',
                         'Jede Anfrage wird von unserem Team geprüft, bevor sie an Sie weitergeleitet wird.',
                         '每一项需求都经我们团队分析后再转交给您。',
                     ]],
-                    ['icon' => 'fa fa-clock', 'title' => ['Une réponse sous 48 h', 'An answer within 48 hours', 'Antwort innerhalb von 48 Std.', '48 小时内回复'], 'text' => [
-                        'Notre équipe étudie votre profil et revient vers vous rapidement.',
-                        'Our team reviews your profile and gets back to you quickly.',
-                        'Unser Team prüft Ihr Profil und meldet sich schnell bei Ihnen.',
-                        '我们的团队会审核您的资料并尽快与您联系。',
+                    ['icon' => 'fa fa-clock', 'title' => ['Des coordonnées protégées', 'Protected contact details', 'Geschützte Kontaktdaten', '联系方式受保护'], 'text' => [
+                        'Votre vitrine ne publie ni e-mail ni téléphone : les acheteurs passent par notre équipe.',
+                        'Your showcase shows no email or phone number: buyers go through our team.',
+                        'Ihr Schaufenster zeigt weder E-Mail noch Telefonnummer: Einkäufer gehen über unser Team.',
+                        '展示页不公开电子邮件或电话，买家需通过我们的团队联系。',
                     ]],
                 ],
             ],
@@ -76,10 +76,10 @@ return [
                 'title' => ['Et maintenant ?', 'What happens next?', 'Wie geht es weiter?', '接下来'],
                 'items' => [
                     ['title' => ['Étude de votre profil', 'Review of your profile', 'Prüfung Ihres Profils', '审核您的资料'], 'text' => [
-                        'Notre équipe analyse vos réponses sous 48 h.',
-                        'Our team reviews your answers within 48 hours.',
-                        'Unser Team prüft Ihre Antworten innerhalb von 48 Stunden.',
-                        '我们的团队将在 48 小时内审核您的回答。',
+                        'Notre équipe lit vos réponses.',
+                        'Our team reads your answers.',
+                        'Unser Team liest Ihre Antworten.',
+                        '我们的团队会阅读您的回答。',
                     ]],
                     ['title' => ['Votre dossier d\'intégration', 'Your onboarding file', 'Ihre Aufnahmeunterlagen', '您的入驻资料'], 'text' => [
                         'Si votre profil correspond, vous recevez un lien privé, déjà pré-rempli avec vos réponses.',
@@ -113,7 +113,7 @@ return [
     'integration-fournisseur' => [
         'name' => 'Dossier d\'intégration fournisseur (formulaire 2)',
         'noindex' => true,
-        'meta_title' => ['Dossier d\'intégration fournisseur   Sabonea', 'Supplier onboarding file – Sabonea', 'Aufnahmeunterlagen für Lieferanten – Sabonea', '供应商入驻资料 – Sabonea'],
+        'meta_title' => ['Dossier d\'intégration fournisseur | Sabonea', 'Supplier onboarding file | Sabonea', 'Aufnahmeunterlagen für Lieferanten | Sabonea', '供应商入驻资料 | Sabonea'],
         'meta_description' => [
             'Espace privé de constitution du dossier d\'intégration des fournisseurs Sabonea.',
             'Private area for Sabonea suppliers to complete their onboarding file.',
@@ -185,7 +185,7 @@ return [
     /* ------------------------------------------------------------------ */
     'politique-de-confidentialite' => [
         'name' => 'Politique de confidentialité',
-        'meta_title' => ['Politique de confidentialité   Sabonea', 'Privacy policy – Sabonea', 'Datenschutzerklärung – Sabonea', '隐私政策 – Sabonea'],
+        'meta_title' => ['Politique de confidentialité | Sabonea', 'Privacy policy | Sabonea', 'Datenschutzerklärung | Sabonea', '隐私政策 | Sabonea'],
         'header_title' => ['Politique de confidentialité', 'Privacy policy', 'Datenschutzerklärung', '隐私政策'],
         'breadcrumb' => ['Politique de confidentialité', 'Privacy policy', 'Datenschutzerklärung', '隐私政策'],
         'sections' => [
@@ -204,7 +204,7 @@ return [
     /* ------------------------------------------------------------------ */
     'conditions-fournisseurs' => [
         'name' => 'Conditions de partenariat fournisseur',
-        'meta_title' => ['Conditions de partenariat fournisseur   Sabonea', 'Supplier partnership terms – Sabonea', 'Partnerschaftsbedingungen für Lieferanten – Sabonea', '供应商合作条款 – Sabonea'],
+        'meta_title' => ['Conditions de partenariat fournisseur | Sabonea', 'Supplier partnership terms | Sabonea', 'Partnerschaftsbedingungen für Lieferanten | Sabonea', '供应商合作条款 | Sabonea'],
         'header_title' => ['Conditions de partenariat fournisseur', 'Supplier partnership terms', 'Partnerschaftsbedingungen für Lieferanten', '供应商合作条款'],
         'breadcrumb' => ['Conditions fournisseurs', 'Supplier terms', 'Lieferantenbedingungen', '供应商条款'],
         'sections' => [
@@ -223,7 +223,7 @@ return [
     /* ------------------------------------------------------------------ */
     'mentions-legales' => [
         'name' => 'Mentions légales',
-        'meta_title' => ['Mentions légales   Sabonea', 'Legal notice – Sabonea', 'Impressum – Sabonea', '法律声明 – Sabonea'],
+        'meta_title' => ['Mentions légales | Sabonea', 'Legal notice | Sabonea', 'Impressum | Sabonea', '法律声明 | Sabonea'],
         'header_title' => ['Mentions légales', 'Legal notice', 'Impressum', '法律声明'],
         'breadcrumb' => ['Mentions légales', 'Legal notice', 'Impressum', '法律声明'],
         'sections' => [

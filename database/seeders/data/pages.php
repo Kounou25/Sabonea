@@ -18,7 +18,7 @@ return [
     /* ------------------------------------------------------------------ */
     'accueil' => [
         'name' => 'Accueil',
-        'meta_title' => ['Sabonea   Direct access to the best suppliers', 'Sabonea – Direct access to the best suppliers', 'Sabonea – Direkter Zugang zu den besten Lieferanten', 'Sabonea – 直达优质供应商'],
+        'meta_title' => ['Sabonea | Fournisseurs d\'équipements de nettoyage et de maintenance', 'Sabonea | Suppliers of cleaning and maintenance equipment', 'Sabonea | Lieferanten für Reinigungs- und Wartungstechnik', 'Sabonea | 清洁与维护设备供应商对接'],
         'meta_keywords' => [
             'Sabonea, marketplace B2B, fournisseurs équipements nettoyage, entretien, maintenance, aéroportuaire, hospitalier, municipal, industriel',
             'Sabonea, B2B marketplace, cleaning equipment suppliers, upkeep, maintenance, airport, hospital, municipal, industrial',
@@ -44,29 +44,29 @@ return [
             [
                 'key' => 'key_facts', 'name' => 'Points clés', 'fields' => [], 'item_fields' => ['title', 'text', 'icon', 'variant'],
                 'items' => [
-                    ['icon' => 'fa fa-globe-americas', 'title' => ['Internationale', 'International', 'International', '国际化'], 'text' => [
-                        'Une marketplace B2B pensée pour connecter acheteurs et fournisseurs partout dans le monde.',
-                        'A B2B marketplace designed to connect buyers and suppliers all over the world.',
-                        'Ein B2B-Marktplatz, der Einkäufer und Lieferanten weltweit zusammenbringt.',
-                        '致力于连接全球买家与供应商的 B2B 交易平台。',
+                    ['icon' => 'fa fa-globe-americas', 'title' => ['Un formulaire, pas un catalogue', 'A form, not a catalogue', 'Ein Formular statt eines Katalogs', '一份表单，而非目录'], 'text' => [
+                        'Vous décrivez l\'équipement recherché. Notre équipe cherche le fournisseur à votre place.',
+                        'You describe the equipment you need. Our team looks for the supplier on your behalf.',
+                        'Sie beschreiben die gesuchte Ausrüstung. Unser Team sucht den Lieferanten für Sie.',
+                        '您只需描述所需设备，由我们的团队代您寻找供应商。',
                     ]],
-                    ['icon' => 'fa fa-layer-group', 'variant' => 'alt-green', 'title' => ['4 secteurs', '4 sectors', '4 Branchen', '4 大行业'], 'text' => [
-                        'Aéroportuaire, hospitalier, municipal et industriel : des besoins que nous connaissons.',
-                        'Airports, hospitals, municipalities and industry: needs we know well.',
-                        'Flughäfen, Krankenhäuser, Kommunen und Industrie: Anforderungen, die wir kennen.',
-                        '机场、医院、市政与工业：我们深谙这些领域的需求。',
+                    ['icon' => 'fa fa-layer-group', 'variant' => 'alt-green', 'title' => ['Des fournisseurs vérifiés', 'Verified suppliers', 'Geprüfte Lieferanten', '经过审核的供应商'], 'text' => [
+                        'Certifications, références et conditions commerciales sont examinées avant tout référencement.',
+                        'Certifications, references and commercial terms are checked before any supplier is listed.',
+                        'Zertifizierungen, Referenzen und Geschäftsbedingungen werden vor jeder Listung geprüft.',
+                        '每家供应商上架前，我们都会审核其认证、业绩和商务条款。',
                     ]],
-                    ['icon' => 'fa fa-user-check', 'variant' => 'alt-orange', 'title' => ['Mise en relation qualifiée', 'Qualified introductions', 'Qualifizierte Vermittlung', '精准对接'], 'text' => [
-                        'Chaque besoin est analysé par notre équipe avant d\'être transmis au bon fournisseur.',
-                        'Every requirement is analysed by our team before being passed on to the right supplier.',
-                        'Jeder Bedarf wird von unserem Team analysiert, bevor er an den richtigen Lieferanten weitergeleitet wird.',
-                        '每一项需求都经我们团队分析后，再转交给合适的供应商。',
+                    ['icon' => 'fa fa-user-check', 'variant' => 'alt-orange', 'title' => ['Puis un échange direct', 'Then direct contact', 'Danach direkter Austausch', '随后直接洽谈'], 'text' => [
+                        'Une fois les présentations faites, acheteur et fournisseur négocient entre eux.',
+                        'Once the introduction is made, buyer and supplier negotiate with each other.',
+                        'Nach der Vorstellung verhandeln Einkäufer und Lieferant direkt miteinander.',
+                        '引荐完成后，买卖双方直接洽谈。',
                     ]],
-                    ['icon' => 'fa fa-language', 'title' => ['Multilingue', 'Multilingual', 'Mehrsprachig', '多语言'], 'text' => [
-                        'Disponible en français, en anglais, en allemand et en chinois.',
-                        'Available in French, English, German and Chinese.',
-                        'Verfügbar auf Französisch, Englisch, Deutsch und Chinesisch.',
-                        '支持法语、英语、德语和中文。',
+                    ['icon' => 'fa fa-language', 'title' => ['Quatre langues', 'Four languages', 'Vier Sprachen', '四种语言'], 'text' => [
+                        'Français, anglais, allemand et chinois.',
+                        'French, English, German and Chinese.',
+                        'Französisch, Englisch, Deutsch und Chinesisch.',
+                        '法语、英语、德语和中文。',
                     ]],
                 ],
             ],
@@ -75,90 +75,90 @@ return [
                 'image' => 'about-ingenieure.jpg',
                 'image_alt' => ['Sabonea, une entreprise portée par une vision d\'infrastructures plus propres', 'Sabonea, a company driven by a vision of cleaner infrastructure', 'Sabonea, ein Unternehmen mit der Vision sauberer Infrastrukturen', 'Sabonea，致力于打造更洁净基础设施的企业'],
                 'eyebrow' => ['À propos de Sabonea', 'About Sabonea', 'Über Sabonea', '关于 Sabonea'],
-                'title' => ['Contribuer à des villes et des infrastructures plus propres, plus modernes', 'Helping to build cleaner, more modern cities and infrastructure', 'Für sauberere, modernere Städte und Infrastrukturen', '助力打造更洁净、更现代的城市与基础设施'],
+                'title' => ['Une place de marché dédiée au nettoyage et à la maintenance professionnels', 'A marketplace dedicated to professional cleaning and maintenance equipment', 'Ein Marktplatz für professionelle Reinigungs- und Wartungstechnik', '专注专业清洁与维护设备的交易平台'],
                 'body' => [
-                    'Sabonea est une marketplace B2B internationale qui met en relation les fournisseurs d\'équipements professionnels de nettoyage, d\'entretien et de maintenance avec les organisations qui en ont besoin   notamment dans les secteurs aéroportuaire, hospitalier, municipal et industriel.',
-                    'Sabonea is an international B2B marketplace connecting suppliers of professional cleaning, upkeep and maintenance equipment with the organisations that need it – particularly in the airport, hospital, municipal and industrial sectors.',
-                    'Sabonea ist ein internationaler B2B-Marktplatz, der Lieferanten professioneller Reinigungs-, Pflege- und Wartungsausrüstung mit den Organisationen verbindet, die sie benötigen – insbesondere in den Bereichen Flughafen, Krankenhaus, Kommune und Industrie.',
-                    'Sabonea 是一个国际 B2B 交易平台，将专业清洁、保养与维护设备供应商与有需求的机构对接，尤其服务于机场、医院、市政和工业领域。',
+                    'Balayeuses, autolaveuses, nettoyeurs haute pression, matériel de déneigement : Sabonea met en relation les fabricants et distributeurs de ces équipements avec les aéroports, hôpitaux, collectivités et sites industriels qui en ont besoin.',
+                    'Road sweepers, scrubber-dryers, high-pressure cleaners, snow removal equipment: Sabonea connects the manufacturers and distributors of these machines with the airports, hospitals, local authorities and industrial sites that need them.',
+                    'Kehrmaschinen, Scheuersaugmaschinen, Hochdruckreiniger, Winterdiensttechnik: Sabonea verbindet Hersteller und Händler dieser Geräte mit Flughäfen, Krankenhäusern, Kommunen und Industriestandorten, die sie benötigen.',
+                    '道路清扫车、洗地机、高压清洗机、除雪设备：Sabonea 将这些设备的制造商和经销商，与有需求的机场、医院、市政部门和工业场所对接。',
                 ],
                 'cta_label' => ['Découvrir notre histoire', 'Discover our story', 'Unsere Geschichte entdecken', '了解我们的故事'], 'cta_url' => 'a-propos',
                 'items' => [
-                    ['title' => ['Un lien direct entre acheteurs et fournisseurs', 'A direct link between buyers and suppliers', 'Eine direkte Verbindung zwischen Einkäufern und Lieferanten', '买家与供应商直接对接']],
-                    ['title' => ['Une sélection analysée par notre équipe', 'A selection reviewed by our team', 'Eine von unserem Team geprüfte Auswahl', '经团队分析的精选供应商']],
-                    ['title' => ['Un accompagnement à l\'international', 'Support for international growth', 'Begleitung auf internationaler Ebene', '国际化全程支持']],
+                    ['title' => ['Chaque demande est lue et triée par notre équipe', 'Every request is read and sorted by our team', 'Jede Anfrage wird von unserem Team gelesen und eingeordnet', '每项需求都由团队阅读并分类']],
+                    ['title' => ['Aucune coordonnée publiée : chaque contact passe par Sabonea', 'No contact details published: every contact goes through Sabonea', 'Keine veröffentlichten Kontaktdaten: Jeder Kontakt läuft über Sabonea', '不公开联系方式：每次联系都经由 Sabonea']],
+                    ['title' => ['Un accompagnement des fournisseurs à l\'export', 'Export support for suppliers', 'Exportbegleitung für Lieferanten', '为供应商提供出口支持']],
                 ],
             ],
             [
                 'key' => 'sectors_preview', 'name' => 'Aperçu des secteurs', 'fields' => ['eyebrow', 'title', 'cta'],
-                'eyebrow' => ['Nos secteurs', 'Our sectors', 'Unsere Branchen', '服务行业'],
-                'title' => ['Des besoins que nous comprenons, sur le terrain', 'Needs we understand, on the ground', 'Anforderungen, die wir aus der Praxis kennen', '我们深入一线，懂得您的需求'],
+                'eyebrow' => ['', '', '', ''],
+                'title' => ['Des sites où l\'entretien ne s\'arrête jamais', 'Sites where upkeep never stops', 'Standorte, an denen die Reinigung nie stillsteht', '清洁维护从不停歇的场所'],
                 'cta_label' => ['Voir tous les secteurs & équipements', 'See all sectors & equipment', 'Alle Branchen & Ausrüstungen ansehen', '查看全部行业与设备'], 'cta_url' => 'secteurs',
             ],
             [
                 'key' => 'how_it_works', 'name' => 'Comment ça fonctionne (aperçu)', 'fields' => ['eyebrow', 'title', 'body', 'image', 'cta'], 'item_fields' => ['title', 'text', 'icon'],
                 'image' => 'comment-mise-en-relation.jpg',
                 'image_alt' => ['Mise en relation qualifiée entre acheteur et fournisseur', 'Qualified introduction between buyer and supplier', 'Qualifizierte Vermittlung zwischen Einkäufer und Lieferant', '买家与供应商之间的精准对接'],
-                'eyebrow' => ['Comment ça fonctionne', 'How it works', 'So funktioniert’s', '运作方式'],
-                'title' => ['Un formulaire, une équipe, la bonne mise en relation', 'One form, one team, the right introduction', 'Ein Formular, ein Team, die richtige Vermittlung', '一份表单，一个团队，一次精准对接'],
+                'eyebrow' => ['', '', '', ''],
+                'title' => ['Vous décrivez le besoin, nous cherchons le fournisseur', 'You describe the need, we find the supplier', 'Sie beschreiben den Bedarf, wir suchen den Lieferanten', '您描述需求，我们寻找供应商'],
                 'body' => [
-                    'Sabonea n\'est pas un catalogue en libre recherche. Vous exprimez votre besoin, notre équipe l\'analyse et identifie le ou les fournisseurs les plus adaptés dans son réseau   puis fait les présentations.',
-                    'Sabonea is not a self-service catalogue. You describe your requirement, our team analyses it, identifies the most suitable supplier(s) in its network – and makes the introductions.',
-                    'Sabonea ist kein frei durchsuchbarer Katalog. Sie beschreiben Ihren Bedarf, unser Team analysiert ihn, findet den oder die passendsten Lieferanten in seinem Netzwerk – und stellt den Kontakt her.',
-                    'Sabonea 不是一个自助检索的产品目录。您提交需求，我们的团队进行分析，在网络中找到最合适的供应商，并为您牵线搭桥。',
+                    'Sabonea n\'est pas un catalogue en libre accès. Notre équipe lit chaque demande, cherche dans son réseau le ou les fournisseurs capables d\'y répondre, puis vous les présente.',
+                    'Sabonea is not a self-service catalogue. Our team reads each request, looks through its network for the supplier(s) able to meet it, then introduces them to you.',
+                    'Sabonea ist kein frei durchsuchbarer Katalog. Unser Team liest jede Anfrage, sucht in seinem Netzwerk nach passenden Lieferanten und stellt sie Ihnen anschließend vor.',
+                    'Sabonea 不是自助检索的目录。我们的团队会阅读每一项需求，在网络中寻找能够满足需求的供应商，然后为您引荐。',
                 ],
                 'cta_label' => ['Voir le parcours complet', 'See the full process', 'Den gesamten Ablauf ansehen', '查看完整流程'], 'cta_url' => 'comment-ca-fonctionne',
                 'items' => [
-                    ['icon' => 'fa fa-file-signature', 'title' => ['Expression', 'Submitting', 'Erfassung', '提交'], 'text' => ['du besoin', 'your request', 'des Bedarfs', '需求']],
-                    ['icon' => 'fa fa-search', 'title' => ['Analyse', 'Analysis', 'Analyse', '分析'], 'text' => ['par l\'équipe', 'by our team', 'durch das Team', '由团队完成']],
-                    ['icon' => 'fa fa-handshake', 'title' => ['Mise en relation', 'Introduction', 'Vermittlung', '对接'], 'text' => ['qualifiée', 'qualified', 'qualifiziert', '精准高效']],
-                    ['icon' => 'fa fa-sync-alt', 'title' => ['Suivi', 'Follow-up', 'Begleitung', '跟进'], 'text' => ['dans la durée', 'over time', 'auf Dauer', '长期持续']],
+                    ['icon' => 'fa fa-file-signature', 'title' => ['Vous décrivez le besoin', 'You describe the need', 'Sie beschreiben den Bedarf', '您描述需求'], 'text' => ['Équipement, secteur, pays, délai.', 'Equipment, sector, country, timeframe.', 'Ausrüstung, Branche, Land, Zeitrahmen.', '设备、行业、国家、时间。']],
+                    ['icon' => 'fa fa-search', 'title' => ['Nous étudions la demande', 'We review the request', 'Wir prüfen die Anfrage', '我们审核需求'], 'text' => ['Et cherchons les fournisseurs adaptés dans notre réseau.', 'And look for suitable suppliers in our network.', 'Und suchen passende Lieferanten in unserem Netzwerk.', '并在网络中寻找合适的供应商。']],
+                    ['icon' => 'fa fa-handshake', 'title' => ['Nous faisons les présentations', 'We make the introduction', 'Wir stellen den Kontakt her', '我们为您引荐'], 'text' => ['Vous échangez ensuite directement avec le fournisseur.', 'You then deal directly with the supplier.', 'Danach sprechen Sie direkt mit dem Lieferanten.', '之后您直接与供应商沟通。']],
+                    ['icon' => 'fa fa-sync-alt', 'title' => ['Nous restons votre contact', 'We remain your contact', 'Wir bleiben Ihr Ansprechpartner', '我们始终是您的联系人'], 'text' => ['Pour chaque nouvelle recherche d\'équipement.', 'For every new equipment search.', 'Bei jeder neuen Ausrüstungssuche.', '每一次新的设备寻源都可找我们。']],
                 ],
             ],
             [
                 'key' => 'why', 'name' => 'Pourquoi Sabonea (en-tête)', 'fields' => ['eyebrow', 'title', 'cta'],
-                'eyebrow' => ['Pourquoi Sabonea', 'Why Sabonea', 'Warum Sabonea', '为何选择 Sabonea'],
-                'title' => ['Deux publics, un même gain de temps', 'Two audiences, the same time saved', 'Zwei Zielgruppen, dieselbe Zeitersparnis', '两类客户，同样省时'],
-                'cta_label' => ['En savoir plus', 'Learn more', 'Mehr erfahren', '了解更多'], 'cta_url' => 'pourquoi-sabonea',
+                'eyebrow' => ['', '', '', ''],
+                'title' => ['Ce que chacun y gagne', 'What each side gains', 'Was beide Seiten davon haben', '双方各有所得'],
+                'cta_label' => ['Pourquoi passer par Sabonea', 'Why go through Sabonea', 'Warum über Sabonea', '为何通过 Sabonea'], 'cta_url' => 'pourquoi-sabonea',
             ],
             [
                 'key' => 'why_suppliers', 'name' => 'Pourquoi Sabonea : carte fournisseurs', 'fields' => ['title', 'body'], 'item_fields' => ['title'],
                 'title' => ['Pour les fournisseurs', 'For suppliers', 'Für Lieferanten', '致供应商'],
                 'body' => [
-                    'Une visibilité internationale ciblée et des demandes de devis qualifiées, sans dispersion sur des canaux génériques.',
-                    'Targeted international visibility and qualified quote requests, without spreading yourself thin across generic channels.',
-                    'Gezielte internationale Sichtbarkeit und qualifizierte Angebotsanfragen – ohne Streuverluste über generische Kanäle.',
-                    '精准的国际曝光与高质量询价，无需在泛化渠道上分散精力。',
+                    'Des demandes de devis triées par notre équipe, venant d\'acheteurs professionnels identifiés, et une vitrine visible à l\'étranger.',
+                    'Quote requests sorted by our team, from identified professional buyers, and a showcase visible abroad.',
+                    'Von unserem Team vorsortierte Angebotsanfragen identifizierter Einkäufer und ein im Ausland sichtbares Schaufenster.',
+                    '由我们团队筛选、来自身份明确的专业买家的询价，以及面向海外的展示页。',
                 ],
                 'items' => [
-                    ['title' => ['Demandes qualifiées', 'Qualified requests', 'Qualifizierte Anfragen', '优质询盘']],
+                    ['title' => ['Demandes de devis triées en amont', 'Quote requests screened in advance', 'Vorab geprüfte Angebotsanfragen', '预先筛选的询价']],
                     ['title' => ['Accompagnement à l\'export', 'Export support', 'Exportbegleitung', '出口支持']],
-                    ['title' => ['Présence continue sur la plateforme', 'Ongoing presence on the platform', 'Dauerhafte Präsenz auf der Plattform', '平台持续曝光']],
+                    ['title' => ['Vitrine publique, sans coordonnées exposées', 'Public showcase, contact details kept private', 'Öffentliches Schaufenster ohne offene Kontaktdaten', '公开展示页，不暴露联系方式']],
                 ],
             ],
             [
                 'key' => 'why_buyers', 'name' => 'Pourquoi Sabonea : carte acheteurs', 'fields' => ['title', 'body'], 'item_fields' => ['title'],
                 'title' => ['Pour les acheteurs', 'For buyers', 'Für Einkäufer', '致买家'],
                 'body' => [
-                    'Un seul besoin exprimé, une équipe qui identifie le bon fournisseur pour vous : un vrai gain de temps.',
-                    'One request submitted, a team that finds the right supplier for you: real time saved.',
-                    'Ein einziger gemeldeter Bedarf, ein Team, das den richtigen Lieferanten für Sie findet: echte Zeitersparnis.',
-                    '只需提交一次需求，团队为您找到合适的供应商：真正节省时间。',
+                    'Une seule demande à rédiger. Notre équipe cherche le fournisseur, vérifie son sérieux et vous le présente.',
+                    'One request to write. Our team finds the supplier, checks it is reliable and introduces it to you.',
+                    'Nur eine Anfrage. Unser Team findet den Lieferanten, prüft seine Zuverlässigkeit und stellt ihn Ihnen vor.',
+                    '只需提交一次需求。我们的团队负责寻找供应商、核实其可靠性，并为您引荐。',
                 ],
                 'items' => [
-                    ['title' => ['Fournisseurs présélectionnés et vérifiés', 'Pre-selected, verified suppliers', 'Vorausgewählte und geprüfte Lieferanten', '经预选和核实的供应商']],
-                    ['title' => ['Mise en relation qualifiée', 'Qualified introductions', 'Qualifizierte Vermittlung', '精准对接']],
-                    ['title' => ['Un interlocuteur unique dans la durée', 'A single point of contact over time', 'Ein fester Ansprechpartner auf Dauer', '长期唯一对接人']],
+                    ['title' => ['Fournisseurs vérifiés avant référencement', 'Suppliers verified before listing', 'Vor der Listung geprüfte Lieferanten', '上架前经过审核的供应商']],
+                    ['title' => ['Présentation directe au bon interlocuteur', 'Direct introduction to the right person', 'Direkte Vorstellung beim richtigen Ansprechpartner', '直接对接合适的负责人']],
+                    ['title' => ['Le même contact pour vos prochains achats', 'The same contact for your future purchases', 'Derselbe Kontakt für künftige Beschaffungen', '今后采购仍由同一联系人跟进']],
                 ],
             ],
             [
                 'key' => 'cta', 'name' => 'Bannière d\'appel à l\'action', 'fields' => ['title', 'body', 'cta'],
-                'title' => ['Prêt à trouver le bon fournisseur ?', 'Ready to find the right supplier?', 'Bereit, den richtigen Lieferanten zu finden?', '准备好寻找合适的供应商了吗？'],
+                'title' => ['Décrivez l\'équipement dont vous avez besoin', 'Describe the equipment you need', 'Beschreiben Sie die benötigte Ausrüstung', '描述您需要的设备'],
                 'body' => [
-                    'Décrivez votre besoin : type d\'équipement, secteur, pays, délai. Notre équipe s\'occupe du reste.',
-                    'Describe your requirement: type of equipment, sector, country, timeframe. Our team takes care of the rest.',
-                    'Beschreiben Sie Ihren Bedarf: Art der Ausrüstung, Branche, Land, Zeitrahmen. Unser Team kümmert sich um den Rest.',
-                    '描述您的需求：设备类型、行业、国家、时间要求。其余的交给我们的团队。',
+                    'Type de machine, secteur, pays, délai. Nous revenons vers vous avec un ou plusieurs fournisseurs.',
+                    'Type of machine, sector, country, timeframe. We come back to you with one or more suppliers.',
+                    'Maschinentyp, Branche, Land, Zeitrahmen. Wir melden uns mit einem oder mehreren Lieferanten zurück.',
+                    '设备类型、行业、国家、时间。我们会为您推荐一家或多家供应商。',
                 ],
                 'cta_label' => $expressNeed, 'cta_url' => 'expression-de-besoin',
             ],
@@ -168,7 +168,7 @@ return [
     /* ------------------------------------------------------------------ */
     'a-propos' => [
         'name' => 'À propos',
-        'meta_title' => ['À propos   Sabonea', 'About us – Sabonea', 'Über uns – Sabonea', '关于我们 – Sabonea'],
+        'meta_title' => ['À propos | Sabonea', 'About us | Sabonea', 'Über uns | Sabonea', '关于我们 | Sabonea'],
         'meta_description' => [
             'Sabonea est une marketplace B2B internationale qui connecte fournisseurs et acheteurs d\'équipements professionnels de nettoyage, d\'entretien et de maintenance. Découvrez notre histoire et notre mission.',
             'Sabonea is an international B2B marketplace connecting suppliers and buyers of professional cleaning, upkeep and maintenance equipment. Discover our story and our mission.',
@@ -184,82 +184,82 @@ return [
                 'key' => 'intro', 'name' => 'Qui sommes-nous', 'fields' => ['eyebrow', 'subtitle', 'body'],
                 'eyebrow' => ['Qui sommes-nous', 'Who we are', 'Wer wir sind', '我们是谁'],
                 'subtitle' => [
-                    'Sabonea est une marketplace B2B internationale qui met en relation les fournisseurs d\'équipements professionnels de nettoyage, d\'entretien et de maintenance avec les organisations qui en ont besoin.',
-                    'Sabonea is an international B2B marketplace connecting suppliers of professional cleaning, upkeep and maintenance equipment with the organisations that need it.',
-                    'Sabonea ist ein internationaler B2B-Marktplatz, der Lieferanten professioneller Reinigungs-, Pflege- und Wartungsausrüstung mit den Organisationen verbindet, die sie benötigen.',
-                    'Sabonea 是一个国际 B2B 交易平台，连接专业清洁、保养与维护设备供应商与有需求的机构。',
+                    'Sabonea aide les organisations qui gèrent de grands sites à trouver leurs équipements de nettoyage et de maintenance, et les fabricants de ces équipements à trouver des clients.',
+                    'Sabonea helps organisations that run large sites find their cleaning and maintenance equipment, and helps the makers of that equipment find customers.',
+                    'Sabonea hilft Organisationen, die große Standorte betreiben, ihre Reinigungs- und Wartungstechnik zu finden, und den Herstellern dieser Geräte, Kunden zu finden.',
+                    'Sabonea 帮助管理大型场所的机构找到所需的清洁与维护设备，也帮助这些设备的制造商找到客户。',
                 ],
                 'body' => [
-                    'Nous accompagnons notamment les secteurs aéroportuaire, hospitalier, municipal et industriel, en facilitant l\'accès à des solutions adaptées à chaque besoin. Notre plateforme crée un lien direct entre acheteurs et fournisseurs, partout dans le monde.',
-                    'We work in particular with the airport, hospital, municipal and industrial sectors, making it easier to access solutions suited to every need. Our platform creates a direct link between buyers and suppliers, all over the world.',
-                    'Wir begleiten insbesondere die Bereiche Flughafen, Krankenhaus, Kommune und Industrie und erleichtern den Zugang zu Lösungen, die zu jedem Bedarf passen. Unsere Plattform schafft eine direkte Verbindung zwischen Einkäufern und Lieferanten – weltweit.',
-                    '我们尤其服务于机场、医院、市政和工业领域，让每一项需求都能便捷地找到合适的解决方案。我们的平台在全球范围内直接连接买家与供应商。',
+                    'Nous travaillons en priorité avec les aéroports, les hôpitaux, les collectivités et l\'industrie. Plutôt qu\'un annuaire à parcourir, nous proposons une équipe qui lit chaque demande et la transmet au fournisseur capable d\'y répondre.',
+                    'We focus first on airports, hospitals, local authorities and industry. Instead of a directory to browse, we offer a team that reads every request and passes it on to the supplier able to meet it.',
+                    'Unser Schwerpunkt liegt auf Flughäfen, Krankenhäusern, Kommunen und Industrie. Statt eines Verzeichnisses zum Durchblättern bieten wir ein Team, das jede Anfrage liest und an den Lieferanten weitergibt, der sie erfüllen kann.',
+                    '我们重点服务机场、医院、市政和工业领域。我们提供的不是一份需要自行翻阅的名录，而是一支会阅读每项需求、并将其转交给合适供应商的团队。',
                 ],
             ],
             [
                 'key' => 'story', 'name' => 'Notre histoire', 'fields' => ['eyebrow', 'title', 'subtitle', 'body', 'image'],
                 'image' => 'about-mission.jpg',
-                'image_alt' => ['Notre histoire, une conviction portée depuis le début', 'Our story, a conviction from day one', 'Unsere Geschichte – eine Überzeugung von Anfang an', '我们的故事，始终如一的信念'],
+                'image_alt' => ['Notre histoire, une conviction portée depuis le début', 'Our story, a conviction from day one', 'Unsere Geschichte: eine Überzeugung von Anfang an', '我们的故事，始终如一的信念'],
                 'eyebrow' => ['Notre histoire', 'Our story', 'Unsere Geschichte', '我们的故事'],
-                'title' => ['Une idée simple, portée par une vision plus grande', 'A simple idea, driven by a bigger vision', 'Eine einfache Idee, getragen von einer größeren Vision', '简单的想法，远大的愿景'],
+                'title' => ['Pourquoi j\'ai créé Sabonea', 'Why I started Sabonea', 'Warum ich Sabonea gegründet habe', '我为什么创立 Sabonea'],
                 'subtitle' => [
-                    '« Le projet a commencé par une idée simple, portée par une vision plus grande : contribuer, progressivement, à des villes et des infrastructures plus propres, plus modernes et mieux équipées. »',
-                    '“The project began with a simple idea, driven by a bigger vision: to gradually help build cleaner, more modern and better-equipped cities and infrastructure.”',
-                    '„Das Projekt begann mit einer einfachen Idee, getragen von einer größeren Vision: Schritt für Schritt zu saubereren, moderneren und besser ausgestatteten Städten und Infrastrukturen beizutragen.“',
-                    '“这个项目始于一个简单的想法，源于一个更远大的愿景：逐步助力打造更洁净、更现代、装备更完善的城市与基础设施。”',
+                    '« Je voulais contribuer, à mon échelle, à des villes et des infrastructures plus propres et mieux équipées. »',
+                    '“I wanted to help, in my own way, make cities and infrastructure cleaner and better equipped.”',
+                    '„Ich wollte auf meine Weise dazu beitragen, dass Städte und Infrastrukturen sauberer und besser ausgestattet sind.“',
+                    '“我希望以自己的方式，让城市和基础设施更洁净、装备更完善。”',
                 ],
                 'body' => [
-                    'En tant que jeune ingénieure, je construis Sabonea avec cette conviction : une entreprise peut être à la fois ambitieuse, internationale et porteuse d\'un impact positif.',
-                    'As a young engineer, I am building Sabonea with this conviction: a company can be ambitious, international and have a positive impact, all at once.',
-                    'Als junge Ingenieurin baue ich Sabonea mit dieser Überzeugung auf: Ein Unternehmen kann zugleich ambitioniert, international und wirkungsvoll im positiven Sinne sein.',
-                    '作为一名年轻的工程师，我怀着这样的信念打造 Sabonea：一家企业可以同时兼具雄心、国际视野与积极影响。',
+                    'Jeune ingénieure, je construis Sabonea avec une conviction : une entreprise peut viser l\'international et avoir un effet concret sur la propreté des villes et des infrastructures.',
+                    'As a young engineer, I am building Sabonea on one conviction: a company can aim for international growth and have a concrete effect on how clean our cities and infrastructure are.',
+                    'Als junge Ingenieurin baue ich Sabonea mit einer Überzeugung auf: Ein Unternehmen kann international wachsen und zugleich konkret zu saubereren Städten und Infrastrukturen beitragen.',
+                    '作为一名年轻的工程师，我怀着一个信念打造 Sabonea：一家企业可以走向国际，同时切实改善城市和基础设施的清洁状况。',
                 ],
             ],
             [
                 'key' => 'mission', 'name' => 'Notre mission', 'fields' => ['eyebrow', 'title', 'subtitle'], 'item_fields' => ['title', 'text', 'icon', 'variant'],
                 'eyebrow' => ['Notre mission', 'Our mission', 'Unsere Mission', '我们的使命'],
-                'title' => ['Donner à chaque acheteur un accès direct aux meilleurs fournisseurs', 'Giving every buyer direct access to the best suppliers', 'Jedem Einkäufer direkten Zugang zu den besten Lieferanten verschaffen', '让每一位买家直达优质供应商'],
+                'title' => ['Trouver le bon fournisseur à la place de l\'acheteur', 'Finding the right supplier on the buyer\'s behalf', 'Den passenden Lieferanten für den Einkäufer finden', '代替买家找到合适的供应商'],
                 'subtitle' => [
-                    'Où qu\'ils se trouvent dans le monde   et offrir aux fournisseurs une vitrine internationale pour développer leurs marchés à l\'export.',
-                    'Wherever they are in the world – and giving suppliers an international showcase to grow their export markets.',
-                    'Wo auch immer sie sich auf der Welt befinden – und Lieferanten ein internationales Schaufenster bieten, um ihre Exportmärkte auszubauen.',
-                    '无论买家身处世界何处；同时为供应商提供国际展示窗口，助其拓展出口市场。',
+                    'Où que se trouvent l\'acheteur et le fournisseur. Et, côté fournisseurs, leur ouvrir des marchés à l\'export.',
+                    'Wherever buyer and supplier are based. And, for suppliers, opening up export markets.',
+                    'Egal, wo Einkäufer und Lieferant ansässig sind. Und für Lieferanten: neue Exportmärkte erschließen.',
+                    '无论买家和供应商身在何处。同时，帮助供应商开拓出口市场。',
                 ],
                 'items' => [
-                    ['icon' => 'fa fa-search', 'title' => ['Simplifier la recherche', 'Simplify the search', 'Die Suche vereinfachen', '简化搜寻'], 'text' => [
-                        'De fournisseurs fiables pour les grandes infrastructures.',
-                        'For reliable suppliers for major infrastructure.',
-                        'Nach zuverlässigen Lieferanten für große Infrastrukturen.',
-                        '为大型基础设施寻找可靠的供应商。',
+                    ['icon' => 'fa fa-search', 'title' => ['Simplifier la recherche', 'Simplify the search', 'Die Suche vereinfachen', '简化寻源'], 'text' => [
+                        'Aéroports, hôpitaux et collectivités ont besoin de fournisseurs fiables. Nous les trouvons pour eux.',
+                        'Airports, hospitals and local authorities need reliable suppliers. We find them.',
+                        'Flughäfen, Krankenhäuser und Kommunen brauchen zuverlässige Lieferanten. Wir finden sie.',
+                        '机场、医院和市政部门需要可靠的供应商，由我们来寻找。',
                     ]],
-                    ['icon' => 'fa fa-bullseye', 'variant' => 'alt-green', 'title' => ['Orienter chaque besoin', 'Direct every request', 'Jeden Bedarf gezielt lenken', '精准匹配需求'], 'text' => [
-                        'Vers le fournisseur le plus adapté, plutôt que de laisser l\'acheteur chercher seul.',
-                        'To the most suitable supplier, rather than leaving the buyer to search alone.',
-                        'Zum passendsten Lieferanten, statt den Einkäufer allein suchen zu lassen.',
-                        '将需求引向最合适的供应商，而不是让买家独自寻找。',
+                    ['icon' => 'fa fa-bullseye', 'variant' => 'alt-green', 'title' => ['Orienter chaque demande', 'Direct every request', 'Jede Anfrage gezielt lenken', '精准分派需求'], 'text' => [
+                        'Chaque demande va au fournisseur le plus adapté : l\'acheteur n\'a pas à chercher seul.',
+                        'Each request goes to the most suitable supplier: the buyer does not have to search alone.',
+                        'Jede Anfrage geht an den passendsten Lieferanten: Der Einkäufer muss nicht allein suchen.',
+                        '每项需求都会转给最合适的供应商，买家无需独自寻找。',
                     ]],
                     ['icon' => 'fa fa-globe', 'variant' => 'alt-orange', 'title' => ['Accompagner à l\'export', 'Support exports', 'Den Export begleiten', '助力出口'], 'text' => [
-                        'Les fournisseurs dans leur développement à l\'international.',
-                        'Helping suppliers grow internationally.',
-                        'Lieferanten bei ihrer internationalen Entwicklung unterstützen.',
-                        '支持供应商的国际化发展。',
+                        'Nous aidons les fournisseurs à se faire connaître d\'acheteurs à l\'étranger.',
+                        'We help suppliers get known by buyers abroad.',
+                        'Wir helfen Lieferanten, bei Einkäufern im Ausland bekannt zu werden.',
+                        '帮助供应商被海外买家了解。',
                     ]],
                     ['icon' => 'fa fa-language', 'title' => ['Rester accessible', 'Stay accessible', 'Zugänglich bleiben', '保持易用'], 'text' => [
-                        'Une plateforme multilingue, pensée pour un public professionnel mondial.',
-                        'A multilingual platform designed for a global professional audience.',
-                        'Eine mehrsprachige Plattform für ein weltweites Fachpublikum.',
-                        '面向全球专业用户的多语言平台。',
+                        'Le site est disponible en français, anglais, allemand et chinois.',
+                        'The site is available in French, English, German and Chinese.',
+                        'Die Website ist auf Französisch, Englisch, Deutsch und Chinesisch verfügbar.',
+                        '网站提供法语、英语、德语和中文版本。',
                     ]],
                 ],
             ],
             [
                 'key' => 'cta', 'name' => 'Bannière d\'appel à l\'action', 'fields' => ['title', 'body', 'cta'],
-                'title' => ['Découvrez comment nous travaillons', 'Discover how we work', 'Entdecken Sie, wie wir arbeiten', '了解我们的工作方式'],
+                'title' => ['Le parcours, étape par étape', 'The process, step by step', 'Der Ablauf, Schritt für Schritt', '逐步了解流程'],
                 'body' => [
-                    'De l\'expression du besoin jusqu\'à la mise en relation qualifiée.',
-                    'From submitting your request to a qualified introduction.',
-                    'Von der Bedarfsmeldung bis zur qualifizierten Vermittlung.',
-                    '从提交需求到精准对接。',
+                    'Du formulaire de demande jusqu\'à l\'échange direct avec le fournisseur.',
+                    'From the request form to direct contact with the supplier.',
+                    'Vom Anfrageformular bis zum direkten Austausch mit dem Lieferanten.',
+                    '从提交需求表单到与供应商直接沟通。',
                 ],
                 'cta_label' => $howItWorks, 'cta_url' => 'comment-ca-fonctionne',
             ],
@@ -269,7 +269,7 @@ return [
     /* ------------------------------------------------------------------ */
     'comment-ca-fonctionne' => [
         'name' => 'Comment ça marche',
-        'meta_title' => ['Comment ça marche   Sabonea', 'How it works – Sabonea', 'So funktioniert’s – Sabonea', '运作方式 – Sabonea'],
+        'meta_title' => ['Comment ça marche | Sabonea', 'How it works | Sabonea', 'So funktioniert’s | Sabonea', '运作方式 | Sabonea'],
         'meta_description' => [
             'Découvrez le parcours fournisseur et le parcours acheteur sur Sabonea : de l\'expression du besoin à la mise en relation qualifiée.',
             'Discover the supplier journey and the buyer journey on Sabonea: from submitting a request to a qualified introduction.',
@@ -285,10 +285,10 @@ return [
                 'key' => 'principle', 'name' => 'Encadré : principe', 'fields' => ['title', 'body'],
                 'title' => ['Sabonea n\'est pas un catalogue en libre recherche', 'Sabonea is not a self-service catalogue', 'Sabonea ist kein frei durchsuchbarer Katalog', 'Sabonea 不是自助检索目录'],
                 'body' => [
-                    'Vous ne parcourez pas librement une liste de fournisseurs. Vous exprimez votre besoin via un formulaire dédié, et c\'est notre équipe qui analyse la demande et vous met en relation avec le ou les fournisseurs les plus adaptés. Objectif : vous faire gagner du temps, et garantir des mises en relation réellement qualifiées.',
-                    'You do not browse a list of suppliers on your own. You describe your requirement using a dedicated form, and our team analyses the request and introduces you to the most suitable supplier(s). The goal: to save you time and guarantee genuinely qualified introductions.',
-                    'Sie durchsuchen keine Lieferantenliste auf eigene Faust. Sie beschreiben Ihren Bedarf über ein spezielles Formular, und unser Team analysiert die Anfrage und bringt Sie mit dem oder den passendsten Lieferanten zusammen. Ziel: Ihnen Zeit sparen und wirklich qualifizierte Kontakte garantieren.',
-                    '您无需自行浏览供应商列表。只需通过专用表单描述需求，我们的团队会分析您的请求，并为您对接最合适的供应商。目标：为您节省时间，确保每一次对接都真正精准。',
+                    'Vous ne parcourez pas une liste de fournisseurs. Vous décrivez votre besoin dans un formulaire ; notre équipe l\'étudie et vous présente le ou les fournisseurs capables d\'y répondre. Vous évitez ainsi de contacter des fournisseurs qui ne correspondent pas à votre besoin.',
+                    'You do not browse a list of suppliers. You describe your requirement in a form; our team studies it and introduces you to the supplier(s) able to meet it. That way you avoid contacting suppliers who do not match your needs.',
+                    'Sie durchsuchen keine Lieferantenliste. Sie beschreiben Ihren Bedarf in einem Formular; unser Team prüft ihn und stellt Ihnen den oder die Lieferanten vor, die ihn erfüllen können. So kontaktieren Sie keine Lieferanten, die nicht zu Ihrem Bedarf passen.',
+                    '您无需浏览供应商列表。只需在表单中描述需求，我们的团队会进行研究，并为您引荐能够满足需求的供应商。这样，您就不必联系不符合需求的供应商。',
                 ],
             ],
             [
@@ -309,7 +309,7 @@ return [
                         'Unser Team prüft die Anfrage und ermittelt in seinem Netzwerk den oder die passendsten Lieferanten.',
                         '我们的团队研究需求，并在网络中找到最合适的供应商。',
                     ]],
-                    ['title' => ['Mise en relation qualifiée', 'Qualified introduction', 'Qualifizierte Vermittlung', '精准对接'], 'text' => [
+                    ['title' => ['Présentation du fournisseur', 'Supplier introduction', 'Vorstellung des Lieferanten', '引荐供应商'], 'text' => [
                         'Sabonea transmet la demande au(x) fournisseur(s) sélectionné(s) et fait les présentations.',
                         'Sabonea passes the request on to the selected supplier(s) and makes the introductions.',
                         'Sabonea leitet die Anfrage an den oder die ausgewählten Lieferanten weiter und stellt den Kontakt her.',
@@ -350,10 +350,10 @@ return [
                     ['title' => ['Référencement', 'Listing', 'Listung', '上架展示'], 'text' => [
                         'Le profil et les produits sont publiés sur la marketplace sous forme de vitrine (gammes, certifications, secteurs couverts), visible par les acheteurs professionnels.',
                         'The profile and products are published on the marketplace as a showcase (ranges, certifications, sectors covered), visible to professional buyers.',
-                        'Profil und Produkte werden auf dem Marktplatz als Schaufenster veröffentlicht (Sortimente, Zertifizierungen, abgedeckte Branchen) – sichtbar für professionelle Einkäufer.',
+                        'Profil und Produkte werden auf dem Marktplatz als Schaufenster veröffentlicht (Sortimente, Zertifizierungen, abgedeckte Branchen) und sind für professionelle Einkäufer sichtbar.',
                         '企业简介与产品以展示页形式发布在平台上（产品系列、认证、覆盖行业），供专业买家浏览。',
                     ]],
-                    ['title' => ['Mise en relation', 'Introductions', 'Vermittlung', '对接'], 'text' => [
+                    ['title' => ['Demandes de devis', 'Quote requests', 'Angebotsanfragen', '接收询价'], 'text' => [
                         'Le fournisseur reçoit des demandes de devis directement via la plateforme.',
                         'The supplier receives quote requests directly through the platform.',
                         'Der Lieferant erhält Angebotsanfragen direkt über die Plattform.',
@@ -374,10 +374,10 @@ return [
                     '每位订阅供应商都拥有一个公开展示页：标志、产品系列、认证、覆盖行业。为确保每次对接都经由 Sabonea，页面上不展示任何直接联系方式（电子邮件、电话）。',
                 ],
                 'note' => [
-                    'À la place, un bouton **« Être mis en relation via Sabonea »** renvoie vers le formulaire de demande, afin que chaque contact passe par une mise en relation qualifiée par notre équipe.',
-                    'Instead, a **“Get introduced via Sabonea”** button leads to the request form, so that every contact goes through a qualified introduction by our team.',
-                    'Stattdessen führt eine Schaltfläche **„Über Sabonea vermitteln lassen“** zum Anfrageformular, damit jeder Kontakt über eine qualifizierte Vermittlung durch unser Team läuft.',
-                    '取而代之的是一个 **“通过 Sabonea 对接”** 按钮，引导至需求表单，确保每一次联系都经过我们团队的精准对接。',
+                    'À la place, un bouton **« Être mis en relation via Sabonea »** renvoie vers le formulaire de demande : chaque contact passe par notre équipe.',
+                    'Instead, a **“Get introduced via Sabonea”** button leads to the request form: every contact goes through our team.',
+                    'Stattdessen führt eine Schaltfläche **„Über Sabonea vermitteln lassen“** zum Anfrageformular: Jeder Kontakt läuft über unser Team.',
+                    '取而代之的是一个 **“通过 Sabonea 对接”** 按钮，引导至需求表单：每一次联系都经由我们的团队。',
                 ],
                 'cta_label' => ['Voir un exemple de vitrine', 'See an example showcase', 'Beispiel-Schaufenster ansehen', '查看展示页示例'], 'cta_url' => 'fournisseur-exemple',
             ],
@@ -385,10 +385,10 @@ return [
                 'key' => 'cta', 'name' => 'Bannière d\'appel à l\'action', 'fields' => ['title', 'body', 'cta', 'cta2'],
                 'title' => ['Une question sur le parcours ?', 'A question about the process?', 'Eine Frage zum Ablauf?', '对流程有疑问？'],
                 'body' => [
-                    'Que vous soyez acheteur ou fournisseur, notre équipe vous accompagne à chaque étape.',
-                    'Whether you are a buyer or a supplier, our team supports you every step of the way.',
-                    'Ob Einkäufer oder Lieferant – unser Team begleitet Sie bei jedem Schritt.',
-                    '无论您是买家还是供应商，我们的团队都将全程陪伴。',
+                    'Écrivez-nous : nous répondons aux acheteurs comme aux fournisseurs.',
+                    'Write to us: we answer buyers and suppliers alike.',
+                    'Schreiben Sie uns: Wir antworten Einkäufern wie Lieferanten.',
+                    '欢迎来信：买家和供应商的问题我们都会解答。',
                 ],
                 'cta_label' => $expressNeed, 'cta_url' => 'expression-de-besoin',
                 'cta2_label' => $contactUs, 'cta2_url' => 'contact',
@@ -399,7 +399,7 @@ return [
     /* ------------------------------------------------------------------ */
     'secteurs' => [
         'name' => 'Secteurs & équipements',
-        'meta_title' => ['Secteurs & équipements   Sabonea', 'Sectors & equipment – Sabonea', 'Branchen & Ausrüstung – Sabonea', '行业与设备 – Sabonea'],
+        'meta_title' => ['Secteurs & équipements | Sabonea', 'Sectors & equipment | Sabonea', 'Branchen & Ausrüstung | Sabonea', '行业与设备 | Sabonea'],
         'meta_description' => [
             'Sabonea couvre les équipements professionnels pour les aéroports, hôpitaux, municipalités, sites industriels, chantiers, hôtels, centres commerciaux, universités et plateformes logistiques.',
             'Sabonea covers professional equipment for airports, hospitals, municipalities, industrial sites, construction sites, hotels, shopping centres, universities and logistics hubs.',
@@ -411,12 +411,12 @@ return [
         'sections' => [
             [
                 'key' => 'sectors', 'name' => 'Nos secteurs (en-tête de la liste)', 'fields' => ['eyebrow', 'title'],
-                'eyebrow' => ['Nos secteurs d\'activité', 'Our sectors', 'Unsere Branchen', '服务行业'],
-                'title' => ['Sabonea couvre les équipements professionnels destinés à :', 'Sabonea covers professional equipment for:', 'Sabonea deckt professionelle Ausrüstung ab für:', 'Sabonea 覆盖以下领域的专业设备：'],
+                'eyebrow' => ['', '', '', ''],
+                'title' => ['Les secteurs que nous couvrons', 'The sectors we cover', 'Die Branchen, die wir abdecken', '我们覆盖的行业'],
             ],
             [
                 'key' => 'equipment', 'name' => 'Types d\'équipements (en-tête de la liste)', 'fields' => ['eyebrow', 'title'],
-                'eyebrow' => ['Types d\'équipements', 'Types of equipment', 'Ausrüstungsarten', '设备类型'],
+                'eyebrow' => ['', '', '', ''],
                 'title' => ['Les familles de machines que nous référençons', 'The machine families we list', 'Die Maschinenfamilien, die wir listen', '我们收录的设备类别'],
             ],
             [
@@ -436,7 +436,7 @@ return [
     /* ------------------------------------------------------------------ */
     'pourquoi-sabonea' => [
         'name' => 'Pourquoi Sabonea',
-        'meta_title' => ['Pourquoi Sabonea   Sabonea', 'Why Sabonea – Sabonea', 'Warum Sabonea – Sabonea', '为何选择 Sabonea – Sabonea'],
+        'meta_title' => ['Pourquoi Sabonea | Sabonea', 'Why Sabonea | Sabonea', 'Warum Sabonea | Sabonea', '为何选择 Sabonea | Sabonea'],
         'meta_description' => [
             'Pourquoi choisir Sabonea : pour les fournisseurs, une visibilité internationale ciblée et des demandes qualifiées. Pour les acheteurs, un gain de temps et des fournisseurs vérifiés.',
             'Why choose Sabonea: for suppliers, targeted international visibility and qualified requests. For buyers, time saved and verified suppliers.',
@@ -451,11 +451,11 @@ return [
                 'image' => 'pourquoi-fournisseurs.jpg',
                 'image_alt' => ['Avantages Sabonea pour les fournisseurs', 'Sabonea benefits for suppliers', 'Vorteile von Sabonea für Lieferanten', 'Sabonea 为供应商带来的优势'],
                 'eyebrow' => ['Pour les fournisseurs', 'For suppliers', 'Für Lieferanten', '致供应商'],
-                'title' => ['Une vitrine à l\'international, des contacts qualifiés', 'An international showcase, qualified contacts', 'Ein internationales Schaufenster, qualifizierte Kontakte', '国际展示窗口，优质客户资源'],
+                'title' => ['Une vitrine à l\'étranger et des demandes déjà triées', 'A showcase abroad and requests already screened', 'Ein Schaufenster im Ausland und vorab geprüfte Anfragen', '海外展示窗口，预先筛选的询价'],
                 'cta_label' => $becomeSupplier, 'cta_url' => 'devenir-fournisseur',
                 'items' => [
-                    ['title' => ['Une visibilité internationale ciblée, sans dispersion sur des canaux génériques', 'Targeted international visibility, without spreading yourself thin across generic channels', 'Gezielte internationale Sichtbarkeit – ohne Streuverluste über generische Kanäle', '精准的国际曝光，无需在泛化渠道上分散精力']],
-                    ['title' => ['Des demandes de devis qualifiées, provenant d\'acheteurs professionnels identifiés', 'Qualified quote requests from identified professional buyers', 'Qualifizierte Angebotsanfragen von identifizierten professionellen Einkäufern', '来自专业买家的优质询价']],
+                    ['title' => ['Une visibilité auprès d\'acheteurs professionnels étrangers, plutôt que sur des annuaires généralistes', 'Visibility with professional buyers abroad, rather than on general directories', 'Sichtbarkeit bei professionellen Einkäufern im Ausland statt in allgemeinen Verzeichnissen', '面向海外专业买家曝光，而非泛泛的综合名录']],
+                    ['title' => ['Des demandes de devis venant d\'acheteurs professionnels identifiés', 'Quote requests from identified professional buyers', 'Angebotsanfragen von identifizierten professionellen Einkäufern', '来自身份明确的专业买家的询价']],
                     ['title' => ['Un accompagnement pour le développement à l\'export', 'Support for growing your exports', 'Begleitung bei der Exportentwicklung', '出口业务发展支持']],
                     ['title' => ['Une présence continue sur la plateforme, pour rester visible sur la durée', 'An ongoing presence on the platform, to stay visible over time', 'Dauerhafte Präsenz auf der Plattform, um langfristig sichtbar zu bleiben', '在平台上持续曝光，长期保持可见度']],
                 ],
@@ -465,23 +465,23 @@ return [
                 'image' => 'pourquoi-acheteurs.jpg',
                 'image_alt' => ['Avantages Sabonea pour les acheteurs', 'Sabonea benefits for buyers', 'Vorteile von Sabonea für Einkäufer', 'Sabonea 为买家带来的优势'],
                 'eyebrow' => ['Pour les acheteurs', 'For buyers', 'Für Einkäufer', '致买家'],
-                'title' => ['Un vrai gain de temps, un interlocuteur unique', 'Real time saved, a single point of contact', 'Echte Zeitersparnis, ein zentraler Ansprechpartner', '真正省时，唯一对接人'],
+                'title' => ['Une seule demande, un seul interlocuteur', 'One request, one point of contact', 'Eine Anfrage, ein Ansprechpartner', '一次需求，一位联系人'],
                 'cta_label' => $expressNeed, 'cta_url' => 'expression-de-besoin',
                 'items' => [
                     ['title' => ['Un seul besoin exprimé, une équipe qui identifie le bon fournisseur pour vous', 'One request submitted, a team that finds the right supplier for you', 'Ein einziger gemeldeter Bedarf, ein Team, das den richtigen Lieferanten für Sie findet', '只需提交一次需求，团队为您找到合适的供应商']],
                     ['title' => ['Des fournisseurs présélectionnés et vérifiés par notre équipe', 'Suppliers pre-selected and verified by our team', 'Von unserem Team vorausgewählte und geprüfte Lieferanten', '由我们团队预选并核实的供应商']],
-                    ['title' => ['Une mise en relation qualifiée, directement avec le fournisseur le plus pertinent', 'A qualified introduction, directly with the most relevant supplier', 'Eine qualifizierte Vermittlung direkt mit dem relevantesten Lieferanten', '与最匹配的供应商直接精准对接']],
+                    ['title' => ['Une présentation directe au fournisseur le plus pertinent', 'A direct introduction to the most relevant supplier', 'Eine direkte Vorstellung beim relevantesten Lieferanten', '直接引荐最匹配的供应商']],
                     ['title' => ['Un accompagnement dans la durée, pour tous vos besoins en équipement', 'Long-term support for all your equipment needs', 'Langfristige Begleitung für Ihren gesamten Ausrüstungsbedarf', '长期支持您的全部设备需求']],
                 ],
             ],
             [
                 'key' => 'cta', 'name' => 'Bannière d\'appel à l\'action', 'fields' => ['title', 'body', 'cta', 'cta2'],
-                'title' => ['Prêt à démarrer avec Sabonea ?', 'Ready to get started with Sabonea?', 'Bereit für den Start mit Sabonea?', '准备好开始使用 Sabonea 了吗？'],
+                'title' => ['Acheteur ou fournisseur, tout commence par un formulaire', 'Buyer or supplier, it all starts with a form', 'Ob Einkäufer oder Lieferant: Alles beginnt mit einem Formular', '无论买家还是供应商，都从一份表单开始'],
                 'body' => [
-                    'Que vous cherchiez un fournisseur ou que vous en soyez un, notre équipe vous accompagne.',
-                    'Whether you are looking for a supplier or you are one, our team is here to help.',
-                    'Ob Sie einen Lieferanten suchen oder selbst einer sind – unser Team begleitet Sie.',
-                    '无论您是在寻找供应商，还是您本身就是供应商，我们的团队都将为您提供支持。',
+                    'Les acheteurs décrivent leur besoin, les fournisseurs présentent leur entreprise. Pour toute autre question, écrivez-nous.',
+                    'Buyers describe their requirement, suppliers introduce their company. For anything else, write to us.',
+                    'Einkäufer beschreiben ihren Bedarf, Lieferanten stellen ihr Unternehmen vor. Für alles andere schreiben Sie uns.',
+                    '买家描述需求，供应商介绍企业。其他问题，欢迎来信。',
                 ],
                 'cta_label' => $expressNeed, 'cta_url' => 'expression-de-besoin',
                 'cta2_label' => $contactUs, 'cta2_url' => 'contact',
@@ -492,7 +492,7 @@ return [
     /* ------------------------------------------------------------------ */
     'contact' => [
         'name' => 'Contact',
-        'meta_title' => ['Contact   Sabonea', 'Contact – Sabonea', 'Kontakt – Sabonea', '联系我们 – Sabonea'],
+        'meta_title' => ['Contact | Sabonea', 'Contact | Sabonea', 'Kontakt | Sabonea', '联系我们 | Sabonea'],
         'meta_description' => [
             'Une question, une demande de partenariat, ou vous souhaitez rejoindre Sabonea en tant que fournisseur ? Contactez-nous par e-mail ou sur les réseaux sociaux.',
             'A question, a partnership request, or would you like to join Sabonea as a supplier? Contact us by email or on social media.',
@@ -506,14 +506,14 @@ return [
         'sections' => [
             [
                 'key' => 'intro', 'name' => 'Introduction', 'fields' => ['eyebrow', 'title', 'subtitle'],
-                'eyebrow' => ['Parlons-en', 'Let\'s talk', 'Sprechen wir darüber', '欢迎交流'],
+                'eyebrow' => ['', '', '', ''],
                 'title' => [
                     'Une question, une demande de partenariat, ou vous souhaitez rejoindre Sabonea en tant que fournisseur ?',
                     'A question, a partnership request, or would you like to join Sabonea as a supplier?',
                     'Eine Frage, eine Partnerschaftsanfrage oder möchten Sie Sabonea als Lieferant beitreten?',
                     '有疑问、合作意向，或希望以供应商身份加入 Sabonea？',
                 ],
-                'subtitle' => ['Contactez-nous   nous revenons vers vous rapidement.', 'Contact us – we will get back to you quickly.', 'Kontaktieren Sie uns – wir melden uns schnell bei Ihnen.', '请联系我们，我们会尽快回复。'],
+                'subtitle' => ['Écrivez-nous via le formulaire ou directement par e-mail.', 'Write to us using the form or directly by email.', 'Schreiben Sie uns über das Formular oder direkt per E-Mail.', '请通过表单或直接发送电子邮件与我们联系。'],
             ],
             [
                 'key' => 'form', 'name' => 'Formulaire de contact', 'fields' => ['title'],
@@ -525,7 +525,7 @@ return [
     /* ------------------------------------------------------------------ */
     'expression-de-besoin' => [
         'name' => 'Exprimer un besoin',
-        'meta_title' => ['Exprimer un besoin   Sabonea', 'Submit a request – Sabonea', 'Bedarf melden – Sabonea', '提交需求 – Sabonea'],
+        'meta_title' => ['Exprimer un besoin | Sabonea', 'Submit a request | Sabonea', 'Bedarf melden | Sabonea', '提交需求 | Sabonea'],
         'meta_description' => [
             'Décrivez votre besoin en équipement professionnel de nettoyage, d\'entretien ou de maintenance. L\'équipe Sabonea analyse votre demande et vous met en relation avec le fournisseur le plus adapté.',
             'Describe your need for professional cleaning, upkeep or maintenance equipment. The Sabonea team analyses your request and introduces you to the most suitable supplier.',
@@ -537,7 +537,7 @@ return [
         'sections' => [
             [
                 'key' => 'intro', 'name' => 'Introduction et étapes', 'fields' => ['eyebrow', 'title', 'body', 'note'], 'item_fields' => ['title', 'text'],
-                'eyebrow' => ['Étape 1 sur 3', 'Step 1 of 3', 'Schritt 1 von 3', '第 1 步，共 3 步'],
+                'eyebrow' => ['Pour les acheteurs', 'For buyers', 'Für Einkäufer', '致买家'],
                 'title' => ['Décrivez votre besoin en quelques champs', 'Describe your requirement in a few fields', 'Beschreiben Sie Ihren Bedarf in wenigen Feldern', '只需填写几项，描述您的需求'],
                 'body' => [
                     'Type d\'équipement, secteur, pays, délai souhaité : ces quelques informations suffisent à notre équipe pour commencer l\'analyse de votre demande.',
@@ -546,10 +546,10 @@ return [
                     '设备类型、行业、国家、期望时间：有了这些信息，我们的团队就可以开始分析您的需求。',
                 ],
                 'note' => [
-                    'Vos coordonnées ne sont partagées qu\'au moment de la mise en relation qualifiée par notre équipe   jamais publiées ni diffusées librement.',
-                    'Your contact details are only shared at the time of the qualified introduction by our team – never published or freely distributed.',
-                    'Ihre Kontaktdaten werden erst bei der qualifizierten Vermittlung durch unser Team weitergegeben – niemals veröffentlicht oder frei verbreitet.',
-                    '您的联系方式仅在我们团队进行精准对接时才会共享，绝不会被公开或随意传播。',
+                    'Vos coordonnées ne sont transmises qu\'au fournisseur retenu, au moment de la mise en relation. Elles ne sont jamais publiées.',
+                    'Your contact details are only passed on to the selected supplier, at the time of the introduction. They are never published.',
+                    'Ihre Kontaktdaten werden nur bei der Vermittlung an den ausgewählten Lieferanten weitergegeben. Sie werden nie veröffentlicht.',
+                    '您的联系方式仅在对接时提供给选定的供应商，绝不会公开。',
                 ],
                 'items' => [
                     ['title' => ['Vous exprimez votre besoin', 'You submit your requirement', 'Sie melden Ihren Bedarf', '您提交需求'], 'text' => [
@@ -579,12 +579,12 @@ return [
     'fournisseur-exemple' => [
         'name' => 'Exemple de vitrine fournisseur',
         'noindex' => true,
-        'meta_title' => ['Exemple de vitrine fournisseur   Sabonea', 'Example supplier showcase – Sabonea', 'Beispiel eines Lieferanten-Schaufensters – Sabonea', '供应商展示页示例 – Sabonea'],
+        'meta_title' => ['Exemple de vitrine fournisseur | Sabonea', 'Example supplier showcase | Sabonea', 'Beispiel eines Lieferanten-Schaufensters | Sabonea', '供应商展示页示例 | Sabonea'],
         'meta_description' => [
-            'Exemple illustratif d\'une page vitrine fournisseur sur Sabonea : gammes, certifications, secteurs couverts   sans coordonnées de contact directes.',
-            'Illustrative example of a supplier showcase page on Sabonea: ranges, certifications, sectors covered – without direct contact details.',
-            'Beispielhaftes Lieferanten-Schaufenster bei Sabonea: Sortimente, Zertifizierungen, abgedeckte Branchen – ohne direkte Kontaktdaten.',
-            'Sabonea 供应商展示页示例：产品系列、认证、覆盖行业——不含直接联系方式。',
+            'Exemple illustratif d\'une page vitrine fournisseur sur Sabonea : gammes, certifications et secteurs couverts, sans coordonnées de contact directes.',
+            'Illustrative example of a supplier showcase page on Sabonea: ranges, certifications and sectors covered, without direct contact details.',
+            'Beispielhaftes Lieferanten-Schaufenster bei Sabonea: Sortimente, Zertifizierungen und abgedeckte Branchen, ohne direkte Kontaktdaten.',
+            'Sabonea 供应商展示页示例：产品系列、认证和覆盖行业，不含直接联系方式。',
         ],
         'breadcrumb' => ['Exemple de vitrine', 'Example showcase', 'Beispiel-Schaufenster', '展示页示例'],
         'header_image' => 'fournisseur-cover.jpg',
@@ -593,17 +593,17 @@ return [
             [
                 'key' => 'ribbon', 'name' => 'Bandeau « exemple »', 'fields' => ['title'],
                 'title' => [
-                    'Exemple illustratif de vitrine fournisseur   contenu fictif à titre de maquette',
-                    'Illustrative supplier showcase – fictitious content for demonstration purposes',
-                    'Beispielhaftes Lieferanten-Schaufenster – fiktive Inhalte zu Demonstrationszwecken',
-                    '供应商展示页示例——内容均为虚构，仅供演示',
+                    'Exemple de vitrine fournisseur : contenu fictif, à titre de maquette',
+                    'Example supplier showcase: fictitious content, for illustration only',
+                    'Beispiel eines Lieferanten-Schaufensters: fiktive Inhalte, nur zur Veranschaulichung',
+                    '供应商展示页示例：内容为虚构，仅作演示',
                 ],
             ],
             [
                 'key' => 'profile', 'name' => 'Identité du fournisseur', 'fields' => ['eyebrow', 'title', 'subtitle'],
                 'eyebrow' => ['NF', 'SN', 'LN', 'NF'],
                 'title' => ['Nom du fournisseur', 'Supplier name', 'Name des Lieferanten', '供应商名称'],
-                'subtitle' => ['Pays d\'origine   Fournisseur abonné', 'Country of origin – Subscribed supplier', 'Herkunftsland – Lieferant im Abonnement', '原产国 – 订阅供应商'],
+                'subtitle' => ['Pays d\'origine · Fournisseur abonné', 'Country of origin · Subscribed supplier', 'Herkunftsland · Lieferant im Abonnement', '原产国 · 订阅供应商'],
             ],
             [
                 'key' => 'tags', 'name' => 'Étiquettes (secteurs & certifications)', 'fields' => [], 'item_fields' => ['title', 'icon', 'variant'],
@@ -638,10 +638,10 @@ return [
                 'key' => 'contact_card', 'name' => 'Encadré « mise en relation »', 'fields' => ['title', 'subtitle', 'body', 'cta', 'cta2'],
                 'title' => ['Mise en relation', 'Introduction', 'Vermittlung', '对接'],
                 'subtitle' => [
-                    'Coordonnées non affichées   mise en relation gérée par Sabonea',
-                    'Contact details hidden – introductions handled by Sabonea',
-                    'Kontaktdaten ausgeblendet – Vermittlung durch Sabonea',
-                    '不显示联系方式——由 Sabonea 负责对接',
+                    'Coordonnées non affichées : la mise en relation passe par Sabonea',
+                    'Contact details hidden: introductions go through Sabonea',
+                    'Kontaktdaten ausgeblendet: Die Vermittlung läuft über Sabonea',
+                    '不显示联系方式：由 Sabonea 负责对接',
                 ],
                 'body' => [
                     'Pour préserver la qualité des échanges, aucun e-mail ni numéro de téléphone n\'est publié sur cette page. Toute demande passe par notre équipe.',

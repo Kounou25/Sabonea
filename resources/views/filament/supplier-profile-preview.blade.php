@@ -1,7 +1,11 @@
-{{-- Preview of the supplier profile PDF, reloaded when the version or the language changes. --}}
+{{--
+    Preview of the supplier profile PDF, reloaded when an option changes. The PDF is requested a moment later,
+    so that the scripts of the form fields load first (a single-process server would queue them behind the PDF).
+--}}
 <div
-    x-data="{ loading: true }"
-    x-init="setTimeout(() => loading = false, 20000)"
+    x-data="{ loading: true, src: null }"
+    x-init="setTimeout(() => src = $el.dataset.url, 500); setTimeout(() => loading = false, 30000)"
+    data-url="{{ $url }}#view=FitH"
     style="position: relative; border-radius: 12px; overflow: hidden; background: #f3f0f8; border: 1px solid rgba(0, 0, 0, .08);"
     wire:key="profile-preview-{{ md5($url) }}"
 >
@@ -12,9 +16,9 @@
         </div>
     </div>
     <iframe
-        src="{{ $url }}#view=FitH"
+        x-bind:src="src"
         title="Aperçu de la fiche fournisseur"
-        style="display: block; width: 100%; height: calc(100vh - 330px); min-height: 420px; border: 0;"
-        x-on:load="loading = false"
+        style="display: block; width: 100%; height: calc(100vh - 250px); min-height: 480px; border: 0;"
+        x-on:load="if (src) loading = false"
     ></iframe>
 </div>
