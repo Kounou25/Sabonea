@@ -58,6 +58,57 @@ class SupplierApplicationAdminTest extends TestCase
             ->assertSee('Autriche');
     }
 
+    public function test_the_file_opens_on_an_overview(): void
+    {
+        $new = $this->newApplication();
+
+        $this->get("/admin/supplier-applications/{$new->id}")
+            ->assertOk()
+            ->assertSee('Synthèse')
+            ->assertSee('Hamburg, Allemagne · Fabricant · candidature reçue le '.now()->format('d/m/Y'))
+            ->assertSee('href="mailto:hans@kehrtechnik.example"', false)
+            ->assertSee('Balayeuses / nettoyeuses de voirie')
+            ->assertDontSee('Points clés')
+            ->assertDontSee('Effectif');
+
+        $received = $this->approvedApplication();
+        $received->update([
+            'status' => SupplierApplicationStatus::OnboardingSubmitted,
+            'onboarding_answers' => [...$received->onboarding_answers, ...$this->validOnboardingOnlyAnswers()],
+            'onboarding_submitted_at' => now(),
+        ]);
+
+        $this->get("/admin/supplier-applications/{$received->id}")
+            ->assertOk()
+            ->assertSee('Points clés')
+            ->assertSee('Effectif')
+            ->assertSee('01/05/2004');
+    }
+
+    public function test_the_list_has_one_tab_per_step_with_counts(): void
+    {
+        $new = $this->newApplication();
+        $received = $this->approvedApplication();
+        $received->update(['status' => SupplierApplicationStatus::OnboardingSubmitted, 'onboarding_submitted_at' => now()]);
+        $integrated = $this->approvedApplication();
+        $integrated->update(['status' => SupplierApplicationStatus::Integrated]);
+        $this->newApplication(isTest: true);
+
+        $page = Livewire::test(ListSupplierApplications::class);
+
+        $this->assertEquals(2, $page->instance()->getTabs()['to-process']->getBadge());
+        $this->assertEquals(1, $page->instance()->getTabs()['integrated']->getBadge());
+        $this->assertNull($page->instance()->getTabs()['rejected']->getBadge());
+
+        $page->set('activeTab', 'to-process')
+            ->assertCanSeeTableRecords([$new, $received])
+            ->assertCanNotSeeTableRecords([$integrated])
+            ->assertSee('À examiner · reçue')
+            ->set('activeTab', 'integrated')
+            ->assertCanSeeTableRecords([$integrated])
+            ->assertCanNotSeeTableRecords([$new, $received]);
+    }
+
     public function test_approving_creates_a_private_link_prefilled_from_form_1(): void
     {
         $application = $this->newApplication();

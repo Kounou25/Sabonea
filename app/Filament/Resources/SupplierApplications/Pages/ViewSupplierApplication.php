@@ -6,6 +6,8 @@ use App\Enums\SupplierApplicationStatus;
 use App\Filament\Resources\SupplierApplications\Actions\ProfilePdfAction;
 use App\Filament\Resources\SupplierApplications\SupplierApplicationResource;
 use App\Models\SupplierApplication;
+use App\SupplierForms\OptionLists;
+use App\Support\Countries;
 use App\Support\Locales;
 use App\Support\SupplierMailer;
 use Filament\Actions\Action;
@@ -31,6 +33,20 @@ class ViewSupplierApplication extends ViewRecord
     public function getTitle(): string
     {
         return $this->record->company_name;
+    }
+
+    /**
+     * "Hamburg, Allemagne · Fabricant · candidature reçue le 13/09/2026".
+     */
+    public function getSubheading(): string
+    {
+        $answers = $this->record->contact_answers ?? [];
+
+        return collect([
+            collect([$answers['city'] ?? null, Countries::name($this->record->country, 'fr')])->filter()->implode(', '),
+            OptionLists::label('supplier_type', $answers['supplier_type'] ?? null, 'fr'),
+            $this->record->contact_submitted_at ? 'candidature reçue le '.$this->record->contact_submitted_at->format('d/m/Y') : null,
+        ])->filter()->implode(' · ');
     }
 
     protected function getHeaderActions(): array

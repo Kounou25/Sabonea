@@ -35,8 +35,10 @@ class SupplierApplicationResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
+        // Same count as the "À traiter" tab of the list (test answers left out).
         $count = SupplierApplication::query()
-            ->whereIn('status', [SupplierApplicationStatus::New, SupplierApplicationStatus::OnboardingSubmitted])
+            ->whereIn('status', SupplierApplicationStatus::toProcess())
+            ->where('is_test', false)
             ->count();
 
         return $count > 0 ? (string) $count : null;
