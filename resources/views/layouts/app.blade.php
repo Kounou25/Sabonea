@@ -143,7 +143,7 @@
             <div class="footer-bottom">
                 <span>&copy; <a href="{{ route('accueil') }}">Sabonea</a>, {{ ui('footer.rights') }}</span>
                 <span class="footer-legal-links"><a href="{{ route('mentions-legales') }}">{{ ui('footer.legal_notice') }}</a><a href="{{ route('politique-de-confidentialite') }}">{{ ui('footer.privacy') }}</a></span>
-                <span class="footer-credit">{{ ui('footer.credit_before') }} <a href="https://htmlcodex.com">HTML Codex</a>{{ ui('footer.credit_after') }}</span>
+                <span class="footer-credit">{{ ui('footer.credit_before') }} <a href="https://www.linkedin.com/in/kounou-gilbert-199461257?utm_source=share_via&utm_content=profile&utm_medium=member_ios/" target="_blank">Kounou Gilbert</a></span>
             </div>
         </div>
     </footer>

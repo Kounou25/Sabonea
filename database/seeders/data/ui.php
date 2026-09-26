@@ -40,7 +40,7 @@ return [
     ],
     'footer.rights' => ['tous droits réservés.', 'all rights reserved.', 'alle Rechte vorbehalten.', '版权所有。'],
     'footer.credit_before' => ['Designed by', 'Designed by', 'Designed by', 'Designed by'],
-    'footer.credit_after' => [', adapté pour Sabonea', ', adapted for Sabonea', ', angepasst für Sabonea', '，为 Sabonea 定制'],
+    // 'footer.credit_after' => [', adapté pour Sabonea', ', adapted for Sabonea', ', angepasst für Sabonea', '，为 Sabonea 定制'],
 
     // Forms (shared)
     'form.select' => ['Sélectionner...', 'Select...', 'Auswählen...', '请选择...'],
