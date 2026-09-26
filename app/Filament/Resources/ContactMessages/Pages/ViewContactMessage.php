@@ -8,6 +8,7 @@ use App\Models\ContactMessage;
 use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Support\Icons\Heroicon;
 
@@ -30,6 +31,15 @@ class ViewContactMessage extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
+            Action::make('notSpam')
+                ->label('Ce n\'est pas un spam')
+                ->icon(Heroicon::OutlinedCheckCircle)
+                ->color('success')
+                ->visible(fn (ContactMessage $record): bool => $record->status === ContactMessageStatus::Spam)
+                ->action(function (ContactMessage $record): void {
+                    $record->update(['status' => ContactMessageStatus::Read]);
+                    Notification::make()->title('Message remis avec les autres messages')->success()->send();
+                }),
             Action::make('reply')
                 ->label('Répondre par e-mail')
                 ->icon(Heroicon::OutlinedPaperAirplane)

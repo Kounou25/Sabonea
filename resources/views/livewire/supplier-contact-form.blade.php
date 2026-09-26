@@ -10,8 +10,8 @@
         <div class="col-lg-8">
             <form wire:submit="submit" novalidate>
                 <div class="hp-field" aria-hidden="true">
-                    <label for="sf-fax">Fax</label>
-                    <input type="text" id="sf-fax" wire:model="fax" tabindex="-1" autocomplete="off">
+                    <label for="sf-leave-blank">Laissez ce champ vide</label>
+                    <input type="text" id="sf-leave-blank" wire:model="leaveBlank" tabindex="-1" autocomplete="off">
                 </div>
 
                 @if ($isTest)

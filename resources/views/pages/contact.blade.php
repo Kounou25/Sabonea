@@ -48,8 +48,8 @@
                     <form method="POST" action="{{ route('contact.store') }}#contact-form" novalidate>
                         @csrf
                         <div class="hp-field" aria-hidden="true">
-                            <label for="c-website">Website</label>
-                            <input type="text" id="c-website" name="website" tabindex="-1" autocomplete="off">
+                            <label for="c-leave-blank">Laissez ce champ vide</label>
+                            <input type="text" id="c-leave-blank" name="{{ \App\Support\Honeypot::FIELD }}" tabindex="-1" autocomplete="off">
                         </div>
                         <div class="row g-4">
                             <div class="col-sm-6">

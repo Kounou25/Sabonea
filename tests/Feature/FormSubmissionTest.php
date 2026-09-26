@@ -4,19 +4,25 @@ namespace Tests\Feature;
 
 use App\Enums\ContactMessageStatus;
 use App\Enums\NeedRequestStatus;
+use App\Filament\Resources\ContactMessages\Pages\ListContactMessages;
+use App\Filament\Resources\ContactMessages\Pages\ViewContactMessage;
 use App\Models\ContactMessage;
 use App\Models\EquipmentType;
 use App\Models\FormOption;
 use App\Models\NeedRequest;
 use App\Models\Sector;
+use App\Models\User;
 use App\Notifications\ContactMessageReceivedNotification;
 use App\Notifications\NewContactMessageNotification;
 use App\Notifications\NewNeedRequestNotification;
+use App\Support\Honeypot;
+use Filament\Facades\Filament;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Notifications\ChannelManager;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 class FormSubmissionTest extends TestCase
@@ -30,6 +36,23 @@ class FormSubmissionTest extends TestCase
         Storage::fake('public');
         $this->seed();
         Notification::fake();
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function validNeedRequest(): array
+    {
+        return [
+            'name' => 'Jane Buyer',
+            'company' => 'Airport Co',
+            'email' => 'jane@example.com',
+            'sector_id' => Sector::query()->value('id'),
+            'equipment_type_id' => EquipmentType::query()->value('id'),
+            'country' => 'FR',
+            'deadline_option_id' => FormOption::query()->where('field', FormOption::NEED_DEADLINE)->value('id'),
+            'message' => '3 sweepers',
+        ];
     }
 
     public function test_need_request_is_stored_and_the_team_is_notified(): void
@@ -179,16 +202,53 @@ class FormSubmissionTest extends TestCase
         ])->assertSessionHasErrors('subject_option_id');
     }
 
-    public function test_honeypot_submissions_are_ignored(): void
+    public function test_messages_caught_by_the_anti_spam_trap_are_kept_apart_without_notification(): void
     {
         $this->post('/fr/contact', [
             'name' => 'Bot',
             'email' => 'bot@example.com',
             'message' => 'Spam',
-            'website' => 'http://spam.example',
+            Honeypot::FIELD => 'http://spam.example',
+        ])->assertRedirect('/fr/contact#contact-form')->assertSessionHas('contact_sent');
+
+        $this->assertSame(ContactMessageStatus::Spam, ContactMessage::query()->sole()->status);
+        Notification::assertNothingSent();
+
+        $this->post('/fr/expression-de-besoin', [...$this->validNeedRequest(), Honeypot::FIELD => 'x'])->assertRedirect('/fr/expression-de-besoin');
+
+        $this->assertSame(NeedRequestStatus::Spam, NeedRequest::query()->sole()->status);
+        Notification::assertNothingSent();
+    }
+
+    public function test_a_field_named_website_filled_by_the_browser_no_longer_hides_a_message(): void
+    {
+        $this->post('/fr/contact', [
+            'name' => 'Anna Schmidt',
+            'email' => 'anna@example.com',
+            'message' => 'Bonjour',
+            'website' => 'https://www.example.com',
         ])->assertRedirect('/fr/contact#contact-form');
 
-        $this->assertDatabaseCount('contact_messages', 0);
-        Notification::assertNothingSent();
+        $this->assertSame(ContactMessageStatus::New, ContactMessage::query()->sole()->status);
+    }
+
+    public function test_spam_is_listed_apart_in_the_back_office(): void
+    {
+        Filament::setCurrentPanel('admin');
+        $this->actingAs(User::factory()->create());
+        $message = ContactMessage::create(['name' => 'Anna', 'email' => 'anna@example.com', 'message' => 'Bonjour', 'locale' => 'fr']);
+        $spam = ContactMessage::create(['name' => 'Bot', 'email' => 'bot@example.com', 'message' => 'Spam', 'locale' => 'fr', 'status' => ContactMessageStatus::Spam]);
+
+        Livewire::test(ListContactMessages::class)
+            ->assertCanSeeTableRecords([$message])
+            ->assertCanNotSeeTableRecords([$spam])
+            ->set('activeTab', 'spam')
+            ->assertCanSeeTableRecords([$spam])
+            ->assertCanNotSeeTableRecords([$message]);
+
+        Livewire::test(ViewContactMessage::class, ['record' => $spam->getRouteKey()])
+            ->callAction('notSpam');
+
+        $this->assertSame(ContactMessageStatus::Read, $spam->refresh()->status);
     }
 }

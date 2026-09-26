@@ -8,6 +8,7 @@ use App\Models\Page;
 use App\Models\SupplierApplication;
 use App\SupplierForms\SupplierContactForm as ContactFormDefinition;
 use App\SupplierForms\SupplierForm;
+use App\Support\Honeypot;
 use App\Support\SupplierForms;
 use App\Support\SupplierMailer;
 use Illuminate\Contracts\View\View;
@@ -24,9 +25,9 @@ class SupplierContactForm extends Component
     private const MAX_SUBMISSIONS_PER_HOUR = 5;
 
     /**
-     * Honeypot: hidden to humans, filled in by bots.
+     * Anti-spam trap: hidden to humans, filled in by bots (see App\Support\Honeypot).
      */
-    public string $fax = '';
+    public string $leaveBlank = '';
 
     public bool $submitted = false;
 
@@ -42,7 +43,8 @@ class SupplierContactForm extends Component
     {
         abort_unless(SupplierForms::contactFormIsOpen(), 403);
 
-        if (filled($this->fax)) {
+        // Logged with the e-mail given, so that a real supplier caught by mistake can be found again.
+        if (Honeypot::caught($this->leaveBlank, ['form' => 'supplier_contact', 'email' => $this->answers['contact_email'] ?? null, 'company' => $this->answers['company_name'] ?? null])) {
             $this->submitted = true;
 
             return;
