@@ -343,7 +343,7 @@ class SupplierProfileDocument
     private function annexes(): ProfileAnnexes
     {
         if ($this->annexes === null) {
-            DompdfRenderer::raiseMemoryLimit();
+            DompdfRenderer::raiseLimits();
             $this->annexes = new ProfileAnnexes;
 
             foreach ($this->chosenAttachments() as $attachment) {

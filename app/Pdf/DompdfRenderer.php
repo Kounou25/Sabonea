@@ -16,13 +16,20 @@ class DompdfRenderer
 {
     private const MEMORY_LIMIT = 512 * 1024 * 1024;
 
+    /** Seconds given to PHP for a profile: a web request is stopped after 30 s, a large catalogue can take longer. */
+    private const TIME_LIMIT = 120;
+
     /**
      * Subsetting the Chinese font reads the whole file (10 MB per weight), and supplier documents can be large.
      */
-    public static function raiseMemoryLimit(): void
+    public static function raiseLimits(): void
     {
         if (ini_get('memory_limit') !== '-1' && ini_parse_quantity(ini_get('memory_limit')) < self::MEMORY_LIMIT) {
             ini_set('memory_limit', (string) self::MEMORY_LIMIT);
+        }
+
+        if (function_exists('set_time_limit')) {
+            @set_time_limit(self::TIME_LIMIT);
         }
     }
 
@@ -31,11 +38,11 @@ class DompdfRenderer
      */
     public function render(string $html, string $orientation = 'portrait', ?Closure $pageLabel = null, bool $chinese = false): RenderedPdf
     {
-        self::raiseMemoryLimit();
+        self::raiseLimits();
         $this->ensureFontCache();
 
         $pdf = Pdf::setOptions([
-            // storage/ holds the reduced pictures; it can be a link to another place on deployed servers.
+            // storage/ holds the font cache; it can be a link to another place on deployed servers.
             'chroot' => array_values(array_unique([base_path(), realpath(storage_path()) ?: storage_path()])),
             'isRemoteEnabled' => false,
             'isFontSubsettingEnabled' => true,
