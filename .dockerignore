@@ -1,0 +1,35 @@
+# Never in the images: secrets, dependencies installed by the build, data of this machine.
+.git
+.env
+.env.*
+!.env.example
+!.env.production.example
+auth.json
+vendor
+node_modules
+
+# Generated in the image (Filament assets, caches) or served from the storage volume.
+public/storage
+public/hot
+public/build
+public/css/filament
+public/js/filament
+public/fonts/filament
+bootstrap/cache/*.php
+
+# Data and caches: they live in the "storage" volume of the server.
+storage/app
+storage/framework
+storage/logs
+storage/fonts
+storage/pail
+
+# Tools of the development machine.
+.idea
+.vscode
+.cursor
+.codex
+.zed
+.phpunit.cache
+.phpunit.result.cache
+*.log

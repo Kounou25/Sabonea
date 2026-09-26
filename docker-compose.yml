@@ -1,0 +1,60 @@
+# Sabonea in production on a server: docker compose up -d --build (see DEPLOIEMENT.md).
+# The settings come from the .env file next to this file (created from .env.production.example).
+
+services:
+  app:
+    build:
+      context: .
+      target: app
+    image: sabonea-app
+    restart: unless-stopped
+    volumes:
+      # Read by Laravel exactly as on a development machine; never copied into the image.
+      - ./.env:/var/www/html/.env:ro
+      # Supplier documents, images of the site, PDF font cache, logs.
+      - storage:/var/www/html/storage
+    depends_on:
+      db:
+        condition: service_healthy
+
+  web:
+    build:
+      context: .
+      target: web
+    image: sabonea-web
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      SITE_ADDRESS: ${SITE_ADDRESS:-:80}
+    volumes:
+      # Only storage/app/public is served (images uploaded from the back-office).
+      - storage:/var/www/html/storage:ro
+      # HTTPS certificates, kept across restarts.
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      - app
+
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:-sabonea}
+      POSTGRES_USER: ${DB_USERNAME:-sabonea}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Renseignez DB_PASSWORD dans .env}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  storage:
+  db-data:
+  caddy-data:
+  caddy-config:

@@ -1,0 +1,34 @@
+# Sabonea: web server.
+#
+# SITE_ADDRESS (in .env):
+#   - ":80" while there is no domain: the site answers in HTTP on the IP address of the server;
+#   - "sabonea.com, www.sabonea.com" once the domain points to the server: Caddy then gets and renews
+#     the HTTPS certificates by itself (Let's Encrypt) and redirects HTTP to HTTPS.
+
+{$SITE_ADDRESS::80} {
+	encode zstd gzip
+
+	# Supplier documents up to 20 MB (form 2).
+	request_body {
+		max_size 25MB
+	}
+
+	header {
+		-Server
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+	}
+
+	# Images uploaded from the back-office ("public" disk), in the storage volume shared with the application.
+	handle_path /storage/* {
+		root * /var/www/html/storage/app/public
+		file_server
+	}
+
+	# Static files of public/, everything else to Laravel (PHP-FPM of the "app" container).
+	handle {
+		root * /var/www/html/public
+		php_fastcgi app:9000
+		file_server
+	}
+}
