@@ -1,5 +1,5 @@
 # Checks, on every push, that the Docker version of the site builds and works:
-# tests in the image, production images, then the whole site started as on the server.
+# tests in the image, then the whole site deployed with deploy.sh exactly as on the server.
 name: Docker
 
 on:
@@ -13,6 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
+    env:
+      # Quotes, $ and # on purpose: the password must reach Laravel exactly as typed.
+      MAIL_PASSWORD: 'p@ss''w$rd #1 "x"'
+
     steps:
       - uses: actions/checkout@v4
 
@@ -21,27 +25,22 @@ jobs:
           docker build --target test -t sabonea-test .
           docker run --rm sabonea-test
 
-      - name: Configuration comme sur le serveur
+      - name: Configuration automatique (deploy.sh)
         run: |
-          cp .env.production.example .env
-          sed -i "s|^APP_KEY=.*|APP_KEY=base64:$(openssl rand -base64 32)|" .env
-          sed -i "s|^APP_URL=.*|APP_URL=http://localhost|" .env
-          sed -i "s|^DB_PASSWORD=.*|DB_PASSWORD=$(openssl rand -hex 16)|" .env
-          sed -i "s|^MAIL_MAILER=.*|MAIL_MAILER=log|" .env
+          bash deploy.sh --config-only
+          grep -Eq '^APP_KEY=base64:.{44}$' .env
+          grep -Eq '^DB_PASSWORD=[0-9a-f]{48}$' .env
+          # No e-mails from GitHub; pages checked on localhost.
+          sed -i -e 's|^MAIL_MAILER=.*|MAIL_MAILER=log|' -e 's|^APP_URL=.*|APP_URL=http://localhost|' .env
 
-      - name: Démarrage du site (app, web, db)
-        run: |
-          docker compose up -d --build
-          for attempt in $(seq 1 60); do
-            if curl -fsS -o /dev/null http://localhost/up; then echo "Site prêt"; exit 0; fi
-            sleep 3
-          done
-          echo "Le site ne répond pas"; exit 1
+      - name: Premier déploiement (deploy.sh)
+        run: bash deploy.sh
 
-      - name: Données de départ et pages principales
+      - name: Pages principales
         run: |
-          docker compose exec -T app php artisan db:seed --force
+          for attempt in $(seq 1 20); do curl -fsS -o /dev/null http://localhost/up && break; sleep 2; done
           check() { code=$(curl -s -o /dev/null -w '%{http_code}' "http://localhost$1"); echo "$1 -> $code"; [ "$code" = "$2" ]; }
+          check /up 200
           check /fr 200
           check /zh/contact 200
           check /fr/devenir-fournisseur 200
@@ -51,6 +50,15 @@ jobs:
           check /page-qui-n-existe-pas 404
           curl -s http://localhost/fr | grep -q "Sabonea"
           curl -s http://localhost/admin/login | grep -q "js/filament"
+          password=$(docker compose exec -T app php artisan tinker --execute='echo config("mail.mailers.smtp.password");')
+          if [ "$password" != "$MAIL_PASSWORD" ]; then echo "Mot de passe mail mal lu : $password"; exit 1; fi
+
+      - name: Redéploiement (données conservées)
+        run: |
+          bash deploy.sh | tee deploiement.log
+          grep -q "Base existante : conservée" deploiement.log
+          if grep -q "Contenu de départ" deploiement.log; then echo "Contenu de départ réinstallé"; exit 1; fi
+          curl -fsS -o /dev/null http://localhost/fr
 
       - name: Journaux en cas d'échec
         if: failure()

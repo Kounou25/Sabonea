@@ -13,135 +13,106 @@ Les données sont dans des **volumes Docker**, conservés quand on met le code �
 
 > ⚠️ Ne jamais lancer `docker compose down -v` : l'option `-v` supprime les volumes, donc la base et les documents.
 
+Tout se fait avec le script **`deploy.sh`** : il installe Docker si besoin, crée et remplit le fichier `.env`, construit et démarre le site, importe vos données. Il peut être relancé sans risque : il ne remplace jamais une valeur déjà remplie ni une base existante.
+
 ---
 
-## 1. Préparer le serveur (une seule fois)
+## 1. Récupérer le code sur le serveur
 
-Ubuntu 22.04 ou 24.04, 2 Go de mémoire au minimum (4 Go conseillés), ports **80** et **443** ouverts.
+Ubuntu 22.04 ou 24.04, 2 Go de mémoire au minimum (4 Go conseillés).
 
-```bash
-sudo apt update && sudo apt upgrade -y
-curl -fsSL https://get.docker.com | sudo sh     # Docker et « docker compose »
-sudo usermod -aG docker $USER                   # puis se déconnecter / reconnecter
+Depuis votre PC (PowerShell), connectez-vous au serveur :
+
+```powershell
+ssh utilisateur@ADRESSE_IP_DU_SERVEUR
 ```
 
-Si le pare-feu `ufw` est activé :
+Puis, **sur le serveur** :
 
 ```bash
-sudo ufw allow OpenSSH && sudo ufw allow 80/tcp && sudo ufw allow 443
-```
-
-## 2. Récupérer le code
-
-```bash
+sudo apt update && sudo apt install -y git
 sudo mkdir -p /opt/sabonea && sudo chown $USER /opt/sabonea
 git clone https://github.com/Kounou25/Sabonea.git /opt/sabonea
-cd /opt/sabonea
 ```
 
-Le dépôt étant privé, GitHub demande un identifiant : utilisez un *personal access token* (GitHub › Settings › Developer settings) en guise de mot de passe.
+Le dépôt étant privé, GitHub demande un identifiant : votre nom d'utilisateur GitHub, et comme mot de passe un *personal access token* (GitHub › Settings › Developer settings › Personal access tokens, droit « Contents : read » sur le dépôt). Pour ne pas le retaper à chaque mise à jour : `git -C /opt/sabonea config credential.helper store` (le jeton est alors conservé sur le serveur).
 
-## 3. Configurer le fichier `.env`
+## 2. Copier vos données sur le serveur (recommandé)
 
-**À faire avant toute commande `docker compose`** (sinon Docker crée un dossier `.env` à la place du fichier).
+À faire **avant** l'étape 3 pour retrouver en ligne vos pages, textes, comptes, candidatures et documents.
 
-```bash
-cp .env.production.example .env
-nano .env
-```
-
-À remplir :
-
-- `APP_URL` : `http://ADRESSE_IP_DU_SERVEUR` tant qu'il n'y a pas de domaine.
-- `DB_PASSWORD` : un mot de passe aléatoire, par exemple le résultat de `openssl rand -hex 24`.
-- `MAIL_PASSWORD` : le mot de passe de la boîte `contact@sabonea.com`.
-- `APP_KEY` : une fois `DB_PASSWORD` rempli et le fichier enregistré, générez-la, puis collez la valeur affichée après `APP_KEY=` :
-
-  ```bash
-  docker compose build app
-  docker compose run --rm --no-deps app php artisan key:generate --show
-  ```
-
-N'utilisez pas le caractère `$` dans les valeurs du `.env` (Docker l'interprète).
-
-## 4. Premier lancement
-
-### Avec vos données (recommandé)
-
-**Sur votre PC**, dans le dossier du projet, exportez la base et les fichiers :
+**Sur votre PC**, dans le dossier du projet (PowerShell) :
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File docker\exporter-donnees-locales.ps1
-scp "$HOME\Desktop\sabonea-export\*" utilisateur@ADRESSE_IP_DU_SERVEUR:/opt/sabonea/
+scp "$HOME\Desktop\sabonea-export\sabonea-base.sql" "$HOME\Desktop\sabonea-export\sabonea-fichiers.tar.gz" utilisateur@ADRESSE_IP_DU_SERVEUR:/opt/sabonea/
 ```
+
+Sans ces fichiers, le site démarre avec son contenu de départ et un compte administrateur neuf.
+
+## 3. Installer et démarrer le site
 
 **Sur le serveur** :
 
 ```bash
 cd /opt/sabonea
-
-# 1. La base seule, puis l'import de vos données
-docker compose up -d --wait db
-docker compose exec -T db sh -c 'psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d "$POSTGRES_DB"' < sabonea-base.sql
-
-# 2. Tout le site
-docker compose up -d --build
-
-# 3. Les fichiers (images du site, documents des fournisseurs)
-docker compose cp sabonea-fichiers.tar.gz app:/tmp/
-docker compose exec app sh -c 'tar -xzf /tmp/sabonea-fichiers.tar.gz -C storage/app && chown -R www-data:www-data storage && rm /tmp/sabonea-fichiers.tar.gz'
-
-# 4. Ces fichiers contiennent des données personnelles : on les supprime
-rm sabonea-base.sql sabonea-fichiers.tar.gz
+bash deploy.sh
 ```
 
-Vos comptes du back-office sont repris : connectez-vous avec les mêmes identifiants qu'en local.
+Le script :
 
-### Ou : installation neuve (sans vos données)
+1. crée le fichier `.env` et le remplit tout seul : clé de l'application, mot de passe de la base, adresse du site (l'IP du serveur, détectée), mot de passe administrateur ;
+2. **demande le mot de passe de la boîte `contact@sabonea.com`** (saisie masquée ; Entrée pour le donner plus tard) ;
+3. installe Docker s'il est absent et ouvre les ports 80 et 443 du pare-feu `ufw` s'il est actif ;
+4. construit les images (5 à 10 minutes la première fois) ;
+5. importe `sabonea-base.sql` et `sabonea-fichiers.tar.gz` s'ils sont présents, sinon installe le contenu de départ ;
+6. démarre le site et affiche son adresse et les identifiants de connexion.
 
-```bash
-docker compose up -d --build
-docker compose exec app php artisan db:seed --force
-```
+Ensuite :
 
-La dernière commande crée les pages, textes et listes de départ, ainsi que le compte administrateur `ADMIN_EMAIL` du `.env` (le mot de passe s'affiche s'il n'est pas renseigné dans `ADMIN_PASSWORD`).
-
-### Vérifier
-
-- `http://ADRESSE_IP_DU_SERVEUR/fr` : le site ;
-- `http://ADRESSE_IP_DU_SERVEUR/admin` : le back-office ;
+- supprimez les fichiers importés, qui contiennent des données personnelles : `rm sabonea-base.sql sabonea-fichiers.tar.gz` ;
+- ouvrez `http://ADRESSE_IP_DU_SERVEUR/fr` (le site) et `/admin` (le back-office) ;
 - envoyez un message depuis la page Contact et vérifiez sa réception.
 
-## 5. Activer le HTTPS (quand le domaine est prêt)
+Données copiées après coup ? `bash deploy.sh --import` remplace la base du serveur par `sabonea-base.sql` (et importe les fichiers).
+
+## 4. Activer le HTTPS (quand le domaine est prêt)
 
 1. Chez le registraire du domaine, créez deux enregistrements DNS de type **A** : `sabonea.com` et `www.sabonea.com` → adresse IP du serveur.
-2. Dans `.env` :
-
-   ```dotenv
-   SITE_ADDRESS="sabonea.com, www.sabonea.com"
-   APP_URL=https://sabonea.com
-   SESSION_SECURE_COOKIE=true
-   ```
-
-3. Relancez :
+2. Sur le serveur :
 
    ```bash
-   docker compose up -d --force-recreate
+   cd /opt/sabonea
+   bash deploy.sh --domain sabonea.com
    ```
 
-Caddy obtient alors les certificats tout seul (Let's Encrypt), les renouvelle, et redirige HTTP vers HTTPS.
+Le script met à jour le `.env` (adresse `https://sabonea.com`, cookies sécurisés) et redémarre le site. Caddy obtient alors les certificats tout seul (Let's Encrypt), les renouvelle, et redirige HTTP vers HTTPS. Le script prévient si le domaine ne pointe pas encore vers le serveur.
 
-## 6. Mettre à jour le site
+## 5. Mettre à jour le site
+
+Après avoir poussé les modifications sur GitHub depuis votre PC :
 
 ```bash
 cd /opt/sabonea
-git pull
-docker compose up -d --build
+bash deploy.sh --update
 ```
 
-Les migrations de la base s'appliquent automatiquement au démarrage ; les données et documents sont conservés.
+Le code est récupéré (`git pull`), les images reconstruites et le site redémarré ; les migrations de la base s'appliquent automatiquement. Les données et documents sont conservés.
 
-Après une modification du `.env` seul : `docker compose up -d --force-recreate`.
+**Changer un réglage** : modifiez `.env` (`nano .env`), puis `bash deploy.sh`.
+Pour changer le mot de passe mail, videz la ligne (`MAIL_PASSWORD=`) et relancez `bash deploy.sh` : il le redemande.
+
+## 6. Le fichier `.env`
+
+| Valeur | Remplie par |
+| --- | --- |
+| `APP_KEY` | `deploy.sh`, une fois pour toutes. |
+| `DB_PASSWORD` | `deploy.sh`, une fois pour toutes : **ne plus la changer**, la base a été créée avec. |
+| `APP_URL`, `SITE_ADDRESS` | `deploy.sh` : IP du serveur, puis domaine avec `--domain`. |
+| `MAIL_PASSWORD` | Vous, à la demande de `deploy.sh`. |
+| `ADMIN_PASSWORD` | `deploy.sh` ; ne sert que pour une installation neuve (sans vos données). |
+
+Gardez une copie du `.env` hors du serveur (dans un gestionnaire de mots de passe par exemple) : sans `APP_KEY` et `DB_PASSWORD`, une sauvegarde ne peut pas être restaurée telle quelle.
 
 ## 7. Sauvegardes
 
@@ -153,19 +124,22 @@ docker compose exec -T db sh -c 'pg_dump -U "$POSTGRES_USER" "$POSTGRES_DB"' | g
 docker compose run --rm --no-deps -v "$PWD":/sauvegarde app tar -czf /sauvegarde/sauvegarde-fichiers-$(date +%F).tar.gz -C /var/www/html/storage app
 ```
 
-À copier régulièrement hors du serveur (ou à programmer avec `crontab -e`).
+À copier régulièrement hors du serveur (ou à programmer avec `crontab -e`). Ces fichiers ne vont ni dans Git ni dans les images Docker.
 
 ## 8. Commandes utiles
 
+Depuis `/opt/sabonea`. Si Docker vient d'être installé, reconnectez-vous en SSH pour utiliser `docker` sans `sudo`.
+
 | Besoin | Commande |
 | --- | --- |
+| Aide du script | `bash deploy.sh --help` |
 | État des conteneurs | `docker compose ps` |
 | Journaux en direct | `docker compose logs -f app web` |
 | Journal de Laravel | `docker compose exec app sh -c 'tail -n 100 storage/logs/laravel-*.log'` |
-| Commande Laravel | `docker compose exec app php artisan …` |
+| Commande Laravel | `docker compose exec -u www-data app php artisan …` |
 | Redémarrer | `docker compose restart` |
 | Arrêter (données conservées) | `docker compose down` |
 
 ## Vérification automatique sur GitHub
 
-À chaque `git push`, GitHub (onglet **Actions**, fichier `.github/workflows/docker.yml`) construit les images, lance les tests dans l'image PHP du serveur, puis démarre le site complet et vérifie les pages principales. Une coche verte indique que la version Docker est prête à être déployée.
+À chaque `git push`, GitHub (onglet **Actions**, fichier `.github/workflows/docker.yml`) lance les tests dans l'image PHP du serveur, puis déploie le site complet avec `deploy.sh` comme sur le serveur, vérifie les pages principales, et relance `deploy.sh` pour s'assurer que les données sont conservées. Une coche verte indique que la version Docker est prête à être déployée.

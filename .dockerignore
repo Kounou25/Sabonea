@@ -24,6 +24,13 @@ storage/logs
 storage/fonts
 storage/pail
 
+# Data exported from a PC and backups made on the server (personal data), deployment script.
+*.sql
+*.sql.gz
+*.tar.gz
+sauvegarde-*
+deploy.sh
+
 # Tools of the development machine.
 .idea
 .vscode

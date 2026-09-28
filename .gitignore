@@ -21,6 +21,9 @@
 /public/hot
 /public/js/filament
 /public/storage
+/sabonea-base.sql
+/sabonea-fichiers.tar.gz
+/sauvegarde-*
 /storage/*.key
 /storage/pail
 /vendor
