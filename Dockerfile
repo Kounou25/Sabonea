@@ -27,13 +27,14 @@ RUN composer install --no-dev --no-interaction --prefer-dist --no-progress --no-
 
 COPY . .
 
+# Storage folders first (excluded from the build context): Laravel needs them to boot.
 # Filament's scripts and styles are not in Git: they are published here.
-RUN composer dump-autoload --optimize --no-dev --no-scripts \
+RUN mkdir -p storage/app/public storage/app/private storage/fonts storage/logs \
+        storage/framework/cache/data storage/framework/sessions storage/framework/views bootstrap/cache \
+    && composer dump-autoload --optimize --no-dev --no-scripts \
     && php artisan package:discover --ansi \
     && php artisan filament:assets \
     && rm -rf tests docker .github \
-    && mkdir -p storage/app/public storage/app/private storage/fonts storage/logs \
-        storage/framework/cache/data storage/framework/sessions storage/framework/views bootstrap/cache \
     && chown -R www-data:www-data storage bootstrap/cache
 
 # ---------------------------------------------------------------------------- Test suite (GitHub check)
@@ -44,10 +45,10 @@ RUN composer install --no-interaction --prefer-dist --no-progress --no-scripts -
 
 COPY . .
 
-RUN composer dump-autoload --no-scripts \
-    && php artisan package:discover --ansi \
-    && mkdir -p storage/app/public storage/app/private storage/fonts storage/logs \
+RUN mkdir -p storage/app/public storage/app/private storage/fonts storage/logs \
         storage/framework/cache/data storage/framework/sessions storage/framework/views bootstrap/cache \
+    && composer dump-autoload --no-scripts \
+    && php artisan package:discover --ansi \
     && cp .env.example .env \
     && php artisan key:generate --force
 
