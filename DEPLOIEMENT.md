@@ -97,7 +97,7 @@ cd /opt/sabonea
 bash deploy.sh --update
 ```
 
-Le code est récupéré (`git pull`), les images reconstruites et le site redémarré ; les migrations de la base s'appliquent automatiquement. Les données et documents sont conservés.
+Le code est récupéré (`git pull`), les images reconstruites et le site redémarré ; les migrations de la base s'appliquent automatiquement, et les nouveaux textes d'interface sont ajoutés (ceux modifiés dans le back-office ne sont jamais écrasés). Les données et documents sont conservés.
 
 **Changer un réglage** : modifiez `.env` (`nano .env`), puis `bash deploy.sh`.
 Pour changer le mot de passe mail, videz la ligne (`MAIL_PASSWORD=`) et relancez `bash deploy.sh` : il le redemande.

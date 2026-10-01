@@ -26,6 +26,12 @@ return [
     'supplier_form.add_country' => ['Ajouter un pays…', 'Add a country…', 'Land hinzufügen…', '添加国家…'],
     'supplier_form.remove' => ['Retirer', 'Remove', 'Entfernen', '移除'],
     'supplier_form.errors_summary' => ['Certaines réponses sont manquantes ou incorrectes : merci de vérifier les champs signalés.', 'Some answers are missing or incorrect: please check the highlighted fields.', 'Einige Antworten fehlen oder sind fehlerhaft: Bitte prüfen Sie die markierten Felder.', '部分回答缺失或有误，请检查标出的字段。'],
+    'supplier_form.pricing_note' => [
+        'La candidature est gratuite. Après validation de votre dossier, votre vitrine Sabonea est proposée sur abonnement, dont les conditions vous seront présentées par notre équipe.',
+        'Applying is free of charge. Once your application has been approved, your Sabonea showcase is offered on a subscription basis, the terms of which our team will present to you.',
+        'Die Bewerbung ist kostenlos. Nach Freigabe Ihrer Unterlagen wird Ihnen Ihr Sabonea-Schaufenster im Abonnement angeboten; die Konditionen stellt Ihnen unser Team vor.',
+        '申请免费。您的资料审核通过后，Sabonea 展示页将以订阅方式提供，具体条件将由我们的团队向您介绍。',
+    ],
     'supplier_form.test_mode' => ['Mode test : vous êtes connecté au back-office, cette réponse sera marquée comme test et exclue des exports.', 'Test mode: you are logged in to the back-office, this answer will be flagged as a test and left out of exports.', 'Testmodus: Sie sind im Back-Office angemeldet, diese Antwort wird als Test markiert und nicht exportiert.', '测试模式：您已登录后台，此次提交将被标记为测试，不会被导出。'],
     'supplier_form.phone_search' => ['Rechercher un pays', 'Search for a country', 'Land suchen', '搜索国家'],
     'supplier_form.sending' => ['Envoi en cours…', 'Sending…', 'Wird gesendet…', '正在提交…'],

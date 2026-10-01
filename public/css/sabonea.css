@@ -707,6 +707,22 @@ fieldset + fieldset { margin-top: 2.5rem; }
 }
 .hp-field { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 
+/* Conditions (gratuit / payant) annoncées avant les formulaires fournisseurs et acheteurs */
+.pricing-note {
+    display: flex;
+    gap: .75rem;
+    align-items: flex-start;
+    max-width: 46rem;
+    margin-bottom: 2rem;
+    padding: 1rem 1.25rem;
+    background: var(--sb-paper);
+    border-left: 3px solid var(--sb-accent);
+    font-size: .9375rem;
+    color: var(--sb-text);
+}
+.pricing-note i { margin-top: .2rem; color: var(--sb-accent-dark); }
+.pricing-note-centered { max-width: 760px; margin-left: auto; margin-right: auto; }
+
 /* --- Pied de page --- */
 .site-footer {
     background: var(--sb-ink);

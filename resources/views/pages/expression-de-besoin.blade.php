@@ -41,6 +41,7 @@
                     @if (session('need_sent'))
                     <div class="form-success mb-4" role="status">{{ ui('need.form.success') }}</div>
                     @endif
+                    <p class="pricing-note mw-100"><i class="fa fa-info-circle" aria-hidden="true"></i><span>{{ ui('need.form.pricing_note') }}</span></p>
                     <form method="POST" action="{{ route('expression-de-besoin.store') }}#need-form" novalidate>
                         @csrf
                         <div class="hp-field" aria-hidden="true">

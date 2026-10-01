@@ -51,6 +51,16 @@ class SupplierContactFormTest extends TestCase
         $this->get('/zh/devenir-fournisseur')->assertOk()->assertSee('公司名称');
     }
 
+    public function test_the_application_is_announced_as_free_before_the_form(): void
+    {
+        $this->get('/fr/devenir-fournisseur')->assertSeeInOrder(['La candidature est gratuite.', 'Nom de l\'entreprise']);
+        $this->get('/en/devenir-fournisseur')->assertSee('Applying is free of charge.');
+
+        Setting::put(SupplierForms::PUBLIC_SETTING, '0');
+
+        $this->get('/fr/devenir-fournisseur')->assertSeeInOrder(['La candidature est gratuite.', 'Formulaire bientôt disponible']);
+    }
+
     public function test_a_closed_form_is_only_shown_to_back_office_users(): void
     {
         Setting::put(SupplierForms::PUBLIC_SETTING, '0');

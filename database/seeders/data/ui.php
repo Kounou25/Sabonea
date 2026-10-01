@@ -85,6 +85,12 @@ return [
         'Details zu Ihrem Bedarf (Menge, Spezifikationen, Kontext...)',
         '需求详情（数量、规格、背景等）',
     ],
+    'need.form.pricing_note' => [
+        'Exprimer un besoin est gratuit. Si une mission de sourcing est engagée, une proposition commerciale vous est soumise.',
+        'Submitting a request is free of charge. If a sourcing assignment is undertaken, a commercial proposal will be submitted to you.',
+        'Das Melden eines Bedarfs ist kostenlos. Wird ein Sourcing-Auftrag aufgenommen, unterbreiten wir Ihnen ein Angebot.',
+        '提交需求免费。如启动寻源服务，我们将向您提交商务方案。',
+    ],
     'need.form.submit' => ['Envoyer ma demande', 'Send my request', 'Anfrage senden', '提交需求'],
     'need.form.success' => [
         'Merci, votre demande a bien été transmise. Notre équipe l\'analyse et revient vers vous rapidement.',

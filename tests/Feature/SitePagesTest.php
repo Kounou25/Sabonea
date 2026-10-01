@@ -4,7 +4,9 @@ namespace Tests\Feature;
 
 use App\Models\Language;
 use App\Models\Page;
+use App\Models\UiTranslation;
 use App\Support\Locales;
+use Database\Seeders\UiTranslationSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
@@ -65,6 +67,25 @@ class SitePagesTest extends TestCase
         $this->get('/en/a-propos')->assertSee('Who we are')->assertSee('Home');
         $this->get('/de/a-propos')->assertSee('Wer wir sind')->assertSee('Startseite');
         $this->get('/zh/a-propos')->assertSee('我们是谁')->assertSee('首页');
+    }
+
+    public function test_need_request_is_announced_as_free_before_the_form(): void
+    {
+        $this->get('/fr/expression-de-besoin')->assertSeeInOrder(['Exprimer un besoin est gratuit.', 'Vos coordonnées']);
+        $this->get('/de/expression-de-besoin')->assertSee('Das Melden eines Bedarfs ist kostenlos.');
+    }
+
+    public function test_ui_seeder_adds_new_texts_without_overwriting_back_office_edits(): void
+    {
+        UiTranslation::query()->where('key', 'need.form.pricing_note')->delete();
+        UiTranslation::query()->where('key', 'need.form.submit')->sole()->update(['text' => ['fr' => 'Envoyer la demande']]);
+
+        $this->seed(UiTranslationSeeder::class);
+
+        $this->get('/fr/expression-de-besoin')
+            ->assertSee('Exprimer un besoin est gratuit.')
+            ->assertSee('Envoyer la demande')
+            ->assertDontSee('Envoyer ma demande');
     }
 
     public function test_missing_translation_falls_back_to_french(): void

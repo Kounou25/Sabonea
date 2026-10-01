@@ -36,7 +36,11 @@
             </dl>
             @endif
 
-            @if (\App\Support\SupplierForms::contactFormIsOpen())
+            @php $formIsOpen = \App\Support\SupplierForms::contactFormIsOpen(); @endphp
+
+            <p @class(['pricing-note', 'pricing-note-centered' => ! $formIsOpen])><i class="fa fa-info-circle" aria-hidden="true"></i><span>{{ ui('supplier_form.pricing_note') }}</span></p>
+
+            @if ($formIsOpen)
             <livewire:supplier-contact-form />
             @elseif ($closed)
             <div class="sf-done is-locked">

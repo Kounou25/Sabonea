@@ -26,6 +26,9 @@ if [ "$1" = "php-fpm" ]; then
         sleep 3
     done
 
+    # Interface strings added by a new version: only missing keys are created, back-office edits are kept.
+    php artisan db:seed --class=UiTranslationSeeder --force
+
     # Configuration, routes, views and Filament components cached for speed (rebuilt at every start).
     php artisan optimize
     php artisan filament:optimize
