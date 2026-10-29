@@ -8,6 +8,9 @@
 #   bash deploy.sh --import               remplace la base du serveur par sabonea-base.sql (et les fichiers)
 #   bash deploy.sh --config-only          crée / complète seulement le fichier .env
 #
+# Clés reCAPTCHA des formulaires (case « Je ne suis pas un robot »), enregistrées dans .env et appliquées :
+#   RECAPTCHA_SITE_KEY='...' RECAPTCHA_SECRET_KEY='...' bash deploy.sh
+#
 # Le fichier .env est créé et complété automatiquement : clé de l'application, mot de passe de la base,
 # adresse du serveur, mot de passe administrateur. Seul le mot de passe de la boîte mail est demandé
 # (ou donné ainsi : MAIL_PASSWORD='...' bash deploy.sh). Les valeurs déjà remplies ne sont jamais changées.
@@ -181,6 +184,15 @@ configure_env() {
             warn "Pas de mot de passe mail : les e-mails ne partiront pas. Relancez « bash deploy.sh » pour le saisir."
         fi
     fi
+
+    # reCAPTCHA keys given on the command line (they replace the ones of .env).
+    local name
+    for name in RECAPTCHA_SITE_KEY RECAPTCHA_SECRET_KEY; do
+        if [ -n "${!name:-}" ] && [ "$(env_get "$name")" != "${!name}" ]; then
+            env_set "$name" "$(env_quote "${!name}")"
+            info "$name enregistrée"
+        fi
+    done
 
     chmod 600 .env
 

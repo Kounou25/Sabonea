@@ -126,6 +126,7 @@
                             </div>
                         </fieldset>
 
+                        <x-recaptcha class="mt-4" />
                         <button class="btn btn-accent mt-4" type="submit">{{ ui('need.form.submit') }}</button>
                     </form>
                 </div>

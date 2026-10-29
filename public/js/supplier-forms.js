@@ -1,5 +1,5 @@
 /*
- * Supplier forms (Livewire): international phone field and scrolling.
+ * Supplier forms (Livewire): international phone field, "I'm not a robot" box and scrolling.
  */
 (function () {
     "use strict";
@@ -7,7 +7,47 @@
     // Default country of the phone field, from the site language.
     var DEFAULT_COUNTRY = { fr: 'fr', de: 'de', zh: 'cn', en: '' };
 
+    // Google's reCAPTCHA script calls saboneaCaptchaLoaded once loaded (onload= in its address).
+    var captchaLoaded = false;
+    var captchaWaiting = [];
+
+    window.saboneaCaptchaLoaded = function () {
+        captchaLoaded = true;
+        captchaWaiting.splice(0).forEach(function (draw) { draw(); });
+    };
+
+    var whenCaptchaLoaded = function (draw) {
+        if (captchaLoaded) {
+            draw();
+        } else {
+            captchaWaiting.push(draw);
+        }
+    };
+
     document.addEventListener('alpine:init', function () {
+        window.Alpine.data('saboneaCaptcha', function (siteKey) {
+            return {
+                init: function () {
+                    var element = this.$refs.widget;
+                    var wire = this.$wire;
+
+                    whenCaptchaLoaded(function () {
+                        // The answer goes to the component with the submission, not when the box is ticked.
+                        var widget = window.grecaptcha.render(element, {
+                            sitekey: siteKey,
+                            callback: function (answer) { wire.set('captcha', answer, false); },
+                            'expired-callback': function () { wire.set('captcha', '', false); },
+                        });
+
+                        // An answer is accepted only once by Google: the box is ticked again after a refusal.
+                        window.Livewire.on('captcha-reset', function () {
+                            window.grecaptcha.reset(widget);
+                        });
+                    });
+                },
+            };
+        });
+
         window.Alpine.data('saboneaPhone', function (initialValue, locale, searchPlaceholder, statePath) {
             // Kept out of Alpine's reactive data on purpose: Alpine wraps its data in a Proxy,
             // and intl-tel-input's private class fields (#...) cannot be read through a Proxy.

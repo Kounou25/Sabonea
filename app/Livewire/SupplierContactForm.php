@@ -9,6 +9,7 @@ use App\Models\SupplierApplication;
 use App\SupplierForms\SupplierContactForm as ContactFormDefinition;
 use App\SupplierForms\SupplierForm;
 use App\Support\Honeypot;
+use App\Support\Recaptcha;
 use App\Support\SupplierForms;
 use App\Support\SupplierMailer;
 use Illuminate\Contracts\View\View;
@@ -28,6 +29,11 @@ class SupplierContactForm extends Component
      * Anti-spam trap: hidden to humans, filled in by bots (see App\Support\Honeypot).
      */
     public string $leaveBlank = '';
+
+    /**
+     * Answer of the "I'm not a robot" box (see App\Support\Recaptcha), sent by the browser with the submission.
+     */
+    public string $captcha = '';
 
     public bool $submitted = false;
 
@@ -61,6 +67,16 @@ class SupplierContactForm extends Component
         $definition = $this->definition();
         $this->answers = $definition->prepare($this->answers);
         $this->validateAnswers($definition->rules($this->answers));
+
+        // Checked once the answers are valid: Google accepts an answer of the box only once.
+        if (! Recaptcha::passes($this->captcha)) {
+            $this->captcha = '';
+            $this->addError('captcha', ui('form.error_captcha'));
+            $this->dispatch('captcha-reset');
+            $this->dispatch('supplier-form-invalid');
+
+            return;
+        }
 
         RateLimiter::hit($throttleKey, 3600);
 
@@ -104,6 +120,7 @@ class SupplierContactForm extends Component
             'thanks' => $page?->section('thanks'),
             'nextSteps' => $page?->section('next_steps'),
             'isTest' => SupplierForms::isTestSubmission(),
+            'captchaSiteKey' => Recaptcha::enabled() ? Recaptcha::siteKey() : null,
         ]);
     }
 }

@@ -5,7 +5,9 @@ namespace App\Http\Requests;
 use App\Models\EquipmentType;
 use App\Models\FormOption;
 use App\Models\Sector;
+use App\Rules\ValidRecaptcha;
 use App\Support\Countries;
+use App\Support\Recaptcha;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -40,6 +42,7 @@ class StoreNeedRequestRequest extends FormRequest
                 Rule::exists(FormOption::class, 'id')->where('field', FormOption::NEED_DEADLINE),
             ],
             'message' => ['nullable', 'string', 'max:5000'],
+            Recaptcha::FIELD => [new ValidRecaptcha],
         ];
     }
 

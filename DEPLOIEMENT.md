@@ -102,6 +102,14 @@ Le code est récupéré (`git pull`), les images reconstruites et le site redém
 **Changer un réglage** : modifiez `.env` (`nano .env`), puis `bash deploy.sh`.
 Pour changer le mot de passe mail, videz la ligne (`MAIL_PASSWORD=`) et relancez `bash deploy.sh` : il le redemande.
 
+**reCAPTCHA des formulaires** (case « Je ne suis pas un robot » sur Contact, Exprimer un besoin et Devenir fournisseur) : créez les clés sur [google.com/recaptcha/admin](https://www.google.com/recaptcha/admin) (type « reCAPTCHA v2 », « Case à cocher Je ne suis pas un robot », domaine `sabonea.com`), puis :
+
+```bash
+RECAPTCHA_SITE_KEY='clé du site' RECAPTCHA_SECRET_KEY='clé secrète' bash deploy.sh
+```
+
+Sans ces clés, les formulaires fonctionnent sans reCAPTCHA (le champ piège anti-spam reste actif).
+
 ## 6. Le fichier `.env`
 
 | Valeur | Remplie par |
@@ -110,6 +118,7 @@ Pour changer le mot de passe mail, videz la ligne (`MAIL_PASSWORD=`) et relancez
 | `DB_PASSWORD` | `deploy.sh`, une fois pour toutes : **ne plus la changer**, la base a été créée avec. |
 | `APP_URL`, `SITE_ADDRESS` | `deploy.sh` : IP du serveur, puis domaine avec `--domain`. |
 | `MAIL_PASSWORD` | Vous, à la demande de `deploy.sh`. |
+| `RECAPTCHA_SITE_KEY`, `RECAPTCHA_SECRET_KEY` | Vous (voir « reCAPTCHA des formulaires » ci-dessus) ; vides : pas de reCAPTCHA. |
 | `ADMIN_PASSWORD` | `deploy.sh` ; ne sert que pour une installation neuve (sans vos données). |
 
 Gardez une copie du `.env` hors du serveur (dans un gestionnaire de mots de passe par exemple) : sans `APP_KEY` et `DB_PASSWORD`, une sauvegarde ne peut pas être restaurée telle quelle.

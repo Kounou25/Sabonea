@@ -54,6 +54,13 @@
                 </section>
                 @endforeach
 
+                @if ($captchaSiteKey)
+                <div class="sf-captcha">
+                    <div wire:ignore x-data="saboneaCaptcha(@js($captchaSiteKey))"><div class="g-recaptcha" x-ref="widget"></div></div>
+                    @error('captcha')<div class="sf-error"><i class="fa fa-exclamation-circle"></i>{{ $message }}</div>@enderror
+                </div>
+                @endif
+
                 <div class="sf-submit-bar">
                     <p class="mb-0 small">{{ ui('supplier_form.required_hint') }}</p>
                     <button class="btn btn-primary sf-submit" type="submit" wire:loading.attr="disabled" wire:target="submit">

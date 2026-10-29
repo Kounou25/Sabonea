@@ -707,6 +707,13 @@ fieldset + fieldset { margin-top: 2.5rem; }
 }
 .hp-field { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 
+/* Case « Je ne suis pas un robot » (reCAPTCHA) : sa place est réservée pendant le chargement du script de Google */
+.g-recaptcha { min-height: 78px; }
+.sf-captcha { margin-bottom: 1.5rem; }
+@media (max-width: 359.98px) {
+    .g-recaptcha { transform: scale(.88); transform-origin: 0 0; }
+}
+
 /* Conditions (gratuit / payant) annoncées avant les formulaires fournisseurs et acheteurs */
 .pricing-note {
     display: flex;

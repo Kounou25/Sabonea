@@ -9,15 +9,18 @@ use App\Models\SupplierApplication;
 use App\Models\User;
 use App\Support\SupplierForms;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Features\SupportTesting\Testable;
 use Livewire\Livewire;
 use Tests\Concerns\BuildsSupplierAnswers;
+use Tests\Concerns\FakesRecaptcha;
 use Tests\TestCase;
 
 class SupplierContactFormTest extends TestCase
 {
     use BuildsSupplierAnswers;
+    use FakesRecaptcha;
     use RefreshDatabase;
 
     protected function setUp(): void
@@ -161,6 +164,46 @@ class SupplierContactFormTest extends TestCase
         $this->fill($this->validContactAnswers(['contact_email' => 'test@yopmail.com', 'contact_phone' => '12345']))
             ->call('submit')
             ->assertHasErrors(['answers.contact_email', 'answers.contact_phone' => 'phone']);
+    }
+
+    public function test_with_recaptcha_the_application_is_kept_only_once_google_confirms_the_box(): void
+    {
+        $this->get('/fr/devenir-fournisseur')->assertDontSee('saboneaCaptcha');
+
+        $this->fakeRecaptcha();
+
+        $this->get('/fr/devenir-fournisseur')->assertOk()
+            ->assertSee('saboneaCaptcha')
+            ->assertSee('https://www.recaptcha.net/recaptcha/api.js?hl=fr&amp;render=explicit&amp;onload=saboneaCaptchaLoaded', false);
+
+        $component = $this->fill($this->validContactAnswers())
+            ->call('submit')
+            ->assertHasErrors('captcha')
+            ->assertSee('Veuillez cocher la case « Je ne suis pas un robot ».')
+            ->assertSet('submitted', false)
+            ->set('captcha', 'bot-answer')
+            ->call('submit')
+            ->assertHasErrors('captcha')
+            ->assertDispatched('captcha-reset')
+            ->assertSet('captcha', '');
+
+        $this->assertDatabaseCount('supplier_applications', 0);
+
+        $component->set('captcha', 'human-answer')->call('submit')->assertSet('submitted', true);
+        $this->assertSame('Kehrtechnik GmbH', SupplierApplication::query()->sole()->company_name);
+    }
+
+    public function test_the_recaptcha_box_is_checked_only_once_the_answers_are_valid(): void
+    {
+        $this->fakeRecaptcha();
+
+        Livewire::test(SupplierContactForm::class)
+            ->set('captcha', 'human-answer')
+            ->call('submit')
+            ->assertHasErrors('answers.company_name')
+            ->assertHasNoErrors('captcha');
+
+        Http::assertNothingSent();
     }
 
     public function test_messages_follow_the_language_of_the_page(): void

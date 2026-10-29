@@ -16,17 +16,22 @@ use App\Notifications\ContactMessageReceivedNotification;
 use App\Notifications\NewContactMessageNotification;
 use App\Notifications\NewNeedRequestNotification;
 use App\Support\Honeypot;
+use App\Support\Recaptcha;
 use Filament\Facades\Filament;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Client\Request;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Notifications\ChannelManager;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
+use Tests\Concerns\FakesRecaptcha;
 use Tests\TestCase;
 
 class FormSubmissionTest extends TestCase
 {
+    use FakesRecaptcha;
     use RefreshDatabase;
 
     protected function setUp(): void
@@ -230,6 +235,68 @@ class FormSubmissionTest extends TestCase
         ])->assertRedirect('/fr/contact#contact-form');
 
         $this->assertSame(ContactMessageStatus::New, ContactMessage::query()->sole()->status);
+    }
+
+    public function test_the_recaptcha_box_is_shown_once_its_keys_are_configured(): void
+    {
+        $this->get('/fr/contact')->assertOk()->assertDontSee('g-recaptcha');
+
+        $this->fakeRecaptcha();
+
+        $this->get('/de/contact')->assertOk()
+            ->assertSee('<div class="g-recaptcha" data-sitekey="site-key"></div>', false)
+            ->assertSee('https://www.recaptcha.net/recaptcha/api.js?hl=de', false);
+        $this->get('/zh/expression-de-besoin')->assertOk()
+            ->assertSee('data-sitekey="site-key"', false)
+            ->assertSee('api.js?hl=zh-CN', false);
+    }
+
+    public function test_with_recaptcha_a_message_is_kept_only_once_google_confirms_the_box(): void
+    {
+        $this->fakeRecaptcha();
+        $message = ['name' => 'Anna Schmidt', 'email' => 'anna@example.com', 'message' => 'Bonjour'];
+
+        // Box not ticked: Google is not even asked.
+        $this->from('/fr/contact')->post('/fr/contact', $message)
+            ->assertRedirect('/fr/contact')
+            ->assertSessionHasErrors([Recaptcha::FIELD => 'Veuillez cocher la case « Je ne suis pas un robot ».'])
+            ->assertSessionHasInput('message', 'Bonjour');
+        Http::assertNothingSent();
+
+        $this->from('/fr/contact')->post('/fr/contact', [...$message, Recaptcha::FIELD => 'bot-answer'])->assertSessionHasErrors(Recaptcha::FIELD);
+        $this->assertDatabaseCount('contact_messages', 0);
+        Notification::assertNothingSent();
+
+        $this->post('/fr/contact', [...$message, Recaptcha::FIELD => 'human-answer'])->assertRedirect('/fr/contact#contact-form')->assertSessionHasNoErrors();
+
+        $this->assertSame(ContactMessageStatus::New, ContactMessage::query()->sole()->status);
+        Http::assertSent(fn (Request $request): bool => $request['secret'] === 'secret-key' && $request['response'] === 'human-answer');
+    }
+
+    public function test_with_recaptcha_the_buyer_form_requires_the_box_too(): void
+    {
+        $this->fakeRecaptcha();
+
+        $this->post('/fr/expression-de-besoin', $this->validNeedRequest())->assertSessionHasErrors(Recaptcha::FIELD);
+        $this->assertDatabaseCount('need_requests', 0);
+
+        $this->post('/fr/expression-de-besoin', [...$this->validNeedRequest(), Recaptcha::FIELD => 'human-answer'])->assertSessionHasNoErrors();
+        $this->assertSame(NeedRequestStatus::New, NeedRequest::query()->sole()->status);
+    }
+
+    public function test_messages_are_not_lost_when_google_cannot_check_the_box(): void
+    {
+        config(['services.recaptcha.site_key' => 'site-key', 'services.recaptcha.secret_key' => 'secret-key']);
+        $message = ['name' => 'Anna Schmidt', 'email' => 'anna@example.com', 'message' => 'Bonjour', Recaptcha::FIELD => 'human-answer'];
+
+        Http::fake(['www.google.com/*' => Http::failedConnection()]);
+        $this->post('/fr/contact', $message)->assertSessionHasNoErrors();
+
+        // A wrong secret key in .env must not block every visitor either.
+        Http::fake(['www.google.com/*' => Http::response(['success' => false, 'error-codes' => ['invalid-input-secret']])]);
+        $this->post('/fr/contact', $message)->assertSessionHasNoErrors();
+
+        $this->assertDatabaseCount('contact_messages', 2);
     }
 
     public function test_spam_is_listed_apart_in_the_back_office(): void

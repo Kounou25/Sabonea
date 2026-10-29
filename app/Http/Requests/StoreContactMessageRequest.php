@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Models\FormOption;
+use App\Rules\ValidRecaptcha;
+use App\Support\Recaptcha;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -33,6 +35,7 @@ class StoreContactMessageRequest extends FormRequest
                 Rule::exists(FormOption::class, 'id')->where('field', FormOption::CONTACT_SUBJECT),
             ],
             'message' => ['required', 'string', 'max:5000'],
+            Recaptcha::FIELD => [new ValidRecaptcha],
         ];
     }
 

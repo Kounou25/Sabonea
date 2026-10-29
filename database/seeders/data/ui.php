@@ -49,6 +49,12 @@ return [
     'form.error_email' => ['Veuillez saisir une adresse e-mail valide.', 'Please enter a valid email address.', 'Bitte geben Sie eine gültige E-Mail-Adresse ein.', '请输入有效的电子邮件地址。'],
     'form.error_max' => ['Ce texte est trop long.', 'This text is too long.', 'Dieser Text ist zu lang.', '内容过长。'],
     'form.error_invalid' => ['Ce choix n\'est pas valide.', 'This choice is not valid.', 'Diese Auswahl ist ungültig.', '所选项无效。'],
+    'form.error_captcha' => [
+        'Veuillez cocher la case « Je ne suis pas un robot ».',
+        'Please tick the “I\'m not a robot” box.',
+        'Bitte setzen Sie das Häkchen bei „Ich bin kein Roboter“.',
+        '请勾选“进行人机身份验证”。',
+    ],
 
     // Contact page
     'contact.email' => ['E-mail', 'Email', 'E-Mail', '电子邮件'],

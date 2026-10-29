@@ -83,6 +83,7 @@
                                 @error('message')<div class="invalid-feedback">{{ $message }}</div>@enderror
                             </div>
                             <div class="col-12">
+                                <x-recaptcha class="mb-4" />
                                 <button class="btn btn-accent" type="submit">{{ ui('contact.form.submit') }}</button>
                             </div>
                         </div>
