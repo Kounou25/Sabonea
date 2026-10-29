@@ -9,7 +9,7 @@
 @include('partials.supplier-form-assets')
 
 {{-- After supplier-forms.js, which draws the "I'm not a robot" box once Google's script is loaded. --}}
-@if (\App\Support\Recaptcha::enabled())
+@if (\App\Support\Recaptcha::enabled() && \App\Support\SupplierForms::contactFormIsOpen())
 @push('scripts')
     <script src="{{ \App\Support\Recaptcha::scriptUrl(explicit: true) }}" async defer></script>
 @endpush

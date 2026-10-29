@@ -176,6 +176,11 @@ class SupplierContactFormTest extends TestCase
             ->assertSee('saboneaCaptcha')
             ->assertSee('https://www.recaptcha.net/recaptcha/api.js?hl=fr&amp;render=explicit&amp;onload=saboneaCaptchaLoaded', false);
 
+        // Form closed to the public: Google's script is not loaded for nothing.
+        Setting::put(SupplierForms::PUBLIC_SETTING, '0');
+        $this->get('/fr/devenir-fournisseur')->assertOk()->assertDontSee('recaptcha.net');
+        Setting::put(SupplierForms::PUBLIC_SETTING, '1');
+
         $component = $this->fill($this->validContactAnswers())
             ->call('submit')
             ->assertHasErrors('captcha')
